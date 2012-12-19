@@ -36,7 +36,7 @@ Trop ou trop peu de qualité.
 
 Test Image
 ==========
-![Portal](../images/wallpaper-portal.jpg)
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/wallpaper-portal.jpg)
 
 Tesr Image 2
 ![Markdown](http://whatismarkdown.com/workspace/img/logo.gif)
