@@ -33,10 +33,3 @@ Participer à sa rédaction, faire le draft.
 Risques
 =======
 Trop ou trop peu de qualité.
-
-Test Image
-==========
-![Portal](../images/wallpaper-portal.jpg)
-
-Tesr Image 2
-![Markdown](http://whatismarkdown.com/workspace/img/logo.gif)
