@@ -15,8 +15,14 @@ Projet Ingénierie - Tâches Responsable Qualité
 
 3. Adéquations entre les solutions et les besoins des clients
 -------------------------------------------------------------
-Procédure ... qualité recueil d'exigences:
+Procédure qualité pour le recueil d'exigences:
+- Respect du formalisme
+- Présence d'un scénario, fil conducteur pour pouvoir lire les diagrammes
+- Le sous problème doit être plus simple que le problème initial
+    * Les éléments du domaine du sous problème doivent être inclus dans le problème
+- Présence de questions levées par un problème
 - Identification de design patterns
+    * Introduction d'un modèle
 - Bonnes pratiques
 
 
