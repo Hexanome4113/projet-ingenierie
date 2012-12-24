@@ -1,8 +1,6 @@
 Plan de revue
 =============
 
-http://www.omafra.gov.on.ca/french/rural/facts/05-036.htm
-
 Déroulement de la revue
 -----------------------
 
