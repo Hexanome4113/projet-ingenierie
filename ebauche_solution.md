@@ -8,6 +8,7 @@ L'installation est partagée sur plusieurs sites:
 - des sites distants: isolés, difficiles d'accès, où sont relevées les mesures des capteurs
 - un site central: fortement connecté, facile d'accès, d'où seront envoyées les commandes et qui recevra les informations des sites isolés
 
+Test de flèche : A -> B
 
 Sites distants
 --
