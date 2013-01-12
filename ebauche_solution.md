@@ -1,4 +1,4 @@
-Ebauche de solution
+Proposition de solution
 ==
 
 Architecture
