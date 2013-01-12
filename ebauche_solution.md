@@ -42,6 +42,19 @@ Le système d’informations du site central a donc pour fonctionnalités princi
 - Émission de demandes de maintenance
 - Journalisation des actions commandées (alerte du responsable de site, maintenance à distance ou demande de maintenance à la société de maintenance)
 
+Exigences fonctionnelles
+---
+
+1. Communication entre les capteurs et le système embarqué sur chaque site isolé
+2. Communication entre le système embarqué de chaque site et le serveur central
+3. Détermination du niveau de gravité d'un évènement
+4. Emission d'une alerte selon l'évènement
+5. Emission d'une demande de maintenance
+6. Commande de maintenance automatique
+7. Journalisation des évènements
+8. Journalisation des commandes
+9. Sauvegarde des évènements sur le site isolé en cas de connexion défaillante avec le serveur central
+
 Questions
 -----
 - Comment se fait la demande d’intervention auprès de la société de maintenance  (téléphone, email, autre...) ?
