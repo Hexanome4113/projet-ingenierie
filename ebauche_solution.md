@@ -22,7 +22,7 @@ Les différentes modalités envisageables sont :
 ### Peu de capteurs, sur une faible superficie
 Pour un nombre limité de capteurs (moins d’une dizaine) sur une superficie faible (moins de 10 ha), un réseau filaire pourrait être le meilleur choix. (Même si le coût d’installation de l’infrastructure filaire sera sûrement plus élevé que celui d’une installation sans fil, la sécurité et la consommation énergétique de ces réseaux devraient être bien meilleures.)
 
-blablabla...
+### Même genre de blabla à redétailler dans d'autres cas
 
 Site central
 --
