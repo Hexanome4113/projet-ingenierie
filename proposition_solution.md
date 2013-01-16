@@ -45,23 +45,10 @@ Le système d’informations du site central a donc pour fonctionnalités princi
 Exigences fonctionnelles
 ---
 
-1. Communication entre les capteurs et le système embarqué sur chaque site isolé
-2. Communication entre le système embarqué de chaque site et le serveur central
-3. Détermination du niveau de gravité d'un évènement
-4. Emission d'une alerte selon l'évènement
-5. Emission d'une demande de maintenance
-6. Commande de maintenance automatique
-7. Journalisation des évènements
-8. Journalisation des commandes
-9. Sauvegarde des évènements sur le site isolé en cas de connexion défaillante avec le serveur central
-
-Questions
------
-- Comment se fait la demande d’intervention auprès de la société de maintenance  (téléphone, email, autre...) ?
-- Quelles sont les informations actuellement transmises à la société de maintenance ?
-- La société de maintenance est-elle toujours la même pour toute l’UE ? (Il peut être nécessaire d’avoir des protocoles de demande d’intervention spécifiques pour chaque société de maintenance, à cause de la langue par exemple.)
-- Quels sont les différents types de sites distants (en dehors de ceux cités dans le document d’appel d’offres) ?
-- Quel est le type de contrat avec la société de maintenance (forfait ou facturé à l’intervention) ? &rarr; Intérêt de faire de la maintenance à distance ? Si forfait, non, si facturé à l’intervention, peut-être.
-    * Avantages : Réduction des coûts de maintenance puisqu’on évite de faire une demande auprès de la société de maintenance pour les tâches simples ; Indépendance relative vis à vis des sociétés de maintenance
-    * Inconvénients : Coût initial important : il faut installer tout un dispositif de maintenance automatique sur le site isolé. Il faut maintenir (à jour et en état de fonctionnement) le système de maintenance à distance
-- Est-ce qu’il y a des contraintes (légales...) obligeant à maintenir un opérateur sur le site? (Si oui, on peut les former pour effectuer les maintenances simples, sinon on peut envisager de vider le site et de faire de la maintenance automatique)
+1. Communication entre les capteurs et le site central *PH Ya*
+2. Détermination du niveau de gravité d'un évènement *Th*
+3. Emission d'une alerte selon l'évènement *Th* 
+4. Emission d'une demande de maintenance *Es*
+5. Optimisation des coûts de maintenance (inclut maintenance automatique) *Ni*
+6. Journalisation des évènements et des commandes *Fr*
+7. Sauvegarde des évènements sur le site isolé en cas de connexion défaillante avec le serveur central *Co*
