@@ -9,6 +9,8 @@ Epression des Besoins
 
 3. Emission d'une alerte
 --
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20automatique.png "01 - Création d'une alerte automatique")
+
 
 4. Emission d'une demande d'intervention d'une société de maintenance
 --
