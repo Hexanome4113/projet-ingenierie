@@ -64,6 +64,23 @@ En ce qui concerne la gestion de l'indisponibilité de la société de maintenan
 5. Optimisation des coûts de la maintenance et de la maintenance automatique
 --
 
+L'optimisation des coûts de la maintenance est l'une des exigences principales pour le projet. On prévoir ici l'existence d'un système de maintenance automatique qui permettra d'effectuer des interventions immédiates et précises pour intervenir avant qu'une anomalie n'évolue en problème nécessitant de contacter la société de maintenance. Dans les faits, ce système pourra être implémenté par des équipements spécifiques. Il pourra également être remplacé par le propriétaire du site si il réside à proximité du site, après une montée en compétence appropriée. A terme, les trajets effectués par les employés de la société de maintenance devraient être réduits au minimum, et donc, avec un contrat approprié, permettre de réduire les coûts de maintenance tout en garantissant un taux de disponibilité des équipements supérieur.
+
+![01-Problème](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-1.png "01 - Problème")
+
+![02-Génération et journalisation](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-2.png "02-Génération et journalisation")
+Ici, lorsqu'il émet une alerte, le système de surveillance considère qu'une action doit être menée.
+
+![03-Génération des demandes](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-1.png "03-Génération des demandes")
+Si l'alerte est traitable par le système de maintenance auto, une demande est générée directement. Sinon, si sa priorité est mineure, elle est ajoutée à une liste de problèmes à reporter à la société de maintenance pour le site. Lorsque le seuil de problèmes pour le site est atteint, ou qu'une erreur grave survient, une demande à destination de la société de maintenance est générée.
+
+![04-Automate de déclenchement d'une demande](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-2.png "04-Automate de déclenchement d'une demande")
+
+![05-Déclenchement d'une maintenance auto](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-3.png "05-Déclenchement d'une maintenance auto")
+
+![06-Diagramme d'activité](https://github.com/Hexanome4113/projet-ingenierie/tree/master/images/ActivityDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/OptimisationDemandesMaintenance.png "01 - Diagramme d'activité")
+
+
 6. Journalisation des données
 --
 
