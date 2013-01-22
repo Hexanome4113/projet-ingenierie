@@ -12,7 +12,7 @@ La communication des données des capteurs/actionneurs au site central est néce
 * __Communication site central - site distant__
 
 * __Communication système embarqué - capteurs__
-* 
+ 
 Les capteurs/actionneurs sont directement reliés au système embarqué, qui a pour role de relever et stocker les données afin de les communiquer ensuite au site central.
 
 ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png "DP - Rôle de la communication système embarqué / capteurs")
