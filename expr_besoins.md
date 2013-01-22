@@ -25,7 +25,7 @@ La fiabilité de la liaison système embarqué/capteurs repose sur deux axes pri
 
 ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesQualitConnexion.png "DP - surveiller la qualité des connexions")
 
-Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les éventuelles données numériques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
+Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les éventuelles données analogiques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
 
 ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesDTecterDCo.png "DP - détecter déconnexions")
 
