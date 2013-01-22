@@ -83,12 +83,15 @@ Si l'alerte est traitable par le système de maintenance auto, une demande est g
 
 6. Journalisation des données
 --
+ ![Journalisation des données1](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation1.png "Journalisation des données1" )
+ ![Journalisation des données2](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation2.png "Journalisation des données2" )
+  ![Journalisation des données3](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation3.png "Journalisation des données3" )
 
 7. Sauvegarde des événements sur le site isolé en cas de connexion défaillante
 -------------------------------------------------------------------------------
 Que se passe t'il en cas de non reception de donnée sur le site central?
 D'où vient le problème? Perte de connexion? Capteur defectueux? Système embarqué du site distant défaillant?
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "general")
+![07 DP général lié aux pb de connexion](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "general")
 Il faut s'adapter selon les cas.  
 Si c'est la connexion qui est défaillante, le système embarqué du site distant 
 doit déclencher une procedure de sauvegarde locale des données.
@@ -98,8 +101,8 @@ Si la connexion se rétablit il s'agit de transmettre les données qui n'ont pas
 pu l'être et sur le site central gérer l'alerte qui avait été lancée par la perte
 de connexion. (Faut il ignorer l'alerte? Envoyer quelqu'un malgré un retour à la
  normale?)
- ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/sauvergarde-locale.png "sauvegarde locale" )
- ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/transmettre-donnees.png "transmettre donnees" )
+ ![sauver données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/sauvergarde-locale.png "sauvegarde locale" )
+ ![transmettre données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/transmettre-donnees.png "transmettre donnees" )
    
 Une perte de connexion pourrait être tolérée momentanément. Lever une alerte en cas
  de problème persistant avec crititicité selon type du site et durée de défaillance.
