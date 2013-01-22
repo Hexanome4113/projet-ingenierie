@@ -1,8 +1,35 @@
-Epression des Besoins
+Expression des Besoins
 ===
+
+Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
+Le schéma ci-dessous est une représentation générale de ces besoins. Des descriptions plus détaillées sont disponibles à la suite.
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
 
 1. Communication entre les capteurs et le site central
 --
+La communication des données des capteurs/actionneurs au site central est nécessaire à la satisfaction de nombreux besoins fonctionnels du système. Ainsi, les différentes étapes de cette communication doivent répondre à des exigences de qualité et de fiabilité. Cette communication est divisée en deux parties successives: le relevé des mesures par un système sur le site distant, que l'on nommera "système embarqué", et le rapatriement de ces informations jusqu'au site central. Par ailleurs, la communication de commandes remontant du site central jusqu'aux actionneurs devra être envisagée au moyen du même dispositif.
+
+* __Communication site central - site distant__
+
+* __Communication système embarqué - capteurs__
+ 
+Les capteurs/actionneurs sont directement reliés au système embarqué, qui a pour role de relever et stocker les données afin de les communiquer ensuite au site central.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png "DP - Rôle de la communication système embarqué / capteurs")
+
+Cette décomposition met en évidence deux sous problèmes liés: la nécessité de connecter les capteurs de manière fiable, dans le but de centraliser l'information sur le système embarqué.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCentraliserLesInformations.png "DP - centraliser les données")
+La centralisation des données conditionne le système embarqué, et nécessite la mise en place d'une base de donnée locale ou d'un dispositif équivalent. Par ailleurs, il faut bien évidement que les capteurs soient reliés de manière fiable afin de pouvoir acquérir les mesures, ce qui nous amène au deuxième sous problème.
+La fiabilité de la liaison système embarqué/capteurs repose sur deux axes principaux, l'objectif est de récupérer des mesures de qualité, et de ne rater aucune de ces mesures. Dans cette optique, nous allons nous pencher sur les deux sous problèmes suivants: La détection d'éventuelles déconnexions, et l'estimation d'une éventuelle dégradation de l'information lors du transfert.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesQualitConnexion.png "DP - surveiller la qualité des connexions")
+
+Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les éventuelles données numériques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesDTecterDCo.png "DP - détecter déconnexions")
+
+Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement du moyen de communication employé. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les différentes extrémités des différents canaux que peuvent être les capteurs, éventuelles cartes d'acquisition, et bien entendu le système embarqué.
 
 2. Détermination du niveau de gravité de l'évènement
 --
@@ -37,6 +64,23 @@ En ce qui concerne la gestion de l'indisponibilité de la société de maintenan
 5. Optimisation des coûts de la maintenance et de la maintenance automatique
 --
 
+L'optimisation des coûts de la maintenance est l'une des exigences principales pour le projet. On prévoir ici l'existence d'un système de maintenance automatique qui permettra d'effectuer des interventions immédiates et précises pour intervenir avant qu'une anomalie n'évolue en problème nécessitant de contacter la société de maintenance. Dans les faits, ce système pourra être implémenté par des équipements spécifiques. Il pourra également être remplacé par le propriétaire du site si il réside à proximité du site, après une montée en compétence appropriée. A terme, les trajets effectués par les employés de la société de maintenance devraient être réduits au minimum, et donc, avec un contrat approprié, permettre de réduire les coûts de maintenance tout en garantissant un taux de disponibilité des équipements supérieur.
+
+![01-Problème](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-1.png "01 - Problème")
+
+![02-Génération et journalisation](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-2.png "02-Génération et journalisation")
+Ici, lorsqu'il émet une alerte, le système de surveillance considère qu'une action doit être menée.
+
+![03-Génération des demandes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-1.png "03-Génération des demandes")
+Si l'alerte est traitable par le système de maintenance auto, une demande est générée directement. Sinon, si sa priorité est mineure, elle est ajoutée à une liste de problèmes à reporter à la société de maintenance pour le site. Lorsque le seuil de problèmes pour le site est atteint, ou qu'une erreur grave survient, une demande à destination de la société de maintenance est générée.
+
+![04-Automate de déclenchement d'une demande](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-2.png "04-Automate de déclenchement d'une demande")
+
+![05-Déclenchement d'une maintenance auto](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-3.png "05-Déclenchement d'une maintenance auto")
+
+![06-Diagramme d'activité](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/OptimisationDemandesMaintenance.png "01 - Diagramme d'activité")
+
+
 6. Journalisation des données
 --
 
@@ -68,3 +112,4 @@ Il est possible d'identifier si le problème ne vient que d'un capteur. En effet
 la connexion existe toujours dans ce cas là, il s'agit d'une absence de donnée à
  transmettre. Cette fois encore il faut lever une alerte.
  
+
