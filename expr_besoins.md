@@ -40,5 +40,18 @@ En ce qui concerne la gestion de l'indisponibilité de la société de maintenan
 6. Journalisation des données
 --
 
-7. Sauvegarde des évènements sur le site isolé en cas de connexion défaillante
---
+7. Sauvegarde des événements sur le site isolé en cas de connexion défaillante
+-------------------------------------------------------------------------------
+Que se passe t'il en cas de non reception de donnée sur le site central?
+D'où vient le problème? Perte de connexion? Capteur defectueux? Système embarqué du site distant défaillant?
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "ll")
+Il faut s'adapter selon les cas.  
+Si c'est la connexion qui est défaillante, le système embarqué du site distant 
+doit déclencher une procedure de sauvegarde locale des données.
+Une perte de connexion peut être tolérée momentanément. Lever une alerte en cas
+ de problème persistant avec crititicité selon type du site et durée de défaillance.
+Si défaillance des capteurs, lever d'alerte selon importance du capteur et criticité du site.
+Si la connexion se rétablit il s'agit de transmettre les données qui n'ont pas 
+pu l'être et sur le site central gérer l'alerte qui avait été lancée par la perte
+de connexion. (Faut il ignorer l'alerte? Envoyer quelqu'un malgré un retour à la
+ normale?)
