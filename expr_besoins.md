@@ -1,6 +1,10 @@
 Epression des Besoins
 ===
 
+Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
+Le schéma ci-dessous est une représentation générale de ces besoins. Des descriptions plus détaillées sont disponibles à la suite.
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/blob/master/images/ProblemDiagrams/schemaGeneral.png")
+
 1. Communication entre les capteurs et le site central
 --
 La communication des données des capteurs/actionneurs au site central est nécessaire à la satisfaction de nombreux besoins fonctionnels du système. Ainsi, les différentes étapes de cette communication doivent répondre à des exigences de qualité et de fiabilité. Cette communication est divisée en deux parties successives: le relevé des mesures par un système sur le site distant, que l'on nommera "système embarqué", et le rapatriement de ces informations jusqu'au site central. Par ailleurs, la communication de commandes remontant du site central jusqu'aux actionneurs devra être envisagée au moyen du même dispositif.
