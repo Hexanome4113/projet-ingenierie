@@ -3,7 +3,7 @@ Epression des Besoins
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
 Le schéma ci-dessous est une représentation générale de ces besoins. Des descriptions plus détaillées sont disponibles à la suite.
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/blob/master/images/ProblemDiagrams/schemaGeneral.png")
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
 
 1. Communication entre les capteurs et le site central
 --
