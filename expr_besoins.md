@@ -44,14 +44,27 @@ En ce qui concerne la gestion de l'indisponibilité de la société de maintenan
 -------------------------------------------------------------------------------
 Que se passe t'il en cas de non reception de donnée sur le site central?
 D'où vient le problème? Perte de connexion? Capteur defectueux? Système embarqué du site distant défaillant?
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "ll")
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "general")
 Il faut s'adapter selon les cas.  
 Si c'est la connexion qui est défaillante, le système embarqué du site distant 
 doit déclencher une procedure de sauvegarde locale des données.
-Une perte de connexion peut être tolérée momentanément. Lever une alerte en cas
- de problème persistant avec crititicité selon type du site et durée de défaillance.
+
 Si défaillance des capteurs, lever d'alerte selon importance du capteur et criticité du site.
 Si la connexion se rétablit il s'agit de transmettre les données qui n'ont pas 
 pu l'être et sur le site central gérer l'alerte qui avait été lancée par la perte
 de connexion. (Faut il ignorer l'alerte? Envoyer quelqu'un malgré un retour à la
  normale?)
+ ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/sauvergarde-locale.png "sauvegarde locale" )
+ ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/transmettre-donnees.png "transmettre donnees" )
+   
+Une perte de connexion pourrait être tolérée momentanément. Lever une alerte en cas
+ de problème persistant avec crititicité selon type du site et durée de défaillance.
+Du point de vue du site central, comment différencier une perte de donnée due à 
+un problème de connexion, d'un problème lié au système embarqué présent là bas?  
+On ne peut pas. C'est pourquoi il faut lever une alerte selon le dernier état connu
+ des capteurs, la criticité du site et la durée de "non réponse" du site.  
+ 
+Il est possible d'identifier si le problème ne vient que d'un capteur. En effet 
+la connexion existe toujours dans ce cas là, il s'agit d'une absence de donnée à
+ transmettre. Cette fois encore il faut lever une alerte.
+ 
