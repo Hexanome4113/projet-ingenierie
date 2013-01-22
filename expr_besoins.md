@@ -1,4 +1,4 @@
-Epression des Besoins
+Expression des Besoins
 ===
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
