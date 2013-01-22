@@ -12,9 +12,24 @@ La communication des données des capteurs/actionneurs au site central est néce
 * __Communication site central - site distant__
 
 * __Communication système embarqué - capteurs__
+* 
 Les capteurs/actionneurs sont directement reliés au système embarqué, qui a pour role de relever et stocker les données afin de les communiquer ensuite au site central.
 
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/blob/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png "DP - Rôle de la communication système embarqué / capteurs")
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png "DP - Rôle de la communication système embarqué / capteurs")
+
+Cette décomposition met en évidence deux sous problèmes liés: la nécessité de connecter les capteurs de manière fiable, dans le but de centraliser l'information sur le système embarqué.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCentraliserLesInformations.png "DP - centraliser les données")
+La centralisation des données conditionne le système embarqué, et nécessite la mise en place d'une base de donnée locale ou d'un dispositif équivalent. Par ailleurs, il faut bien évidement que les capteurs soient reliés de manière fiable afin de pouvoir acquérir les mesures, ce qui nous amène au deuxième sous problème.
+La fiabilité de la liaison système embarqué/capteurs repose sur deux axes principaux, l'objectif est de récupérer des mesures de qualité, et de ne rater aucune de ces mesures. Dans cette optique, nous allons nous pencher sur les deux sous problèmes suivants: La détection d'éventuelles déconnexions, et l'estimation d'une éventuelle dégradation de l'information lors du transfert.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesQualitConnexion.png "DP - surveiller la qualité des connexions")
+
+Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les éventuelles données numériques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesDTecterDCo.png "DP - détecter déconnexions")
+
+Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement du moyen de communication employé. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les différentes extrémités des différents canaux que peuvent être les capteurs, éventuelles cartes d'acquisition, et bien entendu le système embarqué.
 
 2. Détermination du niveau de gravité de l'évènement
 --
