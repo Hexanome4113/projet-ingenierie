@@ -25,11 +25,11 @@ La fiabilité de la liaison système embarqué/capteurs repose sur deux axes pri
 
 ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesQualitConnexion.png "DP - surveiller la qualité des connexions")
 
-Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les éventuelles données analogiques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
+Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les quelques données analogiques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
 
 ![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesDTecterDCo.png "DP - détecter déconnexions")
 
-Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement du moyen de communication employé. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les différentes extrémités des différents canaux que peuvent être les capteurs, éventuelles cartes d'acquisition, et bien entendu le système embarqué.
+Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement des moyens de communication employés. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les extrémités des différents canaux (les capteurs, hypothétiques cartes d'acquisition, et bien entendu le système embarqué).
 
 2. Détermination du niveau de gravité de l'évènement
 --
