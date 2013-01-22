@@ -5,6 +5,9 @@ Epression des Besoins
 --
 La communication des données des capteurs/actionneurs au site central est nécessaire à la satisfaction de nombreux besoins fonctionnels du système. Ainsi, les différentes étapes de cette communication doivent répondre à des exigences de qualité et de fiabilité. Cette communication est divisée en deux parties successives: le relevé des mesures par un système sur le site distant, que l'on nommera "système embarqué", et le rapatriement de ces informations jusqu'au site central. Par ailleurs, la communication de commandes remontant du site central jusqu'aux actionneurs devra être envisagée au moyen du même dispositif.
 
+* _Communication site central - site distant_
+
+* _Communication système embarqué - capteurs_
 
 2. Détermination du niveau de gravité de l'évènement
 --
