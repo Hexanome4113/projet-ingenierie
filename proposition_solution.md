@@ -42,7 +42,7 @@ Le système d’informations du site central a donc pour fonctionnalités princi
 - Émission de demandes de maintenance
 - Journalisation des actions commandées (alerte du responsable de site, maintenance à distance ou demande de maintenance à la société de maintenance)
 
-Société de maintenance
+Communication avec les sociétés de maintenance
 --
 
 Chaque site isolé fait appel à une société de maintenance (la plus proche pouvant répondre à ses besoins) pour demander des interventions.
@@ -53,14 +53,34 @@ Une fois que l'intervention est effectuée, le technicien ayant effectué la mai
 
 Tous les documents sus-cités devront suivre un certain formalisme. Un listing détaillé des informations nécessaires que doivent contenir ces documents est présenté ci-dessous.
 
-Document de demande d'intervention (envoyé par le serveur central vers la société de maintenance) :
+**Document de demande d'intervention (envoyé par le serveur central vers la société de maintenance) :**
  - Date et heure de la demande
- - Site isolé concerné (nom et adresse)
+ - Coordonnées du site isolé concerné
  - Coordonnées du propriétaire du site isolé
  - Coordonnées du serveur central
  - Liste des évènements à traiter avec leur degré de gravité
  - Description de l'alerte et son degré de gravité (l'association de plusieurs évènements ayant une gravité mineure peut engendrer une alerte de niveau élevée)
 
+**Document de réponse à la demande d'intervention (envoyé par la société de maintenance au serveur central avant l'intervention) :**
+ - Date et heure du traitement de la demande
+ - Date, heure et durée de l'intervention prévues
+ - Coordonnées du site isolé concerné
+ - Coordonnées de la société de maintenance
+ - Liste des interventions à effectuer
+ - Liste des évènements, parmi ceux de la demande d'intervention, qui seront traités
+ - Liste des évènements, parmi ceux de la demande d'intervention, qui ne seront pas traités (peut être vide) et les raisons de ces non-maintenances
+ - Coût de l'intervention prévu (s'il s'agit d'un contrat forfaitaire il faut préciser que cette intervention n'est pas facturée mais comprise dans le forfait, ou préciser les surcoûts)
+
+**Document de compte-rendu de l'intervention (rédigée par le technicien de maintenance, envoyée par la société de maintenance vers le serveur central) :**
+ - Date, heure et durée de l'intervention
+ - Nom du technicien de maintenance ayant effectué l'intervention
+ - Coordonnées du site isolé concerné
+ - Coordonnées de la société de maintenance
+ - Liste des interventions, parmi ceux prévus dans la réponse à la demande d'intervention, traitées
+ - Liste des interventions, parmi ceux prévus dans la réponse à la demande d'intervention, non traitées et raisons de ces non-traitements
+ - Liste des interventions traitées non prévues et raison de ces interventions
+ - Observations et remarques (concernant l'état, l'entretien, la gestion et la maintenance du site isolé)
+ - Coût de l'intervention final (augmentation possible si interventions effectuées non prévues)
 
 Exigences fonctionnelles
 ---
