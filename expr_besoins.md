@@ -35,12 +35,15 @@ Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose dev
 
 Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement des moyens de communication employés. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les extrémités des différents canaux (les capteurs, hypothétiques cartes d'acquisition, et bien entendu le système embarqué).
 
-2. Détermination du niveau de gravité de l'évènement et émission d'une alerte
+C. Détermination du niveau de gravité de l'évènement et émission d'une alerte
 --
-Afin de permettre d'informer la société de maintenance des problèmes nécessitant correction, il est important d'avoir une trace de leur apparition. Pour cela, une alerte sera générée à chaque problème rencontré, et remontée au serveur central.
-![DP - Gérer de la génération des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/3%20-%20Emission%20alerte/DP%20Gestion%20Des%20Alertes%20-%20G%C3%A9rer%20la%20g%C3%A9n%C3%A9ration%20des%20alertes%20%28Diagramme%20p%C3%A8re%29.png)
+Quelles sont les conditions de déclenchant une alerte? Actuellement, c'est le propriétaire du site qui informe les sociétés de maintenance, on peut donc estimer qu'il peut toujours observer un problème sur le site et demander une intervention. La différence principale est qu'en absence du propriétaire, les sites sont toujours surveillés par le biais de capteurs. C'est le remontée d'information indiquant un état critique du paramètre observé qui déclenche l'alerte. 
+![DP - Gérer de la génération des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/LucidAlerte.png)
+Les capteurs et les sites isolés doivent transmettre des informations recueillies et non les alertes elles même. En effet, le système doit être fiable, or si un site isolé tombe en panne, il ne peut plus signaler au site central une alerte indiquant son non fonctionnement. Pour ces raisons plutôt évidentes, c'est le site central qui reçoit des informations, les traite et en conséquence génere des alertes. Un point particulier lié à un disfonctionnement et à la perte d'information sera développé plus loin.
 
-Pour pouvoir filtrer les alertes selon leur gravité (et ainsi pouvoir économiser des coûts de maintenance), nous devons pouvoir établir différents niveaux de gravité. Cette priorisation sera décidée par le directeur du site distant, ou un expert engagé par ses soins.
+
+![DP - Déterminer la gravité des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/3%20-%20Emission%20alerte/GestionAlertes.png)
+Pour pouvoir filtrer les alertes selon leur gravité (et ainsi pouvoir économiser des coûts de maintenance), nous devons pouvoir établir différents niveaux de gravité. Qui peut connaître cette gravaité? Actuellement le propriétaire du site, celui qui demande des interventions, n'a pas forcément de connaissance sur son site, et parfois même il peut se tromper en indiquant à la société de maintenance des points peu importants ou oublier des points essentiels. La connaissance de ces sites est donc chez les sociétés de maintenance. Avant de configurer notre système, il faudra réaliser une étude visant à mettre en commun les connaissance pour établir la criticité des situations.
 ![DP - Déterminer la gravité des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/3%20-%20Emission%20alerte/DP%20Gestion%20Des%20Alertes%20-%20D%C3%A9terminer%20la%20gravit%C3%A9%20des%20probl%C3%A8mes.png)
 ![DA - Déterminer la gravité des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20alerte/DA%20Gestion%20Des%20Alertes%20-%20D%C3%A9termination%20de%20la%20gravit%C3%A9%20des%20probl%C3%A8mes.png)
 
@@ -52,18 +55,6 @@ Même si l'objectif de la solution proposée est de limiter les interventions hu
 ![DP - Générer une alerte manuellement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/3%20-%20Emission%20alerte/DP%20Gestion%20Des%20Alertes%20-%20G%C3%A9n%C3%A9rer%20une%20alerte%20manuellement.png)
 ![DA - Générer une alerte manuellement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20manuelle.png)
 
-
-4. Emission d'une demande d'intervention d'une société de maintenance
---
-Après identification de(s) évènement(s) à traiter une demande d'intervention est transmise à la société de maintenance.
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/01DemandeDIntervention.png "01 - Demande d'intervention")
-Pour assurer le bon fonctionnement de cette transmission il faut que cette demande d'intervention soit envoyée par un moyen de communication fonctionnel et efficace et que l'(es) évènement(s) à traiter soit(ent) connu(s) et gérable(s) par la société de maintenance.
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/02MoyenDeCommunicationETEvenements.png "02 - Moyen de communication et évènements")
-Afin de garantir que le moyen de communication utilisé soit fonctionnel et efficace, il faut qu'il permette de mettre en place un formalisme de communication commun entre le serveur central et la société de maintenance, formalisme que chaque demande d'intervention devra ensuite suivre. Mais il faut aussi s'assurer que la société de maintenance soit disponible et puisse se déplacer au moment de la demande d'intervention (nuit, vacances, problèmes internes, ..., peuvent toujours survenir, il faut donc gérer ces cas).
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/03MoyenDeCommunication.png "03 - Moyen de communication")
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/04DisponibilitDesActeurs.png "04 - Disponibilité des Acteurs")
-En ce qui concerne la gestion de l'indisponibilité de la société de maintenance désignée par défaut pour le site isolé en question un solution peut être envisageable. Il serait avantageux pour les sociétés de maintenance (relativement) proche du site isolé et capables d'intervenir sur celui-ci de collaborer. Elle pourraient former une association de société de maintenance qui permettrait de gérer les problèmes d'indisponibilité d'une seule société de maintenance en affectant la demande d'intervention à une autre société alors disponible.
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/05SociTSDeMaintenance.png "05 - Association de sociétés de maintenance")
 
 5. Optimisation des coûts de la maintenance et de la maintenance automatique
 --
@@ -132,4 +123,24 @@ On ne peut pas. C'est pourquoi il faut lever une alerte selon le dernier état c
 Il est possible d'identifier si le problème ne vient que d'un capteur. En effet 
 la connexion existe toujours dans ce cas là, il s'agit d'une absence de donnée à
  transmettre. Cette fois encore il faut lever une alerte.
+ 
+ 
+ 
+D. Transmission d'une demande de maintenance à une société de maintenance
+-------------------------------------------------------------------------
+
+#### 01 - Transmission d'une demande de maintenance ####
+Lorsqu'une demande de maintenance est générée par le système de décision du serveur central, celle-ci est transmise à la société de maintenance.
+![01 - Transmission d'une demande de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/01TransmissionDemandeMaintenance.png "01 - Transmission d'une demande de maintenance")
+
+#### ####
+Pour assurer le bon fonctionnement de cette transmission il faut que cette demande d'intervention soit envoyée par un moyen de communication fonctionnel et efficace et que l'(es) évènement(s) à traiter soit(ent) connu(s) et gérable(s) par la société de maintenance.
+
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/02MoyenDeCommunicationETEvenements.png "02 - Moyen de communication et évènements")
+Afin de garantir que le moyen de communication utilisé soit fonctionnel et efficace, il faut qu'il permette de mettre en place un formalisme de communication commun entre le serveur central et la société de maintenance, formalisme que chaque demande d'intervention devra ensuite suivre. Mais il faut aussi s'assurer que la société de maintenance soit disponible et puisse se déplacer au moment de la demande d'intervention (nuit, vacances, problèmes internes, ..., peuvent toujours survenir, il faut donc gérer ces cas).
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/03MoyenDeCommunication.png "03 - Moyen de communication")
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/04DisponibilitDesActeurs.png "04 - Disponibilité des Acteurs")
+En ce qui concerne la gestion de l'indisponibilité de la société de maintenance désignée par défaut pour le site isolé en question un solution peut être envisageable. Il serait avantageux pour les sociétés de maintenance (relativement) proche du site isolé et capables d'intervenir sur celui-ci de collaborer. Elle pourraient former une association de société de maintenance qui permettrait de gérer les problèmes d'indisponibilité d'une seule société de maintenance en affectant la demande d'intervention à une autre société alors disponible.
+![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/05SociTSDeMaintenance.png "05 - Association de sociétés de maintenance")
+
  
