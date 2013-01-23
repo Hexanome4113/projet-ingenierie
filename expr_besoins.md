@@ -2,11 +2,15 @@ Expression des Besoins
 ===
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
-Le schéma ci-dessous est une représentation générale de ces besoins. Des descriptions plus détaillées sont disponibles à la suite.
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
+Le schéma ci-dessous est un premier découpage, plutot évident, du problème. Notre travail va commencer par s'attarder sur les premières interfaces mises à jour, puis nous approfondirons petit à petit notre approche.
+![schéma général](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
 
-1. Communication entre les capteurs et le site central
+A. Communication entre le système embarqué du site distant et le serveur central
 --
+
+B. Communication entre les capteurs et le système embarqué du site distant
+--
+
 La communication des données des capteurs/actionneurs au site central est nécessaire à la satisfaction de nombreux besoins fonctionnels du système. Ainsi, les différentes étapes de cette communication doivent répondre à des exigences de qualité et de fiabilité. Cette communication est divisée en deux parties successives: le relevé des mesures par un système sur le site distant, que l'on nommera "système embarqué", et le rapatriement de ces informations jusqu'au site central. Par ailleurs, la communication de commandes remontant du site central jusqu'aux actionneurs devra être envisagée au moyen du même dispositif.
 
 * __Communication site central - site distant__
@@ -129,4 +133,3 @@ Il est possible d'identifier si le problème ne vient que d'un capteur. En effet
 la connexion existe toujours dans ce cas là, il s'agit d'une absence de donnée à
  transmettre. Cette fois encore il faut lever une alerte.
  
-
