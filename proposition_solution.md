@@ -53,6 +53,19 @@ Une fois que l'intervention est effectuée, le technicien ayant effectué la mai
 
 ![Schéma Intervention par une société de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/CommunicationSocieteMaintenance.png "Schéma Intervention par une société de maintenance")
 
+##Moyens de communication
+
+Le service de demande d'intervention de maintenance doit gérer plusieurs demandes venant de différents sites isolés et donc à destination de différentes sociétés de maintenance.
+Toutes les sociétés de maintenance ne fonctionnement pas forcément de la même manière avec les mêmes outils. Ici ce sont les moyens de communication de chaque société de maintenance qui sont à prendre en compte.
+La communication privilégiée avec les sociétés de maintenance sera le mail et le téléphone, comme expliqué précédemment. Mais dans le cas où la société de maintenance ne dispose pas de communication mail l'envoi des document sera effectué par fax afin de garder l'avantage de la réception immédiate.
+L'envoi par courrier n'est pas envisageable à cause des délais de livraison et les éventuelles difficultés d'acheminement.
+
+Une seule et même personne du service d'intervention de maintenance s'occupera de créer le document de demande d'intervention, de l'envoyer et de contacter la société de maintenance par téléphone.
+Si la société de maintenance n'est pas disponible cette personne recherchera une autre société de maintenance faisant partie du système, contactera la propriétaire du site isolé concerné pour lui demander l'accord de changer de société de maintenance ponctuellement, et ensuite effectuera la même procédure à destination de cette nouvelle société de maintenance.
+Cependant si aucune société de maintenance faisant partie du système n'est présente dans un rayon de 100 km du site isolé, la personne chargée de cette demande d'intervention cherchera une nouvelle société de maintenance dans le secteur géographique si le niveau de gravité de l'intervention demandée est élevé, sinon la demande d'intervention sera reportée jusqu'à la disponibilité de la société de maintenance atitrée.
+
+##Formalisme de communication
+
 Tous les documents sus-cités devront suivre un certain formalisme. Un listing détaillé des informations nécessaires que doivent contenir ces documents est présenté ci-dessous.
 
 **Document de demande d'intervention (envoyé par le serveur central vers la société de maintenance) :**
@@ -84,6 +97,7 @@ Tous les documents sus-cités devront suivre un certain formalisme. Un listing d
  - Observations et remarques (concernant l'état, l'entretien, la gestion et la maintenance du site isolé)
  - Coût de l'intervention final (augmentation possible si interventions effectuées non prévues)
 
+##Evolution
 Exigences fonctionnelles
 ---
 
