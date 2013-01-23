@@ -18,11 +18,31 @@ a. Capteurs
 -----------
 
 <dl>
-  <dt>Lower cost</dt>
-  <dd>The new version of this product costs significantly less than the previous one!</dd>
-  <dt>Easier to use</dt>
-  <dd>We've changed the product so that it's much easier to use!</dd>
+  <dt>Introduction</dt>
+  <dd>
+  - Présentation des problématiques et des contraintes.
+  - Priorisation des exigences non-fonctionnelles
+  </dd>
+  
+  <dt>Solution retenue</dt>
+  <dd>
+  - explication de la solution (schéma)
+  - avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
+  - limites (installation : coûts et difficultées en fonction du terrain)
+  - coûts
+  </dd>
+
+  <dt>Solution alternative</dt>
+  <dd>
+  - explication de la solution (schéma)
+  - endroits pertinents ( , si plusieurs cuves sont proches...)
+  - avantages (coûts limités d'installation, pas de problèmes d'installation)
+  - inconvénients (isolation, lieux fortement accidentés, société de maintenance ne coopérant pas),
+  - coûts
+  </dd>
+  
 </dl>
+
 
 b. Energie
 ----------
