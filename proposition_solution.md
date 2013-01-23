@@ -42,6 +42,26 @@ Le système d’informations du site central a donc pour fonctionnalités princi
 - Émission de demandes de maintenance
 - Journalisation des actions commandées (alerte du responsable de site, maintenance à distance ou demande de maintenance à la société de maintenance)
 
+Société de maintenance
+--
+
+Chaque site isolé fait appel à une société de maintenance (la plus proche pouvant répondre à ses besoins) pour demander des interventions.
+Ces demandes d'intervention vont être maintenant générées par un service du serveur central et transmises par celui-ci à la société de maintenance concernée.
+Ces demandes d'intervention seront transmises par l'envoi d'un document par mail (ou par fax) pour donner les détails de l'intervention et par un appel téléphonique afin de vérifier la disponibilité de la société de maintenance et de connaître leur réponse quant à l'intervention.
+Après lecture du document de demande d'intervention la société de maintenance enverra par mail (ou par fax) un document de réponse au serveur central.
+Une fois que l'intervention est effectuée, le technicien ayant effectué la maintenance enverra un document de compte-rendu au serveur central.
+
+Tous les documents sus-cités devront suivre un certain formalisme. Un listing détaillé des informations nécessaires que doivent contenir ces documents est présenté ci-dessous.
+
+Document de demande d'intervention (envoyé par le serveur central vers la société de maintenance) :
+ - Date et heure de la demande
+ - Site isolé concerné (nom et adresse)
+ - Coordonnées du propriétaire du site isolé
+ - Coordonnées du serveur central
+ - Liste des évènements à traiter avec leur degré de gravité
+ - Description de l'alerte et son degré de gravité (l'association de plusieurs évènements ayant une gravité mineure peut engendrer une alerte de niveau élevée)
+
+
 Exigences fonctionnelles
 ---
 
