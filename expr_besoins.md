@@ -85,10 +85,24 @@ Si l'alerte est traitable par le système de maintenance auto, une demande est g
 
 
 6. Journalisation des données
---
- ![Journalisation des données1](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation1.png "Journalisation des données1" )
+-----------------------------
+Globalement, le projet vise à parvenir à récolter des données en provenance de sites isolés 
+afin que celles ci nous aident à prendre des décisions sur les trajets que doivent effectuer les entreprises
+de maintenance partenaires. 
+
+Sans ces données, la nouvelle solution perd tout son intérêt puisque la supervision à distance devient impossible 
+et il faut donc intervenir sur le site afin de prendre connaissance de son état, 
+ce qui est justement le problème que la solution est censée résoudre.
+
+Il apparaît donc que notre solution doit répondre à deux problèmes : 
+ - sauvegarder les données
+ - les extraire facilement
+
+ces deux opérations pouvant s'effectuer efficacement à l'aide d'un système de gestion de base de donnée adapté.
+
  ![Journalisation des données2](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation2.png "Journalisation des données2" )
-  ![Journalisation des données3](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation3.png "Journalisation des données3" )
+ ![Journalisation des données1](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation1.png "Journalisation des données1" )
+ ![Journalisation des données3](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation3.png "Journalisation des données3" )
 
 7. Sauvegarde des événements sur le site isolé en cas de connexion défaillante
 -------------------------------------------------------------------------------
