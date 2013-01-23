@@ -8,7 +8,7 @@ La solution est constituée de plusieurs installations réparties sur plusieurs 
 - des sites distants: isolés (du point de vue des communications), difficiles d'accès, où sont relevées les mesures des capteurs
 - un site central: fortement connecté (du point de vue des communications), facile d'accès, communiquant avec les sites isolés et les camions
 
-Sites distants
+Sites isolés
 --
 
 Un système embarqué récupère les mesures du réseau de capteurs déployé sur le site distant et les transmet au site central.
