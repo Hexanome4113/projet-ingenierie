@@ -125,6 +125,11 @@ On constate que quelques zones ne réunissent pas les conditions recquises par l
 
 **Solution standard: Eolien & Batterie tampon**
 
+La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
+
+Par ailleurs, l'éolienne devra être légerement surdimentionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+
+
 **Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
 
 Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisante pour y placer une éolienne, on propose la solution exceptionnelle décrite ci-dessous. Il est important de noter que cette solution est plus onéreuse, offre de moins bons rendements et une autonomie moins forte que la solution standard présentée précédement. Sa mise en place doit donc se limiter exclusivement aux cas où la solution standard ne serait pas applicable.
