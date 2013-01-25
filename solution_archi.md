@@ -20,46 +20,84 @@ a. Capteurs
 <dl>
   <dt>Introduction</dt>
   <dd>
-  Présentation des problématiques et des contraintes. Problématique : réussir à faire en sorte que les sites soient autonomes.
-  Contraintes : sites de 100m à 1km, jusqu'à une cinquantaine de cuves, froids, accidentés...
-  
+  Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises 
+   au serveur du site. Pour celà, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
+   de l'apport en énergie aux différents appareils.
+   
+  Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km, ce qui fait une distance importante entre le serveur
+   et les capteurs), le relief accidenté des sites, et le froid reignant dans le nord de la Norvège.
   </dd>
   <dd>
-  Priorisation des exigences non-fonctionnelles : Autonomie d'abord (expliquer un peu les conséquences), puis...
+  Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacun des avantages et inconvénients. Pour les différencier,
+   nous allons notamment prioriser les tâches selon les exigences non-fonctionnelles auxquelles elles répondent. La COPEVUE ayant placé comme facteur
+   primordial l'autonomie de notre installation, nous nous baserons donc sur ce facteur en priorité.
   </dd>
   
   <dt>Solution retenue</dt>
   <dd>
-  Explication de la solution (schéma) : Capteurs des cuves reliés par cable au site,
+  La solution nous ayant paru la plus pertinente est la suivante :
+  
+  Insérer schéma ici
+  
+  Cette solution consiste à installer un serveur sur le site et à le relier directement à chacune des cuves par des cables électriques
   </dd>
   <dd>
-  Avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
+  Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
+   il n'y a pas besoin de source d'énergie autre que celle du serveur. De plus, son nombre limité d'appareil limite les risques de pannes 
+   et donc de coupure du réseau et de frais de maintenance.
   </dd>
   <dd>
-  limites (installation : coûts et difficultées en fonction du terrain)
+  Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le serveur pouvant
+   être assez éloigné des cuves, il faudra parfois tirer un cable de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
+   des terrains.
   </dd>
   <dd>
-  coûts
+  Par cuve : ~ 150€ + 100€/100m
+  phMètre : gamme moyenne 55€
+  termomètre : gamme moyenne 40€
+  niveau : gamme moyenne 30€bha
+  cables : 10€ + 80€ / 100m
+  main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
   </dd>
 
   <dt>Solution alternative</dt>
   <dd>
-  explication de la solution (schéma) : Une borne radio par cuve, reliée aux différents capteurs, et un récepteur sur le site
-  </dd>
-  <dd>
-  endroits pertinents ( , si plusieurs cuves sont proches...)
-  </dd>
-  <dd>
-  avantages (coûts limités d'installation, pas de problèmes d'installation)
-  </dd>
-  <dd>
-  inconvénients (isolation, lieux fortement accidentés, société de maintenance ne coopérant pas),
-  </dd>
-  <dd>
-  coûts
-  </dd>
+  Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternation dont l'architecture serait la suivante :
   
+  Insérer schéma ici
+  
+  Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le serveur et un récepteur du côté du serveur a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
+   pour une cuve éloignée de 1km que pour une éloignée de 20m.
+  </dd>
+  <dd>
+  L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du serveur. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
+   elle n'est rentable qu'à partir d'une certaine distance, une communication par onde n'étant bien évidement pas nécessaire pour des cuves situées à 10m du serveur. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
+    les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour celà, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
+	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
+	solution peut venir de l'endroit du site : le terrain peut être accidenté et empêcher les ondes de passer. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
+  </dd>
+  <dd>
+  Par cuve : ~ 550€ + 30€ an
+  emetteur : longue portée 60€
+  msp430 (ou équivalent) 10€
+  phMètre : gamme moyenne 55€
+  termomètre : gamme moyenne 40€
+  niveau : gamme moyenne 30€
+  cables : 10€
+  batterie : 30€/ an
+  isolation : 200€ (polyurethane) 
+  chauffage : 50€
+  main-d'oeuvre : 4h/homme -> 50€
+  
+  Site : ~ 50€
+  Récepteur radio : 30€
+  fil : 3€
+  main d'oeuvre : 1h/homme : 15€
+  </dd>
 </dl>
+
+<dt>Conclusion</dt>
+  <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
 
 
 b. Energie
