@@ -20,18 +20,20 @@ a. Capteurs
 <dl>
   <dt>Introduction</dt>
   <dd>
-  Présentation des problématiques et des contraintes.
+  Présentation des problématiques et des contraintes. Problématique : réussir à faire en sorte que les sites soient autonomes.
+  Contraintes : sites de 100m à 1km, jusqu'à une cinquantaine de cuves, froids, accidentés...
+  
   </dd>
   <dd>
-  Priorisation des exigences non-fonctionnelles
+  Priorisation des exigences non-fonctionnelles : Autonomie d'abord (expliquer un peu les conséquences), puis...
   </dd>
   
   <dt>Solution retenue</dt>
   <dd>
-  explication de la solution (schéma)
+  Explication de la solution (schéma) : Capteurs des cuves reliés par cable au site,
   </dd>
   <dd>
-  avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
+  Avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
   </dd>
   <dd>
   limites (installation : coûts et difficultées en fonction du terrain)
@@ -42,7 +44,7 @@ a. Capteurs
 
   <dt>Solution alternative</dt>
   <dd>
-  explication de la solution (schéma)
+  explication de la solution (schéma) : Une borne radio par cuve, reliée aux différents capteurs, et un récepteur sur le site
   </dd>
   <dd>
   endroits pertinents ( , si plusieurs cuves sont proches...)
