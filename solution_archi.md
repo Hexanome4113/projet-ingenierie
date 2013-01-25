@@ -94,11 +94,10 @@ a. Capteurs
   fil : 3€
   main d'oeuvre : 1h/homme : 15€
   </dd>
-</dl>
 
 <dt>Conclusion</dt>
   <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
-
+</dl>
 
 b. Energie
 ----------
