@@ -70,7 +70,7 @@ Pour permettre de sécuriser le système et de retracer les actions effectuées,
 ![03-Génération des demandes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP-3.png "03-Génération des demandes")
 Pour éviter de demander des interventions lorsque cela n'est pas nécessaire, les alertes jugées mineures sont mises de côté pour chaque site tant qu'un nombre d'alertes mineures donnée n'est pas atteint. Lorsqu'il est atteint ou qu'une alerte critique survient, une demande de maintenance est générée.
 
-![04-Automate de déclenchement d'une demande](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP2-2.png "04-Automate de déclenchement d'une demande")
+![04-Automate de déclenchement d'une demande](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/Automate.png "04-Automate de déclenchement d'une demande")
 
 #### Séquence de génération d'une demande de maintenance ####
 
