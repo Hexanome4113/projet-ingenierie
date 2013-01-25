@@ -35,10 +35,13 @@ a. Capteurs
   
   <dt>Solution retenue</dt>
   <dd>
-  La solution nous ayant paru la plus pertinente est la suivante :
+  La solution nous ayant paru la plus pertinente est la suivante :</dd>
+</dl>
   
-  ![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png)
+  ![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_retenue.png)
   
+<dl>
+  <dd>
   Cette solution consiste à installer un serveur sur le site et à le relier directement à chacune des cuves par des cables électriques
   </dd>
   <dd>
