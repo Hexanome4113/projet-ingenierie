@@ -20,27 +20,41 @@ a. Capteurs
 <dl>
   <dt>Introduction</dt>
   <dd>
-  - Présentation des problématiques et des contraintes.
+  Présentation des problématiques et des contraintes.
   </dd>
   <dd>
-  - Priorisation des exigences non-fonctionnelles
+  Priorisation des exigences non-fonctionnelles
   </dd>
   
   <dt>Solution retenue</dt>
   <dd>
-  - explication de la solution (schéma)
-  - avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
-  - limites (installation : coûts et difficultées en fonction du terrain)
-  - coûts
+  explication de la solution (schéma)
+  </dd>
+  <dd>
+  avantages (pas de maintenance, fiabilité (robustesse)), raisons du choix
+  </dd>
+  <dd>
+  limites (installation : coûts et difficultées en fonction du terrain)
+  </dd>
+  <dd>
+  coûts
   </dd>
 
   <dt>Solution alternative</dt>
   <dd>
-  - explication de la solution (schéma)
-  - endroits pertinents ( , si plusieurs cuves sont proches...)
-  - avantages (coûts limités d'installation, pas de problèmes d'installation)
-  - inconvénients (isolation, lieux fortement accidentés, société de maintenance ne coopérant pas),
-  - coûts
+  explication de la solution (schéma)
+  </dd>
+  <dd>
+  endroits pertinents ( , si plusieurs cuves sont proches...)
+  </dd>
+  <dd>
+  avantages (coûts limités d'installation, pas de problèmes d'installation)
+  </dd>
+  <dd>
+  inconvénients (isolation, lieux fortement accidentés, société de maintenance ne coopérant pas),
+  </dd>
+  <dd>
+  coûts
   </dd>
   
 </dl>
