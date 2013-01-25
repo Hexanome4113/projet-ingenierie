@@ -35,8 +35,11 @@ Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose dev
 
 Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement des moyens de communication employés. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les extrémités des différents canaux (les capteurs, hypothétiques cartes d'acquisition, et bien entendu le système embarqué).
 
-C. Détermination du niveau de gravité de l'évènement et émission d'une alerte
---
+C. Génération des demandes de maintenance
+-----------------------------------------
+
+### 1. Détermination du niveau de gravité de l'évènement et émission d'une alerte ###
+
 Quelles sont les conditions de déclenchant une alerte? Actuellement, c'est le propriétaire du site qui informe les sociétés de maintenance, on peut donc estimer qu'il peut toujours observer un problème sur le site et demander une intervention. La différence principale est qu'en absence du propriétaire, les sites sont toujours surveillés par le biais de capteurs. C'est le remontée d'information indiquant un état critique du paramètre observé qui déclenche l'alerte. 
 ![DP - Gérer de la génération des problèmes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/3%20-%20Emission%20alerte/LucidAlerte.png)
 Les capteurs et les sites isolés doivent transmettre des informations recueillies et non les alertes elles même. En effet, le système doit être fiable, or si un site isolé tombe en panne, il ne peut plus signaler au site central une alerte indiquant son non fonctionnement. Pour ces raisons plutôt évidentes, c'est le site central qui reçoit des informations, les traite et en conséquence génere des alertes. Un point particulier lié à un disfonctionnement et à la perte d'information sera développé plus loin.
@@ -56,24 +59,22 @@ Même si l'objectif de la solution proposée est de limiter les interventions hu
 ![DA - Générer une alerte manuellement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20manuelle.png)
 
 
-5. Optimisation des coûts de la maintenance et de la maintenance automatique
---
+### 2. Optimisation des coûts de la maintenance ###
 
-L'optimisation des coûts de la maintenance est l'une des exigences principales pour le projet. On prévoir ici l'existence d'un système de maintenance automatique qui permettra d'effectuer des interventions immédiates et précises pour intervenir avant qu'une anomalie n'évolue en problème nécessitant de contacter la société de maintenance. Dans les faits, ce système pourra être implémenté par des équipements spécifiques. Il pourra également être remplacé par le propriétaire du site si il réside à proximité du site, après une montée en compétence appropriée. A terme, les trajets effectués par les employés de la société de maintenance devraient être réduits au minimum, et donc, avec un contrat approprié, permettre de réduire les coûts de maintenance tout en garantissant un taux de disponibilité des équipements supérieur.
+![01-Problème](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP-1.png "01 - Problème")
+L'optimisation des coûts de la maintenance est l'une des exigences principales pour le projet. Elle se fait entre le moment où on reçoit une alerte et celui où une demande de maintenance est produite.
 
-![01-Problème](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-1.png "01 - Problème")
+![02-Génération et journalisation](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP-2.png "02-Génération et journalisation")
+Pour permettre de sécuriser le système et de retracer les actions effectuées, toute demande de maintenance doit être journalisée à sa création. Elle sera ensuite envoyée à une société de maintenance.
 
-![02-Génération et journalisation](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP1-2.png "02-Génération et journalisation")
-Ici, lorsqu'il émet une alerte, le système de surveillance considère qu'une action doit être menée.
+![03-Génération des demandes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP-3.png "03-Génération des demandes")
+Pour éviter de demander des interventions lorsque cela n'est pas nécessaire, les alertes jugées mineures sont mises de côté pour chaque site tant qu'un nombre d'alertes mineures donnée n'est pas atteint. Lorsqu'il est atteint ou qu'une alerte critique survient, une demande de maintenance est générée.
 
-![03-Génération des demandes](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-1.png "03-Génération des demandes")
-Si l'alerte est traitable par le système de maintenance auto, une demande est générée directement. Sinon, si sa priorité est mineure, elle est ajoutée à une liste de problèmes à reporter à la société de maintenance pour le site. Lorsque le seuil de problèmes pour le site est atteint, ou qu'une erreur grave survient, une demande à destination de la société de maintenance est générée.
+![04-Automate de déclenchement d'une demande](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance/DP2-2.png "04-Automate de déclenchement d'une demande")
 
-![04-Automate de déclenchement d'une demande](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-2.png "04-Automate de déclenchement d'une demande")
+#### Séquence de génération d'une demande de maintenance ####
 
-![05-Déclenchement d'une maintenance auto](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/DP2-3.png "05-Déclenchement d'une maintenance auto")
-
-![06-Diagramme d'activité](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/5%20-%20Optimisation%20couts%20maintenance%20ET%20automatique/OptimisationDemandesMaintenance.png "01 - Diagramme d'activité")
+![06-Diagramme d'activité](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/5%20-%20Optimisation%20couts%20maintenance/OptimisationDemandesMaintenance.png "01 - Diagramme d'activité")
 
 
 6. Journalisation des données
