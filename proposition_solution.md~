@@ -45,13 +45,13 @@ Le système d’informations du site central a donc pour fonctionnalités princi
 Communication avec les sociétés de maintenance
 --
 
-A chaque site isolé correspond une société de maintenance (la plus proche pouvant répondre à ses besoins) pour demander des interventions.
+Chaque site isolé fait appel à une société de maintenance (la plus proche pouvant répondre à ses besoins) pour demander des interventions.
 Ces demandes d'intervention vont être maintenant générées par un service du serveur central et transmises par celui-ci à la société de maintenance concernée.
 Ces demandes d'intervention seront transmises par l'envoi d'un document par mail (ou par fax) pour donner les détails de l'intervention et par un appel téléphonique afin de vérifier la disponibilité de la société de maintenance et de connaître leur réponse quant à l'intervention.
 Après lecture du document de demande d'intervention la société de maintenance enverra par mail (ou par fax) un document de réponse au serveur central.
 Une fois que l'intervention est effectuée, le technicien ayant effectué la maintenance enverra un document de compte-rendu au serveur central.
 
-![Schéma Intervention par une société de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/DiagrammeDActivitCommunicationAvecLesSociTSDeMaintenance.png "Schéma Intervention par une société de maintenance")
+![Schéma Intervention par une société de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/CommunicationSocieteMaintenance.png "Schéma Intervention par une société de maintenance")
 
 ###Moyens de communication
 

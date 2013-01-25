@@ -11,6 +11,7 @@ Frame Box Approach
 ---
 - Respect du formalisme
 - Présence d'un scénario, fil conducteur pour pouvoir lire les diagrammes
+- Détail des interfaces entre les éléments du diagramme
 - Identification de design patterns
     * Introduction d'un modèle
 - Bonnes pratiques
