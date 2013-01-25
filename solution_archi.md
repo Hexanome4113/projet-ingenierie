@@ -66,9 +66,13 @@ a. Capteurs
   <dt>Solution alternative</dt>
   <dd>
   Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternation dont l'architecture serait la suivante :
+  </dd>
+</dl>
+
+  ![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_alternative.png)
   
-  ![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png)
-  
+<dl>
+  <dd>
   Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le serveur et un récepteur du côté du serveur a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
    pour une cuve éloignée de 1km que pour une éloignée de 20m.
   </dd>
