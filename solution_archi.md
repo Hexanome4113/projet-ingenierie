@@ -21,6 +21,8 @@ a. Capteurs
   <dt>Introduction</dt>
   <dd>
   - Présentation des problématiques et des contraintes.
+  </dd>
+  <dd>
   - Priorisation des exigences non-fonctionnelles
   </dd>
   
