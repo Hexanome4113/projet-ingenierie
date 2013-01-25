@@ -37,7 +37,7 @@ a. Capteurs
   <dd>
   La solution nous ayant paru la plus pertinente est la suivante :
   
-  Insérer schéma ici
+  ![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png)
   
   Cette solution consiste à installer un serveur sur le site et à le relier directement à chacune des cuves par des cables électriques
   </dd>
@@ -64,7 +64,7 @@ a. Capteurs
   <dd>
   Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternation dont l'architecture serait la suivante :
   
-  Insérer schéma ici
+  ![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png)
   
   Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le serveur et un récepteur du côté du serveur a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
    pour une cuve éloignée de 1km que pour une éloignée de 20m.
