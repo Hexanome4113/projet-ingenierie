@@ -21,10 +21,10 @@ a. Capteurs
   <dt>Introduction</dt>
   <dd>
   Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises 
-   au serveur du site. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
+   au système embarqué. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
    de l'apport en énergie aux différents appareils.
    
-  Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km, ce qui fait une distance importante entre le serveur
+  Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km, ce qui fait une distance importante entre le système embarqué
    et les capteurs), le relief accidenté des sites, et le froid reignant dans le nord de la Norvège.
   </dd>
   <dd>
@@ -42,11 +42,11 @@ a. Capteurs
   
 <dl>
   <dd>
-  Cette solution consiste à installer un serveur sur le site et à le relier directement à chacune des cuves par des cables électriques
+  Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des cables électriques
   </dd>
   <dd>
   Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
-   il n'y a pas besoin de source d'énergie autre que celle du serveur. De plus, son nombre limité d'appareils limite les risques de pannes 
+   il n'y a pas besoin de source d'énergie autre que celle du système embarqué. De plus, son nombre limité d'appareils limite les risques de pannes 
    et donc de coupure du réseau et de frais de maintenance.
   </dd>
   <dd>
@@ -54,12 +54,12 @@ a. Capteurs
    pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
   </dd>
   <dd>
-  Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le serveur pouvant
+  Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
    être assez éloigné des cuves, il faudra parfois tirer un cable de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
    des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le cable électrique, et le second vient du temps passé par
    des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
    passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
-   un temps variable en fonction de la distance de la cuve au serveur qu'ils passeront pour tirer le cable et s'assurer qu'il ne risque rien.
+   un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le cable et s'assurer qu'il ne risque rien.
   </dd>
 </dl>
    __Par cuve__ : ~ 150€ + 100€/100m
@@ -80,18 +80,18 @@ a. Capteurs
   
 <dl>
   <dd>
-  Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le serveur et un récepteur du côté du serveur a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
+  Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
    pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consomation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
    non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera gaspillée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
   </dd>
   <dd>
   Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio emettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
-   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au serveur. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que
+   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que
    le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai résonnable pour le changement de batterie.
   </dd>
   <dd>
-  L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du serveur. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
-   elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du serveur. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
+  L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
+   elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
     les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour celà, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
 	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
 	solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
