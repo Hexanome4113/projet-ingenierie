@@ -84,7 +84,7 @@ a. Capteurs
 	solution peut venir de l'endroit du site : le terrain peut être accidenté et empêcher les ondes de passer. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
   </dd>
 </dl>
-  __Par cuve__ : ~ 550€ + 30€/an</dd>
+__Par cuve__ : ~ 550€ + 30€/an
 
   - emetteur : longue portée 60€
   - msp430 (ou équivalent) 10€
@@ -97,7 +97,7 @@ a. Capteurs
   - chauffage : 50€
   - main-d'oeuvre : 4h/homme -> 50€
   
-  __Site__ : ~ 50€
+__Site__ : ~ 50€
   - Récepteur radio : 30€
   - fil : 3€
   - main d'oeuvre : 1h/homme : 15€
