@@ -55,7 +55,7 @@ a. Capteurs
    des terrains.
   </dd>
 
-  <dd>Par cuve : ~ 150€ + 100€/100m</dd>
+  <dd>*Par cuve* : ~ 150€ + 100€/100m</dd>
 </dl>
   - phMètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
@@ -84,7 +84,7 @@ a. Capteurs
 	solution peut venir de l'endroit du site : le terrain peut être accidenté et empêcher les ondes de passer. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
   </dd>
 
-  <dd>Par cuve : ~ 550€ + 30€/an</dd>
+  <dd>*Par cuve* : ~ 550€ + 30€/an</dd>
 </dl>
   - emetteur : longue portée 60€
   - msp430 (ou équivalent) 10€
@@ -97,7 +97,7 @@ a. Capteurs
   - chauffage : 50€
   - main-d'oeuvre : 4h/homme -> 50€
   
-<dl><dd>Site : ~ 50€</dd></dl>
+<dl><dd>*Site* : ~ 50€</dd></dl>
   - Récepteur radio : 30€
   - fil : 3€
   - main d'oeuvre : 1h/homme : 15€
