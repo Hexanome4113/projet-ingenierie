@@ -54,14 +54,13 @@ a. Capteurs
    être assez éloigné des cuves, il faudra parfois tirer un cable de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
    des terrains.
   </dd>
-  <dd>
+  
   Par cuve : ~ 150€ + 100€/100m
-  phMètre : gamme moyenne 55€
-  termomètre : gamme moyenne 40€
-  niveau : gamme moyenne 30€bha
-  cables : 10€ + 80€ / 100m
-  main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
-  </dd>
+  - phMètre : gamme moyenne 55€
+  - thermomètre : gamme moyenne 40€
+  - niveau : gamme moyenne 30€bha
+  - cables : 10€ + 80€ / 100m
+  - main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 
   <dt>Solution alternative</dt>
   <dd>
@@ -83,24 +82,22 @@ a. Capteurs
 	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
 	solution peut venir de l'endroit du site : le terrain peut être accidenté et empêcher les ondes de passer. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
   </dd>
-  <dd>
   Par cuve : ~ 550€ + 30€ an
-  emetteur : longue portée 60€
-  msp430 (ou équivalent) 10€
-  phMètre : gamme moyenne 55€
-  termomètre : gamme moyenne 40€
-  niveau : gamme moyenne 30€
-  cables : 10€
-  batterie : 30€/ an
-  isolation : 200€ (polyurethane) 
-  chauffage : 50€
-  main-d'oeuvre : 4h/homme -> 50€
+  - emetteur : longue portée 60€
+  - msp430 (ou équivalent) 10€
+  - phMètre : gamme moyenne 55€
+  - thermomètre : gamme moyenne 40€
+  - niveau : gamme moyenne 30€
+  - cables : 10€
+  - batterie : 30€/ an
+  - isolation : 200€ (polyurethane) 
+  - chauffage : 50€
+  - main-d'oeuvre : 4h/homme -> 50€
   
   Site : ~ 50€
-  Récepteur radio : 30€
-  fil : 3€
-  main d'oeuvre : 1h/homme : 15€
-  </dd>
+  - Récepteur radio : 30€
+  - fil : 3€
+  - main d'oeuvre : 1h/homme : 15€
 
 <dt>Conclusion</dt>
   <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
