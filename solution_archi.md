@@ -50,10 +50,17 @@ a. Capteurs
    et donc de coupure du réseau et de frais de maintenance.
   </dd>
   <dd>
+  L'énergie dépensée pour chaque cuve dans ce genre d'installation est minime : il suffit en effet d'avoir assez d'énergie pour faire fonctionner les capteurs, ce qui correspond 
+   pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
+  </dd>
+  <dd>
   Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le serveur pouvant
    être assez éloigné des cuves, il faudra parfois tirer un cable de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
-   des terrains.
-</dd>
+   des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le cable électrique, et le second vient du temps passé par
+   des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
+   passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
+   un temps variable en fonction de la distance de la cuve au serveur qu'ils passeront pour tirer le cable et s'assurer qu'il ne risque rien.
+  </dd>
 </dl>
    __Par cuve__ : ~ 150€ + 100€/100m
 
@@ -74,7 +81,13 @@ a. Capteurs
 <dl>
   <dd>
   Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le serveur et un récepteur du côté du serveur a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
-   pour une cuve éloignée de 1km que pour une éloignée de 20m.
+   pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consomation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
+   non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera gaspillée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
+  </dd>
+  <dd>
+  Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio emettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
+   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au serveur. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminer qu'un abri en polyurethan serait suffisant pour que
+   le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai résonnable pour le changement de batterie.
   </dd>
   <dd>
   L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du serveur. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
@@ -82,6 +95,9 @@ a. Capteurs
     les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour celà, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
 	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
 	solution peut venir de l'endroit du site : le terrain peut être accidenté et empêcher les ondes de passer. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
+  </dd>
+  <dd>
+  Pour ce type d'installation, le coût fixe de la main d'oeuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontroleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
 __Par cuve__ : ~ 550€ + 30€/an
