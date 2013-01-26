@@ -21,7 +21,7 @@ a. Capteurs
   <dt>Introduction</dt>
   <dd>
   Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises 
-   au serveur du site. Pour celà, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
+   au serveur du site. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
    de l'apport en énergie aux différents appareils.
    
   Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km, ce qui fait une distance importante entre le serveur
@@ -86,7 +86,7 @@ a. Capteurs
   </dd>
   <dd>
   Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio emettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
-   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au serveur. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminer qu'un abri en polyurethan serait suffisant pour que
+   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au serveur. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyurethan serait suffisant pour que
    le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai résonnable pour le changement de batterie.
   </dd>
   <dd>
