@@ -52,12 +52,12 @@ Pour pouvoir filtrer les alertes selon leur gravité (et ainsi pouvoir économis
 Les alertes configurées seront enregistrées dans la base du site central et levées quand une donnée transmise dépasse le seuil fixé, ou quand une erreur matériel ou de communication surgit. La création de ces alertes sera automatique, mais pourra nécessiter un traitement humain en aval.
 
 #### Générer une alerte automatiquement ####
-![DA - Générer une alerte automatiquement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20Alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20manuelle.png DA - Générer une alerte automatiquement)
+![DA - Générer une alerte automatiquement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20Alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20automatique.png "DA - Générer une alerte automatiquement")
 
 Même si l'objectif de la solution proposée est de limiter les interventions humaines, il peut arriver que des alertes soient créées manuellement. C'est notamment le cas lorsque le directeur constate une anomalie (soit dans les données transmises, soit parce qu'il s'est rendu sur place) : il doit dans ce cas remplir un formulaire et le transmettre au site central où il sera étudié.
 
 #### Générer une alerte manuellement ####
-![DA - Générer une alerte manuellement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20Alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20automatique.png DA - Générer une alerte manuellement)
+![DA - Générer une alerte manuellement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ActivityDiagrams/3%20-%20Emission%20Alerte/DA%20Gestion%20Des%20Alertes%20-%20Cr%C3%A9ation%20d%27une%20alerte%20manuelle.png "DA - Générer une alerte manuellement")
 
 
 ### 2. Optimisation des coûts de la maintenance ###
@@ -82,6 +82,9 @@ Pour éviter de demander des interventions lorsque cela n'est pas nécessaire, l
 Globalement, le projet vise à parvenir à récolter des données en provenance de sites isolés 
 afin que celles ci nous aident à prendre des décisions sur les trajets que doivent effectuer les entreprises de maintenance partenaires. 
 
+#### Sous système d'aide à la décision ####
+ ![Aide à la decision](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/aide%20decision.png "Aide à la decision" )
+
 Sans ces données, la nouvelle solution perd tout son intérêt puisque la supervision
  à distance devient impossible et il faut donc intervenir sur le site afin de prendre connaissance de son état, 
 ce qui est justement le problème que la solution est censée résoudre.
@@ -90,10 +93,11 @@ Il apparaît donc que notre solution doit répondre à deux problèmes :
  - sauvegarder les données
  - les extraire facilement
 
-ces deux opérations pouvant s'effectuer efficacement à l'aide d'un système de gestion de base de donnée adapté.
-
-![Aide à la decision](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/aide decision.png "Aide à la decision" )
+Ces deux opérations pouvant s'effectuer efficacement à l'aide d'un système de gestion de base de donnée adapté.
+#### Journaliser ... ####
  ![Journalisation des données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/journalisation.png "Journalisation des données" )
+
+#### ... Et extraire des donnes ####
  ![extraction des données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/extraction.png "Extraction des données" )
 
  
