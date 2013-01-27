@@ -6,34 +6,32 @@ Le schéma ci-dessous est un premier découpage, plutot évident, du problème. 
 ![schéma général](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
 
 A. Communication entre le système embarqué du site distant et le serveur central
---
+--------------------------------------------------------------------------------
+Le coeur du problème est le suivant: supposons que nous possédons des données sur l'état d'un site (nous verrons un peu plus tard d'où nous vient cette connaissance) et nous souhaitons les transmettre à une autre unitée distante: le cite central. Cette communication doit répondre aux exigences de qualité et de fiabilité. Par ailleurs, la communication de commandes remontant du site central jusqu'à des actionneurs devra être envisagée au moyen du même dispositif.
 
-B. Communication entre les capteurs et le système embarqué du site distant
---
+Si la connexion vers le site centrale est défaillante, le système embarqué du site distant doit déclencher une procedure de sauvegarde locale des données.
+####Sauver des données####
+![sauver données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/sauvegarde-locale.png "sauvegarde locale" )
 
-La communication des données des capteurs/actionneurs au site central est nécessaire à la satisfaction de nombreux besoins fonctionnels du système. Ainsi, les différentes étapes de cette communication doivent répondre à des exigences de qualité et de fiabilité. Cette communication est divisée en deux parties successives: le relevé des mesures par un système sur le site distant, que l'on nommera "système embarqué", et le rapatriement de ces informations jusqu'au site central. Par ailleurs, la communication de commandes remontant du site central jusqu'aux actionneurs devra être envisagée au moyen du même dispositif.
 
-* __Communication site central - site distant__
-
-* __Communication système embarqué - capteurs__
+Lorsque la connexion est rétablie, ou réparée, le système embarqué doit envoyer les données qu'il a sauvegardé. Ainsi malgré l'incident, il est possible d'avoir un suivi continu de l'acquisition des données.
+####Transmettre des données####
+ ![transmettre données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/transmettre-donnee.png "transmettre donnees" )
  
-Les capteurs/actionneurs sont directement reliés au système embarqué, qui a pour role de relever et stocker les données afin de les communiquer ensuite au site central.
+ 
+Que se passe t'il en cas de non reception de donnée sur le site central?
+D'où vient le problème? Perte de connexion? Capteur defectueux? Système embarqué du site distant défaillant?
 
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommInterneSI.png "DP - Rôle de la communication système embarqué / capteurs")
+Si le capteur est defectueux, le site central reçoit tout de même les autres informations liées au site. Il s'agit donc de lever l'alerte adaptée au problème.
 
-Cette décomposition met en évidence deux sous problèmes liés: la nécessité de connecter les capteurs de manière fiable, dans le but de centraliser l'information sur le système embarqué.
+Qu'en est il de la distinction entre une perte de connexion et un système embarqué du site distant défaillant? On ne peut pas, il faut donc lever l'alerte correspondant au niveau de gravité le plus élevé : panne du système embarqué lui même. En effet, en cas de perte de connexion les données sont sauvergardée localement par le site isolé puis ré-envoyées dès la connexion rétablie. De plus il faut lever une alerte selon d'autres facteurs : le dernier état connu des capteurs, la criticité du site et la durée de "non réponse" du site.
 
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCentraliserLesInformations.png "DP - centraliser les données")
-La centralisation des données conditionne le système embarqué, et nécessite la mise en place d'une base de donnée locale ou d'un dispositif équivalent. Par ailleurs, il faut bien évidement que les capteurs soient reliés de manière fiable afin de pouvoir acquérir les mesures, ce qui nous amène au deuxième sous problème.
-La fiabilité de la liaison système embarqué/capteurs repose sur deux axes principaux, l'objectif est de récupérer des mesures de qualité, et de ne rater aucune de ces mesures. Dans cette optique, nous allons nous pencher sur les deux sous problèmes suivants: La détection d'éventuelles déconnexions, et l'estimation d'une éventuelle dégradation de l'information lors du transfert.
+B. L'acquisition des données et la communication entre les capteurs et le système embarqué du site distant
+--------------------------------------------------------------------------
+Nous avions jusqu'à présent des informations à transmettre au site central. Il s'agit de savoir comment ses données ont été collectées et comment elles ont été transmises au système embarqué du site isolé.
+nécessité de connecter les capteurs de manière fiable
+![contrainte de distance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/distance.png "contrainte de distance")
 
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesQualitConnexion.png "DP - surveiller la qualité des connexions")
-
-Les capteurs peuvent être analogiques ou numériques, et bien qu'on suppose devoir numériser les quelques données analogiques au moyen de dispositifs d'acquisition, les deux problèmes restent entier car le signal peut-être altéré avant même d'avoir atteint ce dispositif.
-
-![Portal](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/DPCommSousSystMesDTecterDCo.png "DP - détecter déconnexions")
-
-Les mesures préventives visant à éviter les éventuelles pertes de connexion dépendent bien évidement des moyens de communication employés. Quels qu'ils soient, ces dispositifs sont faillibles, et il est alors nécessaire de pouvoir détecter un problème de connexion afin de réagir rapidement. Cette nécessité exige la mise en place d'un protocole de vérification entre les extrémités des différents canaux (les capteurs, hypothétiques cartes d'acquisition, et bien entendu le système embarqué).
 
 C. Génération des demandes de maintenance
 -----------------------------------------
@@ -97,34 +95,6 @@ ces deux opérations pouvant s'effectuer efficacement à l'aide d'un système de
  ![Journalisation des données1](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation1.png "Journalisation des données1" )
  ![Journalisation des données3](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/6%20-%20Journalisation/DPJournalisation3.png "Journalisation des données3" )
 
-7. Sauvegarde des événements sur le site isolé en cas de connexion défaillante
--------------------------------------------------------------------------------
-Que se passe t'il en cas de non reception de donnée sur le site central?
-D'où vient le problème? Perte de connexion? Capteur defectueux? Système embarqué du site distant défaillant?
-![07 DP général lié aux pb de connexion](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/general.png "general")
-Il faut s'adapter selon les cas.  
-Si c'est la connexion qui est défaillante, le système embarqué du site distant 
-doit déclencher une procedure de sauvegarde locale des données.
-
-Si défaillance des capteurs, lever d'alerte selon importance du capteur et criticité du site.
-Si la connexion se rétablit il s'agit de transmettre les données qui n'ont pas 
-pu l'être et sur le site central gérer l'alerte qui avait été lancée par la perte
-de connexion. (Faut il ignorer l'alerte? Envoyer quelqu'un malgré un retour à la
- normale?)
- ![sauver données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/sauvergarde-locale.png "sauvegarde locale" )
- ![transmettre données](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/7%20-%20Sauvegarde%20evenements%20sur%20le%20site%20isole%20connexion%20defaillante/transmettre-donnees.png "transmettre donnees" )
-   
-Une perte de connexion pourrait être tolérée momentanément. Lever une alerte en cas
- de problème persistant avec crititicité selon type du site et durée de défaillance.
-Du point de vue du site central, comment différencier une perte de donnée due à 
-un problème de connexion, d'un problème lié au système embarqué présent là bas?  
-On ne peut pas. C'est pourquoi il faut lever une alerte selon le dernier état connu
- des capteurs, la criticité du site et la durée de "non réponse" du site.  
- 
-Il est possible d'identifier si le problème ne vient que d'un capteur. En effet 
-la connexion existe toujours dans ce cas là, il s'agit d'une absence de donnée à
- transmettre. Cette fois encore il faut lever une alerte.
- 
  
  
 D. Transmission d'une demande de maintenance à une société de maintenance
