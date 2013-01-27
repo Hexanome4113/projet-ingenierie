@@ -19,6 +19,7 @@ Les éditeurs suivants pourront être utilisés dans la rédaction des documents
 * Nommage du fichier: Pas d'espaces. Des underscores ``_`` peuvent être utilisés à la place.
 * Eviter le plus possible les hiérarchies de titres profondes. Les différences de niveau de titre ne sont pas flagrantes et ne rendraient donc par très bien.
 * Se reporter à la section [Gestion des configurations](#gestion-de-configurations) pour les instructions relatives à la validation du document et au marquage du numéro de version.
+* Indiquer des messages de commit significatifs, permettant de comprendre ce qui a été fait sur le document.
 
 ### Images ###
 Les images seront ajoutées dans le dossier image sur github pour pouvoir être intégrées aux documents. Le format recommandé est le PNG
