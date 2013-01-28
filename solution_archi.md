@@ -67,7 +67,7 @@ a. Capteurs
   - phMètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
-  - cables : 10€ + 80€ / 100m
+  - cables : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du cable à 23 €&hellip;_
   - main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
@@ -103,7 +103,7 @@ a. Capteurs
 __Par cuve__ : ~ 550€ + 30€/an
 
   - emetteur : longue portée 60€
-  - msp430 (ou équivalent) 10€
+  - MSP430 (ou équivalent) 10€ _PH: De même, on peut trouver des MSP430 à l'unité pour quelques dollars, alors en commande groupée&hellip;_
   - phMètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
@@ -158,15 +158,30 @@ Le principe général de la solution est de maintenir la batterie à une tempér
 Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le developpement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
 
-c. Système central
-------------------
+c. Système embarqué et système de communication avec le site central
+-------------------------------------------------------------------
+
+### Introduction ###
+
+Le système embarqué se doit d'assurer trois fonctions principales&nbsp;:
+- recueillir les données envoyées par les capteurs, les regrouper par cuves, les dater, en bref, les identifier&nbsp;;
+- envoyer les données vers le site central lorsque la liaison est disponible&nbsp;;
+- stocker les données lorsque la liaison avec le site central n'est pas disponible.
+
+Le système assurera également une fonction auxiliaire&nbsp;: le contrôle de la température de l'enceinte thermique.
+
+Ces fonctionnalités sont assurées par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
+
+### Microcontrôleur ###
+
+Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
 
 d. ...
 ------
 
 
 3. Communication avec les sociétés de maintenance
-===============================================
+=================================================
 
 À chaque site isolé correspond une société de maintenance (la plus proche pouvant répondre à ses besoins) pour demander des interventions.
 Ces demandes d'intervention vont être maintenant générées par un service du serveur central et transmises par celui-ci à la société de maintenance concernée.
