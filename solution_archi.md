@@ -67,7 +67,7 @@ a. Capteurs
   - phMètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
-  - cables : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du cable à 23 €&hellip;_
+  - cables : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du cable à 23&nbsp;€/100&nbsp;m&hellip;_
   - main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
@@ -103,7 +103,7 @@ a. Capteurs
 __Par cuve__ : ~ 550€ + 30€/an
 
   - emetteur : longue portée 60€
-  - MSP430 (ou équivalent) 10€ _PH: De même, on peut trouver des MSP430 à l'unité pour quelques dollars, alors en commande groupée&hellip;_
+  - MSP430 (ou équivalent) 10€ _PH: De même, on peut trouver des MSP430 à l'unité pour quelques dollars, alors en commande groupée de plusieurs centaines&hellip;_
   - phMètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
@@ -164,17 +164,32 @@ c. Système embarqué et système de communication avec le site central
 ### Introduction ###
 
 Le système embarqué se doit d'assurer trois fonctions principales&nbsp;:
+
 - recueillir les données envoyées par les capteurs, les regrouper par cuves, les dater, en bref, les identifier&nbsp;;
+
 - envoyer les données vers le site central lorsque la liaison est disponible&nbsp;;
+
 - stocker les données lorsque la liaison avec le site central n'est pas disponible.
 
-Le système assurera également une fonction auxiliaire&nbsp;: le contrôle de la température de l'enceinte thermique.
+Le système assurera également, dans certains cas, une fonction auxiliaire&nbsp;: le contrôle de la température de l'enceinte thermique.
 
-Ces fonctionnalités sont assurées par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
+Ces fonctionnalités sont prises en charge par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
 
 ### Microcontrôleur ###
 
 Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
+
+La régulation de la température est elle plus complexe. D'autre part, cette brique logicielle n'est nécessaire que lorsque le système embarqué est installé dans une enceinte thermique, c'est-à-dire dans le cas (considéré comme rare) où une source d'énergie éolienne n'est pas disponible (voir _Solution alternative_ dans _[b. Energie](#b-energie)_).
+
+Pour cette raison, et parce que cette fonction, qui n'est pas liée à la satisfaction d'une exigence fonctionnelle, risque d'interférer avec la tâche principale du microcontrôleur, cette brique logicielle s'exécute sur un microcontrôleur dédié. La carte correspondant au système embarqué est donc déclinée en deux versions, selon la solution d'alimentation retenue, avec un ou deux microcontrôleurs.
+
+#### Microcontrôleur de transmission des données ####
+
+#### Microcontrôleur de régulation de la température ####
+
+### Système de liaison ###
+
+### Mémoire externe ###
 
 d. ...
 ------
