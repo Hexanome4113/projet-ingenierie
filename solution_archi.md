@@ -4,7 +4,7 @@
 
 *Quantifier les besoins en énergie du dispositif en [ampère-heure](http://fr.wikipedia.org/wiki/Amp%C3%A8re-heure), par unité (si nécessaire) et par jour.*
 
-*Par exemple: Communication ponctuelle par wifi toutes les 2H, 200 mAH /borne/jour*
+*Par exemple: Communication ponctuelle par wifi toutes les 2H, 200 mAh/borne/jour*
 
 
 1. Site central
@@ -25,7 +25,7 @@ a. Capteurs
    de l'apport en énergie aux différents appareils.
    
   Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km, ce qui fait une distance importante entre le système embarqué
-   et les capteurs), le relief accidenté des sites, et le froid reignant dans le nord de la Norvège.
+   et les capteurs), le relief accidenté des sites, et le froid régnant dans le nord de la Norvège.
   </dd>
   <dd>
   Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacun des avantages et inconvénients. Pour les différencier,
@@ -42,7 +42,7 @@ a. Capteurs
   
 <dl>
   <dd>
-  Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des cables électriques
+  Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des câbles électriques
   </dd>
   <dd>
   Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
@@ -55,24 +55,24 @@ a. Capteurs
   </dd>
   <dd>
   Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
-   être assez éloigné des cuves, il faudra parfois tirer un cable de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
-   des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le cable électrique, et le second vient du temps passé par
+   être assez éloigné des cuves, il faudra parfois tirer un câble de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
+   des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le câble électrique, et le second vient du temps passé par
    des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
    passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
-   un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le cable et s'assurer qu'il ne risque rien.
+   un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
   </dd>
 </dl>
    __Par cuve__ : ~ 150€ + 100€/100m
 
-  - phMètre : gamme moyenne 55€
+  - pH-mètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
-  - cables : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du cable à 23&nbsp;€/100&nbsp;m&hellip;_
-  - main-d'oeuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
+  - câbles : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du câble à 23&nbsp;€/100&nbsp;m&hellip;_
+  - main-d'œuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
   <dd>
-  Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternation dont l'architecture serait la suivante :
+  Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternative dont l'architecture serait la suivante :
   </dd>
 </dl>
 
@@ -81,69 +81,69 @@ a. Capteurs
 <dl>
   <dd>
   Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
-   pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consomation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
+   pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consommation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
    non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera gaspillée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
   </dd>
   <dd>
-  Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio emettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
+  Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio émettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
    que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que
-   le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai résonnable pour le changement de batterie.
+   le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai raisonnable pour le changement de batterie.
   </dd>
   <dd>
   L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
    elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
-    les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour celà, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
+    les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour cela, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
 	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
 	solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
   </dd>
   <dd>
-  Pour ce type d'installation, le coût fixe de la main d'oeuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontroleur) et de leur bon fonctionnement. 
+  Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
 __Par cuve__ : ~ 550€ + 30€/an
 
-  - emetteur : longue portée 60€
+  - émetteur : longue portée 60€
   - MSP430 (ou équivalent) 10€ _PH: De même, on peut trouver des MSP430 à l'unité pour quelques dollars, alors en commande groupée de plusieurs centaines&hellip;_
-  - phMètre : gamme moyenne 55€
+  - pH-mètre : gamme moyenne 55€
   - thermomètre : gamme moyenne 40€
   - niveau : gamme moyenne 30€
-  - cables : 10€
+  - câbles : 10€
   - batterie : 30€/ an
-  - isolation : 200€ (polyurethane) 
+  - isolation : 200€ (polyuréthane) 
   - chauffage : 50€
-  - main-d'oeuvre : 4h/homme -> 50€
+  - main-d'œuvre : 4h/homme -> 50€
   
 __Site__ : ~ 50€
   - Récepteur radio : 30€
   - fil : 3€
-  - main d'oeuvre : 1h/homme : 15€
+  - main d'œuvre : 1h/homme : 15€
 <dl>
 <dt>Conclusion</dt>
   <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
 </dl>
 
-b. Energie
+b. Énergie
 ----------
 
  **Introduction**
 
-Le système nécessite la mise en place d'une solution d'alimentation autonome pour les sites isolés n'ayant pas accès à une source d'énergie exterieure. Le système ayant besoin d'une alimentation continue et de faible puissance, il semble indispensable d'avoir recours à une batterie pour faire tampon, quelle que soit la source d'énergie utilisée. La principale contrainte de fonctionnement d'une batterie est la temperature ambiante, en l'occurence ici les températures sur site peuvent descendre jusqu'à des extrèmes de -40°C, ce qui limite drastiquement le rendement de n'importe quelle batterie du marché.
+Le système nécessite la mise en place d'une solution d'alimentation autonome pour les sites isolés n'ayant pas accès à une source d'énergie extérieure. Le système ayant besoin d'une alimentation continue et de faible puissance, il semble indispensable d'avoir recours à une batterie pour faire tampon, quelle que soit la source d'énergie utilisée. La principale contrainte de fonctionnement d'une batterie est la température ambiante, en l'occurrence ici les températures sur site peuvent descendre jusqu'à des extrêmes de -40°C, ce qui limite drastiquement le rendement de n'importe quelle batterie du marché.
 
 
-Le problème de la source d'énergie en elle-meme est contraint par les conditions géographiques et météorologiques du site. Une allimentation photovoltaïque est inenvisageable du fait de la très forte variabilité des durées d'ensoleillement des régions concernées. L'exploitation de la biomasse environnante est également innapropriée, car les régions concernées sont potentiellement désertiques et la mise en fonctionnement d'un tel dispositif nécessite l'intervention d'un opérateur. Finalement, les solutions hydroélectriques sont contraintes par la disposition géographique des sites qui sont pour la plupart éloignés des côtes. De plus, les puissances développées par les systèmes hydroélectriques sont largement supérieures aux besoins de notre système.
+Le problème de la source d'énergie en elle-même est contraint par les conditions géographiques et météorologiques du site. Une alimentation photovoltaïque est inenvisageable du fait de la très forte variabilité des durées d'ensoleillement des régions concernées. L'exploitation de la biomasse environnante est également inappropriée, car les régions concernées sont potentiellement désertiques et la mise en fonctionnement d'un tel dispositif nécessite l'intervention d'un opérateur. Finalement, les solutions hydroélectriques sont contraintes par la disposition géographique des sites qui sont pour la plupart éloignés des côtes. De plus, les puissances développées par les systèmes hydroélectriques sont largement supérieures aux besoins de notre système.
 
-Après revue des différentes alternatives, la seule solution restante pour générer de l'énergie sur place est l'éolien. Cette solution est particulièrement bien adaptée à de faibles puissances comme en témoigne l'utilisation de plus en plus fréquente de ces technologies dans des contextes domestiques. De plus, la norvège possède un très fort potentiel éolien, avec des vents suffisament forts et réguliers. La carte ci-dessous montre que pour la majorité des sites envisageables, le vent est suffisant car superieur en moyenne au minimum de 4km/h que nécessite la plupart des éoliennes.
+Après revue des différentes alternatives, la seule solution restante pour générer de l'énergie sur place est l'éolien. Cette solution est particulièrement bien adaptée à de faibles puissances comme en témoigne l'utilisation de plus en plus fréquente de ces technologies dans des contextes domestiques. De plus, la Norvège possède un très fort potentiel éolien, avec des vents suffisamment forts et réguliers. La carte ci-dessous montre que pour la majorité des sites envisageables, le vent est suffisant car supérieur en moyenne au minimum de 4km/h que nécessite la plupart des éoliennes.
 
 
 ![windmap](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/misc/windmap.png "carte des vents du nord de la Norvège")
 
 On constate que quelques zones ne réunissent pas les conditions recquises par l'éolien: on proposera donc une solution de secours pour ces quelques cas particuliers.
 
-**Solution standard: Eolien & Batterie tampon**
+**Solution standard: Éolien & Batterie tampon**
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
-Par ailleurs, l'éolienne devra être légèrement surdimentionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
 
 
 **Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
@@ -153,9 +153,9 @@ Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisant
 
 ![alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/misc/energie-sol-alternative.png "schéma de la solution alternative")
 
-Le principe général de la solution est de maintenir la batterie à une température permettant un rendement acceptable, tout en limitant la consommation du dispositif de chauffage au minimum. Dans cette optique, on place l'ensemble des composants electroniques centraux (système embarqué notamment) dans une enceinte limitant les échanges de chaleur avec l'exterieur, le but étant également de rentabiliser la dissipation thermique de ces derniers. L'appoint de chauffage est rendu possible par l'intégration d'une résistance alimentée par la batterie elle-meme. L'activation de cette résistance est contrôlée par une brique logicielle fonctionnant sur le système embarqué, dont l'objectif est de déterminer la meilleure stratégie à adopter pour préserver l'énergie emmagasinée dans la batterie malgré les conditions de température. Pour que cette optimisation soit possible, il faut au préalable avoir caractérisé précisément le rendement de la batterie en fonction de la température, le rendement de la résistance, ainsi que les caractéristiques thermiques (inertie, fuites...) de l'enceinte. En se basant sur ces données initiales et sur les relevés de température à l'intérieur du boitier, la brique logicielle est capable, par la résolution d'un système différentiel complexe, de déterminer cette stratégie optimale de chauffage. L'implémentation de ce système dans son ensemble (choix des composants les plus adaptés, étalonnage, développement de la brique logicielle...) ne sera pas détaillé ici, mais nos équipes disposent de l'expertise nécessaire à la mise en place d'un tel dispositif.
+Le principe général de la solution est de maintenir la batterie à une température permettant un rendement acceptable, tout en limitant la consommation du dispositif de chauffage au minimum. Dans cette optique, on place l'ensemble des composants électroniques centraux (système embarqué notamment) dans une enceinte limitant les échanges de chaleur avec l'extérieur, le but étant également de rentabiliser la dissipation thermique de ces derniers. L'appoint de chauffage est rendu possible par l'intégration d'une résistance alimentée par la batterie elle-même. L'activation de cette résistance est contrôlée par une brique logicielle fonctionnant sur le système embarqué, dont l'objectif est de déterminer la meilleure stratégie à adopter pour préserver l'énergie emmagasinée dans la batterie malgré les conditions de température. Pour que cette optimisation soit possible, il faut au préalable avoir caractérisé précisément le rendement de la batterie en fonction de la température, le rendement de la résistance, ainsi que les caractéristiques thermiques (inertie, fuites...) de l'enceinte. En se basant sur ces données initiales et sur les relevés de température à l'intérieur du boitier, la brique logicielle est capable, par la résolution d'un système différentiel complexe, de déterminer cette stratégie optimale de chauffage. L'implémentation de ce système dans son ensemble (choix des composants les plus adaptés, étalonnage, développement de la brique logicielle...) ne sera pas détaillé ici, mais nos équipes disposent de l'expertise nécessaire à la mise en place d'un tel dispositif.
 
-Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le developpement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
+Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succin mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
 
 c. Système embarqué et système de communication avec le site central
@@ -166,9 +166,7 @@ c. Système embarqué et système de communication avec le site central
 Le système embarqué se doit d'assurer trois fonctions principales&nbsp;:
 
 - recueillir les données envoyées par les capteurs, les regrouper par cuves, les dater, en bref, les identifier&nbsp;;
-
 - envoyer les données vers le site central lorsque la liaison est disponible&nbsp;;
-
 - stocker les données lorsque la liaison avec le site central n'est pas disponible.
 
 Le système assurera également, dans certains cas, une fonction auxiliaire&nbsp;: le contrôle de la température de l'enceinte thermique.
@@ -179,16 +177,39 @@ Ces fonctionnalités sont prises en charge par les trois composants du système 
 
 Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
 
-La régulation de la température est elle plus complexe. D'autre part, cette brique logicielle n'est nécessaire que lorsque le système embarqué est installé dans une enceinte thermique, c'est-à-dire dans le cas (considéré comme rare) où une source d'énergie éolienne n'est pas disponible (voir _Solution alternative_ dans _[b. Energie](#b-energie)_).
+La régulation de la température est elle plus complexe. D'autre part, cette brique logicielle n'est nécessaire que lorsque le système embarqué est installé dans une enceinte thermique, c'est-à-dire dans le cas (considéré comme rare) où une source d'énergie éolienne n'est pas disponible (voir _Solution alternative_ dans _[b. Énergie](#b-energie)_).
 
 Pour cette raison, et parce que cette fonction, qui n'est pas liée à la satisfaction d'une exigence fonctionnelle, risque d'interférer avec la tâche principale du microcontrôleur, cette brique logicielle s'exécute sur un microcontrôleur dédié. La carte correspondant au système embarqué est donc déclinée en deux versions, selon la solution d'alimentation retenue, avec un ou deux microcontrôleurs.
 
 #### Microcontrôleur de transmission des données ####
-Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de . En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huits octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surrestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
+Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
-Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du receuil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
+Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
+
+Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 4 Series_) a été choisi.
+
+Le microcontrôleur choisi permettant également de réaliser des conversions analogiques/numériques, celui peut aussi être employé au niveau des cuves, pour envoyer les mesures au système embarqué par ondes radio (voir _[a. Capteurs](#a-capteurs)_). De même, ce microcontrôleur est assez puissant pour assurer le contrôle de la température (voir _Microcontrôleur de régulation de la température_, ci-après. Au final, nous n'utilisons qu'un seul type de microcontrôleur pour répondre à tous nos besoins, ce qui présente plusieurs avantages. On peut notamment citer une même plateforme de développement, donc une réduction des coûts de programmation, ainsi que la possibilité de commander le nombre minimum d'exemplaires (bien souvent 1&thinsp;000) pour bénéficier du tarif le plus bas.
+
+_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ 2 Series _à_ Low Voltage Series _mais les idées restes les mêmes._
+
+Le microcontrôleur choisi (MSP430F2370) à les caractéristiques suivantes&nbsp;:
+
+- Fréquence&nbsp;: 16&nbsp;MHz
+- Taille de la mémoire Flash&nbsp;: 32&nbsp;ko
+- Taille de la RAM&nbsp;: 2048 octets
+- Nombre de broches GPIO&nbsp;: 32
+- Convertisseur analogique/numérique&nbsp;: Oui
+- Multiplicateur matériel&nbsp;: Oui
+- Support matériel de protocoles de communication série&nbsp;: Oui 
+- Prix (à l'unité)&nbsp;: 1,95&nbsp;$ (pour 1&thinsp;000 exemplaires)
+
+_Autre chose très intéressante avec ce microcontrôleur, c'est que la [page](http://www.ti.com/product/msp430f2370) de Texas Instruments le décrivant porte une référence sur cette page, intitulée [Energy Harvesting](http://www.ti.com/solution/energy_harvesting). À lire absolument. Coralie et Yann (pour la partie alimentation) dites moi ce que vous en pensez&nbsp;!_
 
 #### Microcontrôleur de régulation de la température ####
+
+Pour les raisons citées précédemment, le choix de ce microcontrôleur a déjà été fait. En effet, le microcontrôleur utilisé pour la partie transmission des données dispose de toutes les caractéristiques matérielles nécessaires (présence d'un multiplicateur matériel, cadence "élevée" de 16 MHz, RAM de taille suffisante) pour effectuer tous les calculs liés à la régulation de la température.
+
+Le microcontrôleur qui est utilisé pour assurer la régulation de la température, dans le cas d'un système embarqué en enceinte thermique, est du même modèle que le microcontrôleur utilisé pour la transmission des données.
 
 ### Système de liaison ###
 
