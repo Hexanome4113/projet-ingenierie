@@ -254,7 +254,7 @@ Afin de dimensionner correctement les équipements relatifs à l'énergie, il co
 
 *micro-controleur* - calcul ci-dessus, **0,594mW**.
 
-*équipement satellitaire* - détaillé dans la partie en question, **XX W**
+*équipement satellitaire* - détaillé dans la partie en question, **5 W**
 
 *capteur pH + temperature* - 3 piles AAA pour 1200h d'utilisation. 1250mAh/pile soit 3750mAh à 1,5V c'est à dire une consommation de **4,6875 mW**.
 
@@ -267,9 +267,9 @@ que l'on néglige les pertes en ligne (qui sont proches de zero aux intensités 
 que l'on ouvre 3 fenêtres de communication satellitaire de 2 minutes chaque jour,  
 nous obtenons la consommation moyenne d'un site par l'approximation suivante:
 
-Consomation journalière = (155.nbCuves + 2.3.XX).60 (mW.s)
+Consomation journalière = (155.nbCuves + 2.3.5000).60 (mW.s)
 
-Soit environ YYYY pour les sites les plus grands (50 cuves).
+Soit environ 630 Wh/jour pour les sites les plus grands (50 cuves) que l'on prendra comme référence.
 
 
 
@@ -278,16 +278,16 @@ Soit environ YYYY pour les sites les plus grands (50 cuves).
 **Solution standard: Éolien & Batterie tampon**
 
 
-La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 5 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
+La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
-Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestique conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas 
+Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestique conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la Ultimate Air One 600 sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
-Prix unitaire de la solution:
+Prix unitaire de la solution:  
+9000€	installation  
+3590€	éolienne 
+708€	batterie 
 
-9000€	installation éolienne
-5000€	éolienne
-
-
+durée de vie estimée ~10 ans
 
 
 
@@ -309,16 +309,18 @@ Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristique
 
 Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
 
-Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 6 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix aux alentours de XXX€.
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 6 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix aux alentours de 10000€.
 
 Prix fixe de développement de la brique logicielle de régulation différentielle: environ 10.000€
 
 
-Prix unitaire de la solution:
+Prix unitaire de la solution:  
+700€	caisson  
+12,26€	résistance  
+10000€	batterie  
 
-700€	caisson
-12,26€	résistance
-XXX	batterie
+durée de vie de la batterie ~10ans
+
 
 c. Système embarqué et système de communication avec le site central
 --------------------------------------------------------------------
