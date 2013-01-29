@@ -62,13 +62,12 @@ a. Capteurs
    un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
   </dd>
 </dl>
-   __Par cuve__ : ~ 150€ + 100€/100m
+   __Par cuve__ : ~ 325€ + 39€/100m
 
-  - pH-mètre : gamme moyenne 55€
-  - thermomètre : gamme moyenne 40€
-  - niveau : gamme moyenne 30€
-  - câbles : 10€ + 80€ / 100m _PH: je pense que cette valeur est exagérée, j'ai réussi à trouver du câble à 23&nbsp;€/100&nbsp;m&hellip;_
-  - main-d'œuvre : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
+  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - câbles : £11.76 (= 13,73€) / 100m : 
+  - main-d'œuvre : nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
   <dd>
@@ -100,22 +99,17 @@ a. Capteurs
   Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
-__Par cuve__ : ~ 550€ + 30€/an
+__Par cuve__ : ~ 435€
 
-  - émetteur : longue portée 60€
-  - MSP430 (ou équivalent) 10€ _PH: De même, on peut trouver des MSP430 à l'unité pour quelques dollars, alors en commande groupée de plusieurs centaines&hellip;_
-  - pH-mètre : gamme moyenne 55€
-  - thermomètre : gamme moyenne 40€
-  - niveau : gamme moyenne 30€
-  - câbles : 10€
-  - batterie : 30€/ an
-  - isolation : 200€ (polyuréthane) 
-  - chauffage : 50€
+  - émetteur : (longue portée) 89.99$ = 66.78€ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
+  - MSP430 : $4.30 = 3.2€. Thib:C'est effectivement le prix à l'unité pas pour trouver la réduc qu'ils vont nous faire... :/
+  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - batterie : 22.90€ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
   - main-d'œuvre : 4h/homme -> 50€
   
 __Site__ : ~ 50€
   - Récepteur radio : 30€
-  - fil : 3€
   - main d'œuvre : 1h/homme : 15€
 <dl>
 <dt>Conclusion</dt>
