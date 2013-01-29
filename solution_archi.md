@@ -10,23 +10,6 @@
 1. Site central
 ===============
 
-Détermination du niveau de gravité des évènements
----
-Pour déterminer le niveau de gravité des données reçues via les capteurs pour un site isolé, un système de règles est mis en place après la réception des données.
-Ces données sont donc comparées aux données précédemment reçues (historique des données) et grâce aux règles établies par les sociétés de maintenance, le propriétaire et les normes de sécurité européennes, le système détermine la gravité de la situation.
-Un évènement peut être dans un de ces trois états :
-- normal
-- inquiétant
-- alarmant
-
-Génération d'une alerte
----
-On souhaite optimiser les interventions par les sociétés de maintenance.
-Cela se traduit par une meilleure détermination du moment où il faut intervenir sur un site isolé.
-Une alarme sera générée automatiquement par le système lorsqu'un capteur en état alarmant, si d'autres capteurs sont alors en état inquiétant ceux-ci seront aussi compris dans l'alerte, ou lorsque trois capteurs sont en état inquiétant.
-Une alarme pourra aussi être émise manuellement par un employé du site central.
-Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
-
 Traffic attendu
 ---
 Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois (calcul effectué sur la base décrite dans la suite du document).
@@ -112,6 +95,35 @@ Sur le site central, nous aurons besoin d'employer le personnel suivant :
   - Des donneurs d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées
   - Un directeur (peut-être avec une toute petite équipe de direction derrière lui de une ou deux personnes supplémentaires), responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)
 
+Système des gestion des alertes
+---
+Un système d'aide à la décision pour la gestion des alertes est aussi présent dans le site central.
+Ce système est un système à règles conditionnelles.
+Il est primordial de renseigner les règles à considérer lors de la mise en place de notre système pour chaque site isolé.
+Il est donc important de réunir les cadres et agents, de la société de maintenance comme du propriétaire du site, qui interviennent sur le site isolé en question afin de collecter toutes ces règles.
+
+Ces règles seront de la forme :
+SI _donnée dans un certain état_ ALORS EMETTRE UNE ALERTE POUR DEMANDER UNE INTERVENTION DANS UN DELAI DE _x à y jours_
+
+Exemples de règles possibles :
+- SI le niveau de liquide a baissé de 10 cm (depuis la dernière mesure donc la veille) ALORS émettre une alerte pour demander une intervention dans un délai de 0 à 6 jours.
+- SI le degré pH du liquide est de 2 ALORS demander émettre une alerte pour une intervention dans un délai de 0 à 10 jours.
+
+Certaines règles indispensables seront définies par l'architecture technique choisie sur le site isolé :
+- SI une batterie du site est faible ou épuisée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI la communication satellite avec le système embarqué est coupée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI un capteur n'envoie plus de données ALORS émettre une alerte pour demander une intervention immédiate
+- SI l'éolienne présente un défaut ALORS émettre une alerte pour demander une intervention immédiate
+- ...
+
+A la réception de nouvelles données venant d'un site isolé, ce système de gestion des alertes va appliquer toutes les règles établies aux données reçues.
+Si une seule règle est rencontrée, le système demandera une intervention dans les délais demandés.
+Mais si le système rencontre plusieurs règles, le système d'aide à la décision choisira de demander une intervention dans des délais convenants à toutes les règles activées.
+Ce système considére aussi les alertes précédemment émises qui n'ont pas encore été rétablies par une intervention.
+Si une telle alerte avait été émise avant la nouvelle le système vérifie la date d'intervention prévue pour cette précédente alerte.
+Si cette date entre dans les délais calculés pour la nouvelle alerte alors les deux alertes seront traitées dans la même intervention, sinon le système choisira la date la plus proche pour demander une intervention pour les deux alertes.
+
+Ces alertes sont ensuite transmises au service de demande d'intervention de maintenance quelques jours avant la date d'intervention calculée.
 
 2. Site isolé
 =============
