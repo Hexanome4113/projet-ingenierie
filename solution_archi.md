@@ -29,7 +29,7 @@ Cela peut être très utile en cas de mauvaise détermination du niveau de gravi
 
 Traffic attendu
 ---
-Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois.
+Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois (calcul effectué sur la base décrite dans la suite du document).
 
 En configurant les sites distants pour qu’ils ne se connectent par tous au même instant au site central, on évite les pics de transferts et de connections simultanées.
 
