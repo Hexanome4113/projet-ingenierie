@@ -138,18 +138,26 @@ On constate que quelques zones ne réunissent pas les conditions recquises par l
 
 Afin de dimensionner correctement les équipements relatifs à l'énergie, il convient d'avoir une idée précise des besoins de notre système. Les deux carractéristiques principales à considérer sont la consommation moyenne, et la puissance maximale que l'on doit être capable de développer ponctuellement pour permettre, notamment, les communications satelitaires. La consommation moyenne dépend bien évidement de l'échelle du site considéré, car le principal besoin d'énergie provient de l'allimentation des capteurs. En effet le micro-controleur sélectionné nécessite entre 0,7µA (idle) et 270µA (on load) sous une tension de 2,2V, soit une consomation 0,594mW si l'on considère pour simplifier que ce dernier est solicité en permanence. Pour comparaison, un triplet de capteurs pH-niveau-température consomme 155mW (voir calcul ci-dessous) ce qui justifie que l'on puisse considérer la consommation du système embarqué comme négligeable.
 
-*micro-controleur* - **0,594mW**.
+*micro-controleur* - calcul ci-dessus, **0,594mW**.
+
+*équipement satellitaire* - détaillé dans la partie en question, **XX W**
 
 *capteur pH + temperature* - 3 piles AAA pour 1200h d'utilisation. 1250mAh/pile soit 3750mAh à 1,5V c'est à dire une consommation de **4,6875 mW**.
 
 *capteur de niveau* - 50mA sous 3V, soit **150 mW**.
 
 
-Si l'on considère que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement en continu, et sans prendre en compte les pertes en ligne (qui sont négligeables aux intensités considérées); nous obtenons donc la consommation moyenne d'un site par l'approximation suivante:
+Si l'on considère:  
+que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement environ 1 minute par heure,  
+que l'on néglige les pertes en ligne (qui sont proches de zero aux intensités considérées),  
+que l'on ouvre 3 fenêtres de communication de 1 minute chaque jour,  
+nous obtenons la consommation moyenne d'un site par l'approximation suivante:
 
-Consomation = 155 * nbCuves (mW)
+Consomation = (155.nbCuves + 3.XX).60 (mW.s)
 
-Soit une consommation de 7750mW pour les sites les plus grands (50aine de cuves).
+Soit une consommation journalière de YYYY pour les sites les plus grands (environ 50 cuves).
+
+
 
 
 
