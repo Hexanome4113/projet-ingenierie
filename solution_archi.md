@@ -10,6 +10,22 @@
 1. Site central
 ===============
 
+Détermination du niveau de gravité des évènements
+---
+Pour déterminer le niveau de gravité des données reçues via les capteurs pour un site isolé, un système de règles est mis en place après la réception des données.
+Ces données sont donc comparées aux données précédemment reçues (historique des données) et grâce aux règles établies par les sociétés de maintenance, le propriétaire et les normes de sécurité européennes, le système détermine la gravité de la situation.
+Un évènement peut être dans un de ces trois états :
+- normal
+- inquiétant
+- alarmant
+
+Génération d'une alerte
+---
+On souhaite optimiser les interventions par les sociétés de maintenance.
+Cela se traduit par une meilleure détermination du moment où il faut intervenir sur un site isolé.
+Une alarme sera générée automatiquement par le système lorsqu'un capteur en état alarmant, si d'autres capteurs sont alors en état inquiétant ceux-ci seront aussi compris dans l'alerte, ou lorsque trois capteurs sont en état inquiétant.
+Une alarme pourra aussi être émise manuellement par un employé du site central.
+Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
 
 2. Site isolé
 =============
@@ -133,11 +149,42 @@ Après revue des différentes alternatives, la seule solution restante pour gén
 
 On constate que quelques zones ne réunissent pas les conditions recquises par l'éolien: on proposera donc une solution de secours pour ces quelques cas particuliers.
 
+
+**Evaluation des besoins en énergie**
+
+Afin de dimensionner correctement les équipements relatifs à l'énergie, il convient d'avoir une idée précise des besoins de notre système. Les deux carractéristiques principales à considérer sont la consommation moyenne, et la puissance maximale que l'on doit être capable de développer ponctuellement pour permettre, notamment, les communications satelitaires. La consommation moyenne dépend bien évidement de l'échelle du site considéré, car le principal besoin d'énergie provient de l'allimentation des capteurs. En effet le micro-controleur sélectionné nécessite entre 0,7µA (idle) et 270µA (on load) sous une tension de 2,2V, soit une consomation 0,594mW si l'on considère pour simplifier que ce dernier est solicité en permanence. Pour comparaison, un triplet de capteurs pH-niveau-température consomme 155mW (voir calcul ci-dessous) ce qui justifie que l'on puisse considérer la consommation du système embarqué comme négligeable.
+
+*micro-controleur* - calcul ci-dessus, **0,594mW**.
+
+*équipement satellitaire* - détaillé dans la partie en question, **XX W**
+
+*capteur pH + temperature* - 3 piles AAA pour 1200h d'utilisation. 1250mAh/pile soit 3750mAh à 1,5V c'est à dire une consommation de **4,6875 mW**.
+
+*capteur de niveau* - 50mA sous 3V, soit **150 mW**.
+
+
+Si l'on considère:  
+que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement environ 1 minute par heure,  
+que l'on néglige les pertes en ligne (qui sont proches de zero aux intensités considérées),  
+que l'on ouvre 3 fenêtres de communication de 1 minute chaque jour,  
+nous obtenons la consommation moyenne d'un site par l'approximation suivante:
+
+Consomation = (155.nbCuves + 3.XX).60 (mW.s)
+
+Soit une consommation journalière de YYYY pour les sites les plus grands (environ 50 cuves).
+
+
+
+
+
 **Solution standard: Éolien & Batterie tampon**
+
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+
+
 
 
 **Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
