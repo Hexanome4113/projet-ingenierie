@@ -262,6 +262,7 @@ De manière réaliste, sur un gros site (30 cuves) où chaque cuve aurait 3 capt
   - Ethernet : 18 octets
   - IP : 24 octets
   - TCP : 24 octets
+
 Soit +66 octets.
 
 Pour un gros site, on s’attend donc à consommer 9066 octets/jour, soit 265,6 ko/mois.
