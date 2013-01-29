@@ -107,14 +107,12 @@ D. Transmission d'une demande de maintenance à une société de maintenance
 
 #### 01 - Choix de la société de maintenance ####
 
-Avant d'envoyer une demande de maintenance à une société, il faut s'assurer qu'elle sera en mesure de la traiter dans les meilleurs délais. Pour cela, le système mémorise les informations de toutes les sociétés de maintenance en contrat avec COPEVUE. Celles-ci doivent indiquer les sites qu'elles sont capables de desservir et leurs domaines de compétence mais aussi indiquer leurs indisponibilités.
-
+Le système dispose d'un annuaire de sociétés de maintenances, lui permettant de savoir quelles sociétés de maintenance peuvent effectuer une intervention sur un site donné. Si une société est momentanément indisponible, cela peut également être mémorisé par le système, qui choisira une société disponible lorsqu'une maintenance doit être effectuée.
 ![01 - Transmission d'une demande de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/01ChoixDeLaSocieteDeMaintenance.png "01 - Transmission d'une demande de maintenance")
 
 
 #### 02 - Transmission d'une demande de maintenance ####
 Lorsqu'une demande de maintenance est générée par le système de décision du serveur central, celle-ci est transmise à la société de maintenance.
-
 ![02 - Transmission d'une demande de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/02TransmissionDemandeMaintenance.png "01 - Transmission d'une demande de maintenance")
 
-On peut imaginer que l'envoi de la demande se fait via une service de type tickets permettant de contacter la société, ou par email, fax, ou encore appel téléphonique effectué par un opérateur. Lorsque la maintenance a été effectuée, la société de maintenance le notifie et le système peut journaliser cette notification.
+On peut imaginer que l'envoi de la demande se fait via une service de type tickets permettant de contacter la société, ou par email, fax, ou encore appel téléphonique effectué par un opérateur. Lorsque la maintenance a été effectuée, la société de maintenance le notifie et le système peut journaliser cette notification. Si l'intervention ne peut pas être réalisée actuellement par la société, une autre sera contactée.
