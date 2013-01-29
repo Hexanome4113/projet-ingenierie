@@ -65,7 +65,7 @@ Au niveau de l’équipement matériel du site central, nous aurons besoin de :
   - un pare-feu permettant de faire respecter la politique de sécurité du réseau de l’entreprise (1000€)
   - un serveur web accessible depuis l’extérieur permettant aux entreprises de maintenance de saisir les détails des opérations de maintenance effectuées. Ne requiert pas de performances accrues. (200€)
   - un serveur pour la base de données, disposant d’importantes ressources (RAM, stockage), et d’un système de redondance pour éviter une perte de données. (2500€)
-  - un serveur accédé par les systèmes embarqués des sites distants, a priori très peu gourmand en ressources mais devant assurer un service fiable et continu. Il sera donc doublé et protégé par le pare feu grâce à des règles strictes.
+  - un serveur accédé par les systèmes embarqués des sites distants, a priori très peu gourmand en ressources mais devant assurer un service fiable et continu. Il sera donc doublé et protégé par le pare feu grâce à des règles strictes. (1000€)
   - un serveur web et d’application accédé par tous les clients légers des postes des employés, devant périodiquement effectuer des calculs complexes (aide à la décision) et par conséquent doté de ressources conséquentes, ce qui garantira sa faible charge et sa forte réactivité la majorité du temps. (2500€)
   - onduleurs, câbles, imprimante réseau, périphériques... (2000€)
 
