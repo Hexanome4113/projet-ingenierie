@@ -412,9 +412,9 @@ _Le tout pour environ 300&nbsp;€ (hors frais d'abonnement)._
 
 _Spansion S25FL512S_
 
-- _Taille de la mémoire&nbsp;: 64&nbsp;Mo
-- Alimentation électrique&nbsp;: 3&nbsp;V, 100&nbsp;mA en fonctionnement, 0.07&nbsp;mA à l'arrêt
-- Prix (à l'unité)&nbsp;: 6,78&nbsp;€ (pour 1&thinsp;000), 7,34&nbsp;€ (pour 100)
+- _Taille de la mémoire&nbsp;: 64&nbsp;Mo_
+- _Alimentation électrique&nbsp;: 3&nbsp;V, 100&nbsp;mA en fonctionnement, 0,07&nbsp;mA à l'arrêt_
+- _Prix (à l'unité)&nbsp;: 6,78&nbsp;€ (pour 1&thinsp;000), 7,34&nbsp;€ (pour 100)_
 
 d. ...
 ------
