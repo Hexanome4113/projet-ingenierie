@@ -10,22 +10,120 @@
 1. Site central
 ===============
 
-Détermination du niveau de gravité des évènements
+Traffic attendu
 ---
-Pour déterminer le niveau de gravité des données reçues via les capteurs pour un site isolé, un système de règles est mis en place après la réception des données.
-Ces données sont donc comparées aux données précédemment reçues (historique des données) et grâce aux règles établies par les sociétés de maintenance, le propriétaire et les normes de sécurité européennes, le système détermine la gravité de la situation.
-Un évènement peut être dans un de ces trois états :
-- normal
-- inquiétant
-- alarmant
+Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois (calcul effectué sur la base décrite dans la suite du document).
 
-Génération d'une alerte
+En configurant les sites distants pour qu’ils ne se connectent par tous au même instant au site central, on évite les pics de transferts et de connections simultanées.
+
+Également, le site central échangera des données avec les sociétés de maintenance (pour des demandes de maintenance ainsi que pour en recevoir les rapports). Ces échanges sont assez peu fréquents et peu gourmands en masse de données.
+
+Pour ces raisons, le site central peut tout à fait se contenter d’une simple connexion ADSL, même si pour des raisons pratiques, un accès fibré est à privilégier.
+
+Base de données
 ---
-On souhaite optimiser les interventions par les sociétés de maintenance.
-Cela se traduit par une meilleure détermination du moment où il faut intervenir sur un site isolé.
-Une alarme sera générée automatiquement par le système lorsqu'un capteur en état alarmant, si d'autres capteurs sont alors en état inquiétant ceux-ci seront aussi compris dans l'alerte, ou lorsque trois capteurs sont en état inquiétant.
-Une alarme pourra aussi être émise manuellement par un employé du site central.
-Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
+
+En supposant qu’on stocke en base de données une valeur de 4 octet pour chaque message de capteur reçu, cela nous donne environ 10 mo par mois à stocker, auxquelles il faut rajouter toutes les informations d’ID, de relations, d’indexation, etc, ainsi que les données issues des échanges avec les sociétés de maintenance.
+
+D’autres données métiers peuvent être amenées à être stockées en base de données, mais ne représentent qu’une fraction de la masse des données précédentes.
+
+Avec une grande marge, un téraoctet de stockage paraît suffisants pour le stockage et la redondance. Cela représente en fin de compte très peu de données en comparaison de ce que les SGBD actuels sont capables de gérer (les performances étant grandement liées à son schéma et à sa configuration). Pour garantir des performances encore meilleures, il est envisageable d’utiliser des disques durs SSD.
+
+Les principales opérations qui seront effectuées seront :
+  - insertion d’une valeur d’un capteur en base de données
+  - extraction des valeurs les plus récentes des capteurs pour vérifier l’état global des sites distants sur un tableau de bord
+  - calculs intensifs sur l’ensemble de l’historique des valeurs de la base de donnée afin de :
+    - déceler des défaillances fréquentes
+    - évaluer l’intérêt d’intervenir sur certains sites afin de corriger des problèmes récurrents ou ayant de forts risques de se produire
+    - renégocier des contrats concernant des opérations de maintenance inutilisées en pratique ou au contraire trop souvent utilisées
+
+⇒ Car l’application requiert des opérations très complexes par moments, une base de donnée relationnelle est toute indiquée. Pour les dernières valeurs reçues pour chaque capteur, un stockage en RAM suffit (système de cache type Redis).
+
+Architecture matérielle
+---
+![site central](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Site_Central.png)
+
+Au niveau de l’équipement matériel du site central, nous aurons besoin de :
+  - un poste par employé (tour 175€, écran 75€)
+  - un pare-feu permettant de faire respecter la politique de sécurité du réseau de l’entreprise (1000€)
+  - un serveur web accessible depuis l’extérieur permettant aux entreprises de maintenance de saisir les détails des opérations de maintenance effectuées. Ne requiert pas de performances accrues. (200€)
+  - un serveur pour la base de données, disposant d’importantes ressources (RAM, stockage), et d’un système de redondance pour éviter une perte de données. (2500€)
+  - un serveur accédé par les systèmes embarqués des sites distants, a priori très peu gourmand en ressources mais devant assurer un service fiable et continu. Il sera donc doublé et protégé par le pare feu grâce à des règles strictes. (1000€)
+  - un serveur web et d’application accédé par tous les clients légers des postes des employés, devant périodiquement effectuer des calculs complexes (aide à la décision) et par conséquent doté de ressources conséquentes, ce qui garantira sa faible charge et sa forte réactivité la majorité du temps. (2500€)
+  - onduleurs, câbles, imprimante réseau, périphériques... (2000€)
+
+Architecture applicative
+---
+Notre solution au niveau du site central se présente sous la forme d’un intranet auxquels se connectent les employés, leur offrant :
+  - des tableaux de bord
+  - un système de notification en temps réel des alertes remontées des sites distants ou des interventions sur site
+  - des indicateurs
+  - une visualisation des interventions demandées aux sociétés de maintenance
+  - des demandes des propriétaires
+  - la modification des règles de maintenance automatisée
+  - la réalisation d’une action de maintenance manuelle
+  - l’affichage de  statistiques sur la fiabilité, les interventions sur sites, sur les sociétés de maintenance, sur les propriétaires
+
+Nous proposons également aux entreprises de maintenance partenaires de remplir les informations relatives à leurs interventions directement sur une interface web accessible depuis l’extérieur, plutôt que de les communiquer par mail ou téléphone à un agent du site central. Cette possibilité leur reste néanmoins accessible. C’est alors à l’agent lui même de remplir les informations sur l’intervention.
+
+D’un point de vue technique, de manière à simplifier les développements, nous choisissons d’utiliser les mêmes technologies pour la réalisation du site internet accessible par les sociétés de maintenance ainsi que pour le serveur accédé par les sites distants. Dans la même logique, nous utiliserons le même langage pour les clients légers que pour les serveurs, c’est à dire JavaScript, à travers son environnement haute performance Node.js.
+
+
+Autres frais
+---
+### Fixes
+  - fournitures diverses (300€)
+  - mobilier (chaises, bureaux, luminaires, rangements) : (300€ + 100€/poste)
+  - cafetière (100€)
+
+### Forfaits
+  - de jolis locaux à Limoges (70m², 600€/mois)
+  - connexion internet haut débit (50€/mois)
+  - nom de domaine (12€/an)
+  - impôts et taxes divers et variés
+  - salaires (1500€/employé)
+  - edf, eau courante
+
+
+Personnel
+---
+Sur le site central, nous aurons besoin d'employer le personnel suivant :
+  - Un agent de maintenance sur place (peut-être deux, ou un vacataire, à voir), en charge de faire la maintenance logicielle (bd, site web, appel à une société en informatique externe pour les tâches les plus complexes, etc.) et matérielle (postes de travail, du parc informatique du site, commande de matériel, premier diagnostic en cas défaillance, appel à une société informatique externe pour la maintenance matérielle, suivi des réparations, etc.), responsable de la sécurité, de la gestion des comptes utilisateurs, aide et formation des utilisateurs aux outils.
+  - Un agent de maintenance pour les sites distants pour assurer les mêmes fonctions de maintenance logicielle et matérielle que l’agent sur place, mais pour les sites distants
+  - Une personne sur place pour prendre les appels/envoyer/répondre au(x) mails/courrier des propriétaires, des sociétés de maintenance, d’autres personnes (suivi de la relation)
+  - Un Comptable/Responsable du service achat/approvisionnement/Suivi de la facturation des sociétés de maintenance/des propriétaires de sites
+  - Des donneurs d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées
+  - Un directeur (peut-être avec une toute petite équipe de direction derrière lui de une ou deux personnes supplémentaires), responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)
+
+Système des gestion des alertes
+---
+Un système d'aide à la décision pour la gestion des alertes est aussi présent dans le site central.
+Ce système est un système à règles conditionnelles.
+Il est primordial de renseigner les règles à considérer lors de la mise en place de notre système pour chaque site isolé.
+Il est donc important de réunir les cadres et agents, de la société de maintenance comme du propriétaire du site, qui interviennent sur le site isolé en question afin de collecter toutes ces règles.
+
+Ces règles seront de la forme :
+SI _donnée dans un certain état_ ALORS EMETTRE UNE ALERTE POUR DEMANDER UNE INTERVENTION DANS UN DELAI DE _x à y jours_
+
+Exemples de règles possibles :
+- SI le niveau de liquide a baissé de 10 cm (depuis la dernière mesure donc la veille) ALORS émettre une alerte pour demander une intervention dans un délai de 0 à 6 jours.
+- SI le degré pH du liquide est de 2 ALORS demander émettre une alerte pour une intervention dans un délai de 0 à 10 jours.
+
+Certaines règles indispensables seront définies par l'architecture technique choisie sur le site isolé :
+- SI une batterie du site est faible ou épuisée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI la communication satellite avec le système embarqué est coupée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI un capteur n'envoie plus de données ALORS émettre une alerte pour demander une intervention immédiate
+- SI l'éolienne présente un défaut ALORS émettre une alerte pour demander une intervention immédiate
+- ...
+
+A la réception de nouvelles données venant d'un site isolé, ce système de gestion des alertes va appliquer toutes les règles établies aux données reçues.
+Si une seule règle est rencontrée, le système demandera une intervention dans les délais demandés.
+Mais si le système rencontre plusieurs règles, le système d'aide à la décision choisira de demander une intervention dans des délais convenants à toutes les règles activées.
+Ce système considère aussi les alertes précédemment émises qui n'ont pas encore été rétablies par une intervention.
+Si une telle alerte avait été émise avant la nouvelle le système vérifie la date d'intervention prévue pour cette précédente alerte.
+Si cette date est entre dans les délais calculés pour la nouvelle alerte alors les deux alertes seront traitées dans la même intervention, sinon le système choisira la date la plus proche pour demander une intervention pour les deux alertes.
+
+Ces alertes sont ensuite transmises au service de demande d'intervention de maintenance quelques jours avant la date d'intervention calculée.
 
 2. Site isolé
 =============
@@ -237,6 +335,8 @@ Le système assurera également, dans certains cas, une fonction auxiliaire&nbsp
 
 Ces fonctionnalités sont prises en charge par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
 
+_N.B.&nbsp;: Dans la suite, les coûts sont exprimés en euros, et n'incluent ni main d'œuvre, ni coûts liés à un développement spécifique (logiciel ou matériel), sauf mention contraire explicite. Les coûts donnés n'incluent donc que les prix des pièces détachés et des prestations fournies._
+
 ### Microcontrôleur ###
 
 Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
@@ -245,16 +345,20 @@ La régulation de la température est elle plus complexe. D'autre part, cette br
 
 Pour cette raison, et parce que cette fonction, qui n'est pas liée à la satisfaction d'une exigence fonctionnelle, risque d'interférer avec la tâche principale du microcontrôleur, cette brique logicielle s'exécute sur un microcontrôleur dédié. La carte correspondant au système embarqué est donc déclinée en deux versions, selon la solution d'alimentation retenue, avec un ou deux microcontrôleurs.
 
+Il faudra donc assurer le développement d'une carte spécifique pour le système embarqué.
+
+_Coût approximatif de la carte&nbsp;: &nbsp;€ pour le développement/prototypage/test de la carte + y&nbsp;€ (par carte, hors microcontrôleur et mémoire externe) pour la production._
+
 #### Microcontrôleur de transmission des données ####
 Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
 Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
 
-Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 4 Series_) a été choisi.
+Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 2 Series_) a été choisi.
 
 Le microcontrôleur choisi permettant également de réaliser des conversions analogiques/numériques, celui peut aussi être employé au niveau des cuves, pour envoyer les mesures au système embarqué par ondes radio (voir _[a. Capteurs](#a-capteurs)_). De même, ce microcontrôleur est assez puissant pour assurer le contrôle de la température (voir _Microcontrôleur de régulation de la température_, ci-après. Au final, nous n'utilisons qu'un seul type de microcontrôleur pour répondre à tous nos besoins, ce qui présente plusieurs avantages. On peut notamment citer une même plateforme de développement, donc une réduction des coûts de programmation, ainsi que la possibilité de commander le nombre minimum d'exemplaires (bien souvent 1&thinsp;000) pour bénéficier du tarif le plus bas.
 
-_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ 2 Series _à_ Low Voltage Series _mais les idées restes les mêmes._
+_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ MSP430 2 Series _à_ MSP430 Low Voltage Series _mais les idées restes les mêmes._
 
 Le microcontrôleur choisi (MSP430F2370) à les caractéristiques suivantes&nbsp;:
 
@@ -277,7 +381,38 @@ Le microcontrôleur qui est utilisé pour assurer la régulation de la températ
 
 ### Système de liaison ###
 
+Au niveau du microcontrôleur de chaque site distant, on aggrège les données des capteurs envoyées chaque heure, en les envoyant au moins une fois par jour.
+
+Un capteur transmet toutes les 60 minutes son ID et sa valeur (deux entiers sur 4 octets), ce qui fait 2*4*24 = 192 octets de données par jour et par capteur, compressible à 100 octets en évitant la répétition de l’ID.
+
+De manière réaliste, sur un gros site (30 cuves) où chaque cuve aurait 3 capteurs, (pH, niveau et température), on aurait donc 9000 octets de générés chaque jour, auxquels il faut rajouter les différentes en-têtes nécessaires à la transmission :
+  - Ethernet : 18 octets
+  - IP : 24 octets
+  - TCP : 24 octets
+
+Soit +66 octets.
+
+Pour un gros site, on s’attend donc à consommer 9066 octets/jour, soit 265,6 ko/mois.
+
+Pour un petit site (5 cuves) : ((5*3*100)+66)*30 octets/mois = 45,9 ko/mois.
+
+En supposant que les sites peuvent être amenés à grossir de manière raisonnable en nombre de cuves, on peut fixer un plafond de trafic allant de 1 mo à 2 mo par mois pour un gros site, si un ou deux capteurs venaient à s’ajouter. Quand au débit maximal, il apparaît être vraiment peu significatif, les offres les plus lentes d’Internet par satellite conviendraient. Avec la gamme que nous avons choisies (quelques centaines de kilobits/s), la communication des données quotidiennes se ferait en moins d’une seconde.
+
+_Système de transmission composé de&nbsp;:_
+
+- _Antenne Prodelin de 1,8&nbsp;m de diamètre_
+- _Unité de transmission/réception de 5 W (C-Band)_
+- _Équipement divers nécessaire à l'installation de l'antenne sur le site_
+
+_Le tout pour environ 300&nbsp;€ (hors frais d'abonnement)._
+
 ### Mémoire externe ###
+
+_Spansion S25FL512S_
+
+- _Taille de la mémoire&nbsp;: 64&nbsp;Mo
+- Alimentation électrique&nbsp;: 3&nbsp;V, 100&nbsp;mA en fonctionnement, 0.07&nbsp;mA à l'arrêt
+- Prix (à l'unité)&nbsp;: 6,78&nbsp;€ (pour 1&thinsp;000), 7,34&nbsp;€ (pour 100)
 
 d. ...
 ------
