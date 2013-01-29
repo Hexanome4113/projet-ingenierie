@@ -166,12 +166,12 @@ Afin de dimensionner correctement les équipements relatifs à l'énergie, il co
 Si l'on considère:  
 que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement environ 1 minute par heure,  
 que l'on néglige les pertes en ligne (qui sont proches de zero aux intensités considérées),  
-que l'on ouvre 3 fenêtres de communication de 1 minute chaque jour,  
+que l'on ouvre 3 fenêtres de communication satellitaire de 2 minutes chaque jour,  
 nous obtenons la consommation moyenne d'un site par l'approximation suivante:
 
-Consomation = (155.nbCuves + 3.XX).60 (mW.s)
+Consomation journalière = (155.nbCuves + 2.3.XX).60 (mW.s)
 
-Soit une consommation journalière de YYYY pour les sites les plus grands (environ 50 cuves).
+Soit environ YYYY pour les sites les plus grands (50 cuves).
 
 
 
@@ -180,9 +180,15 @@ Soit une consommation journalière de YYYY pour les sites les plus grands (envir
 **Solution standard: Éolien & Batterie tampon**
 
 
-La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
+La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 5 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
-Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestique conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas 
+
+Prix unitaire de la solution:
+
+9000€	installation éolienne
+5000€	éolienne
+
 
 
 
@@ -198,6 +204,23 @@ Le principe général de la solution est de maintenir la batterie à une tempér
 
 Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succin mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
+
+Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
+
+*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
+
+Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
+
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 6 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix aux alentours de XXX€.
+
+Prix fixe de développement de la brique logicielle de régulation différentielle: environ 10.000€
+
+
+Prix unitaire de la solution:
+
+700€	caisson
+12,26€	résistance
+XXX	batterie
 
 c. Système embarqué et système de communication avec le site central
 --------------------------------------------------------------------
