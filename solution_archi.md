@@ -10,6 +10,22 @@
 1. Site central
 ===============
 
+Détermination du niveau de gravité des évènements
+---
+Pour déterminer le niveau de gravité des données reçues via les capteurs pour un site isolé, un système de règles est mis en place après la réception des données.
+Ces données sont donc comparées aux données précédemment reçues (historique des données) et grâce aux règles établies par les sociétés de maintenance, le propriétaire et les normes de sécurité européennes, le système détermine la gravité de la situation.
+Un évènement peut être dans un de ces trois états :
+- normal
+- inquiétant
+- alarmant
+
+Génération d'une alerte
+---
+On souhaite optimiser les interventions par les sociétés de maintenance.
+Cela se traduit par une meilleure détermination du moment où il faut intervenir sur un site isolé.
+Une alarme sera générée automatiquement par le système lorsqu'un capteur en état alarmant, si d'autres capteurs sont alors en état inquiétant ceux-ci seront aussi compris dans l'alerte, ou lorsque trois capteurs sont en état inquiétant.
+Une alarme pourra aussi être émise manuellement par un employé du site central.
+Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
 
 2. Site isolé
 =============
