@@ -119,9 +119,9 @@ Certaines règles indispensables seront définies par l'architecture technique c
 A la réception de nouvelles données venant d'un site isolé, ce système de gestion des alertes va appliquer toutes les règles établies aux données reçues.
 Si une seule règle est rencontrée, le système demandera une intervention dans les délais demandés.
 Mais si le système rencontre plusieurs règles, le système d'aide à la décision choisira de demander une intervention dans des délais convenants à toutes les règles activées.
-Ce système considére aussi les alertes précédemment émises qui n'ont pas encore été rétablies par une intervention.
+Ce système considère aussi les alertes précédemment émises qui n'ont pas encore été rétablies par une intervention.
 Si une telle alerte avait été émise avant la nouvelle le système vérifie la date d'intervention prévue pour cette précédente alerte.
-Si cette date entre dans les délais calculés pour la nouvelle alerte alors les deux alertes seront traitées dans la même intervention, sinon le système choisira la date la plus proche pour demander une intervention pour les deux alertes.
+Si cette date est entre dans les délais calculés pour la nouvelle alerte alors les deux alertes seront traitées dans la même intervention, sinon le système choisira la date la plus proche pour demander une intervention pour les deux alertes.
 
 Ces alertes sont ensuite transmises au service de demande d'intervention de maintenance quelques jours avant la date d'intervention calculée.
 
