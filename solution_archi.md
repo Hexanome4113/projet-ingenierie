@@ -254,6 +254,22 @@ Le microcontrôleur qui est utilisé pour assurer la régulation de la températ
 
 ### Système de liaison ###
 
+Au niveau du microcontrôleur de chaque site distant, on aggrège les données des capteurs envoyées chaque heure, en les envoyant au moins une fois par jour.
+
+Un capteur transmet toutes les 60 minutes son ID et sa valeur (deux entiers sur 4 octets), ce qui fait 2*4*24 = 192 octets de données par jour et par capteur, compressible à 100 octets en évitant la répétition de l’ID.
+
+De manière réaliste, sur un gros site (30 cuves) où chaque cuve aurait 3 capteurs, (pH, niveau et température), on aurait donc 9000 octets de générés chaque jour, auxquels il faut rajouter les différentes en-têtes nécessaires à la transmission :
+  - Ethernet : 18 octets
+  - IP : 24 octets
+  - TCP : 24 octets
+Soit +66 octets.
+
+Pour un gros site, on s’attend donc à consommer 9066 octets/jour, soit 265,6 ko/mois.
+
+Pour un petit site (5 cuves) : ((5*3*100)+66)*30 octets/mois = 45,9 ko/mois.
+
+En supposant que les sites peuvent être amenés à grossir de manière raisonnable en nombre de cuves, on peut fixer un plafond de trafic allant de 1 mo à 2 mo par mois pour un gros site, si un ou deux capteurs venaient à s’ajouter. Quand au débit maximal, il apparaît être vraiment peu significatif, les offres les plus lentes d’Internet par satellite conviendraient. Avec la gamme que nous avons choisies (quelques centaines de kilobits/s), la communication des données quotidiennes se ferait en moins d’une seconde.
+
 ### Mémoire externe ###
 
 d. ...
