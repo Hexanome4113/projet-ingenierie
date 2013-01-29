@@ -312,6 +312,8 @@ Le système assurera également, dans certains cas, une fonction auxiliaire&nbsp
 
 Ces fonctionnalités sont prises en charge par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
 
+_N.B.&nbsp;: Dans la suite, les coûts sont exprimés en euros, et n'incluent ni main d'œuvre, ni coûts liés à un développement spécifique (logiciel ou matériel), sauf mention contraire explicite. Les coûts donnés n'incluent donc que les prix des pièces détachés et des prestations fournies._
+
 ### Microcontrôleur ###
 
 Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
@@ -320,16 +322,20 @@ La régulation de la température est elle plus complexe. D'autre part, cette br
 
 Pour cette raison, et parce que cette fonction, qui n'est pas liée à la satisfaction d'une exigence fonctionnelle, risque d'interférer avec la tâche principale du microcontrôleur, cette brique logicielle s'exécute sur un microcontrôleur dédié. La carte correspondant au système embarqué est donc déclinée en deux versions, selon la solution d'alimentation retenue, avec un ou deux microcontrôleurs.
 
+Il faudra donc assurer le développement d'une carte spécifique pour le système embarqué.
+
+_Coût approximatif de la carte&nbsp;: &nbsp;€ pour le développement/prototypage/test de la carte + y&nbsp;€ (par carte, hors microcontrôleur et mémoire externe) pour la production._
+
 #### Microcontrôleur de transmission des données ####
 Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
 Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
 
-Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 4 Series_) a été choisi.
+Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 2 Series_) a été choisi.
 
 Le microcontrôleur choisi permettant également de réaliser des conversions analogiques/numériques, celui peut aussi être employé au niveau des cuves, pour envoyer les mesures au système embarqué par ondes radio (voir _[a. Capteurs](#a-capteurs)_). De même, ce microcontrôleur est assez puissant pour assurer le contrôle de la température (voir _Microcontrôleur de régulation de la température_, ci-après. Au final, nous n'utilisons qu'un seul type de microcontrôleur pour répondre à tous nos besoins, ce qui présente plusieurs avantages. On peut notamment citer une même plateforme de développement, donc une réduction des coûts de programmation, ainsi que la possibilité de commander le nombre minimum d'exemplaires (bien souvent 1&thinsp;000) pour bénéficier du tarif le plus bas.
 
-_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ 2 Series _à_ Low Voltage Series _mais les idées restes les mêmes._
+_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ MSP430 2 Series _à_ MSP430 Low Voltage Series _mais les idées restes les mêmes._
 
 Le microcontrôleur choisi (MSP430F2370) à les caractéristiques suivantes&nbsp;:
 
@@ -369,7 +375,21 @@ Pour un petit site (5 cuves) : ((5*3*100)+66)*30 octets/mois = 45,9 ko/mois.
 
 En supposant que les sites peuvent être amenés à grossir de manière raisonnable en nombre de cuves, on peut fixer un plafond de trafic allant de 1 mo à 2 mo par mois pour un gros site, si un ou deux capteurs venaient à s’ajouter. Quand au débit maximal, il apparaît être vraiment peu significatif, les offres les plus lentes d’Internet par satellite conviendraient. Avec la gamme que nous avons choisies (quelques centaines de kilobits/s), la communication des données quotidiennes se ferait en moins d’une seconde.
 
+_Système de transmission composé de&nbsp;:_
+
+- _Antenne Prodelin de 1,8&nbsp;m de diamètre_
+- _Unité de transmission/réception de 5 W (C-Band)_
+- _Équipement divers nécessaire à l'installation de l'antenne sur le site_
+
+_Le tout pour environ 300&nbsp;€ (hors frais d'abonnement)._
+
 ### Mémoire externe ###
+
+_Spansion S25FL512S_
+
+- _Taille de la mémoire&nbsp;: 64&nbsp;Mo
+- Alimentation électrique&nbsp;: 3&nbsp;V, 100&nbsp;mA en fonctionnement, 0.07&nbsp;mA à l'arrêt
+- Prix (à l'unité)&nbsp;: 6,78&nbsp;€ (pour 1&thinsp;000), 7,34&nbsp;€ (pour 100)
 
 d. ...
 ------
