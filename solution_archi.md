@@ -133,11 +133,34 @@ Après revue des différentes alternatives, la seule solution restante pour gén
 
 On constate que quelques zones ne réunissent pas les conditions recquises par l'éolien: on proposera donc une solution de secours pour ces quelques cas particuliers.
 
+
+**Evaluation des besoins en énergie**
+
+Afin de dimensionner correctement les équipements relatifs à l'énergie, il convient d'avoir une idée précise des besoins de notre système. Les deux carractéristiques principales à considérer sont la consommation moyenne, et la puissance maximale que l'on doit être capable de développer ponctuellement pour permettre, notamment, les communications satelitaires. La consommation moyenne dépend bien évidement de l'échelle du site considéré, car le principal besoin d'énergie provient de l'allimentation des capteurs. En effet le micro-controleur sélectionné nécessite entre 0,7µA (idle) et 270µA (on load) sous une tension de 2,2V, soit une consomation 0,594mW si l'on considère pour simplifier que ce dernier est solicité en permanence. Pour comparaison, un triplet de capteurs pH-niveau-température consomme 155mW (voir calcul ci-dessous) ce qui justifie que l'on puisse considérer la consommation du système embarqué comme négligeable.
+
+*micro-controleur* - **0,594mW**.
+
+*capteur pH + temperature* - 3 piles AAA pour 1200h d'utilisation. 1250mAh/pile soit 3750mAh à 1,5V c'est à dire une consommation de **4,6875 mW**.
+
+*capteur de niveau* - 50mA sous 3V, soit **150 mW**.
+
+
+Si l'on considère que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement en continu, et sans prendre en compte les pertes en ligne (qui sont négligeables aux intensités considérées); nous obtenons donc la consommation moyenne d'un site par l'approximation suivante:
+
+Consomation = 155 * nbCuves (mW)
+
+Soit une consommation de 7750mW pour les sites les plus grands (50aine de cuves).
+
+
+
 **Solution standard: Éolien & Batterie tampon**
+
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+
+
 
 
 **Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
