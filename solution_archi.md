@@ -27,6 +27,48 @@ Une alarme sera générée automatiquement par le système lorsqu'un capteur en 
 Une alarme pourra aussi être émise manuellement par un employé du site central.
 Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
 
+Traffic attendu
+---
+Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois.
+
+En configurant les sites distants pour qu’ils ne se connectent par tous au même instant au site central, on évite les pics de transferts et de connections simultanées.
+
+Également, le site central échangera des données avec les sociétés de maintenance (pour des demandes de maintenance ainsi que pour en recevoir les rapports). Ces échanges sont assez peu fréquents et peu gourmands en masse de données.
+
+Pour ces raisons, le site central peut tout à fait se contenter d’une simple connexion ADSL, même si pour des raisons pratiques, un accès fibré est à privilégier.
+
+Base de données
+---
+
+En supposant qu’on stocke en base de données une valeur de 4 octet pour chaque message de capteur reçu, cela nous donne environ 10 mo par mois à stocker, auxquelles il faut rajouter toutes les informations d’ID, de relations, d’indexation, etc, ainsi que les données issues des échanges avec les sociétés de maintenance.
+
+D’autres données métiers peuvent être amenées à être stockées en base de données, mais ne représentent qu’une fraction de la masse des données précédentes.
+
+Avec une grande marge, un téraoctet de stockage paraît suffisants pour le stockage et la redondance. Cela représente en fin de compte très peu de données en comparaison de ce que les SGBD actuels sont capables de gérer (les performances étant grandement liées à son schéma et à sa configuration). Pour garantir des performances encore meilleures, il est envisageable d’utiliser des disques durs SSD.
+
+Les principales opérations qui seront effectuées seront :
+  - insertion d’une valeur d’un capteur en base de données
+  - extraction des valeurs les plus récentes des capteurs pour vérifier l’état global des sites distants sur un tableau de bord
+  - calculs intensifs sur l’ensemble de l’historique des valeurs de la base de donnée afin de :
+    - déceler des défaillances fréquentes
+    - évaluer l’intérêt d’intervenir sur certains sites afin de corriger des problèmes récurrents ou ayant de forts risques de se produire
+    - renégocier des contrats concernant des opérations de maintenance inutilisées en pratique ou au contraire trop souvent utilisées
+
+⇒ Car l’application requiert des opérations très complexes par moments, une base de donnée relationnelle est toute indiquée. Pour les dernières valeurs reçues pour chaque capteur, un stockage en RAM suffit (système de cache type Redis).
+
+Architecture matérielle
+---
+
+Architecture applicative
+---
+
+Autres frais
+---
+
+Personnel
+---
+
+
 2. Site isolé
 =============
 
