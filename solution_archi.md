@@ -167,12 +167,12 @@ a. Capteurs
    un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
   </dd>
 </dl>
-   __Par cuve__ : ~ 325€ + 39€/100m
+###Par cuve : ~325€ + 39€/100m
 
-  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
-  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
-  - câbles : £11.76 (= 13,73€) / 100m : 
-  - main-d'œuvre : nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
+  - __pH-mètre / thermomère : 260€__ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - __niveau : 31.50€__ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - __câbles : 13,73€ / 100m__ 
+  - __main-d'œuvre : 25€ + 25€/100m__ Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
   <dd>
@@ -204,19 +204,19 @@ a. Capteurs
   Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
-__Par cuve__ : ~ 510€
+###Par cuve : ~510€
 
-  - émetteur : (longue portée) 89.99$ = 66.78€ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
-  - MSP430 : 1.95€.
-  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
-  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
-  - batterie : 22.90€ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
-  - main-d'œuvre : 4h/homme -> 50€
-  - caisson isolant : 80€ 
+  - __émetteur : (longue portée) 66.78€__ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
+  - __MSP430 : 1.95€__
+  - __pH-mètre / thermomère : 260€__ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - __niveau : 31.50€__ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - __batterie : 22.90€__ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
+  - __main-d'œuvre : 50€__ 4h/homme -> 50€
+  - __caisson isolant : 80€__
   
-__Site__ : ~ 50€
-  - Récepteur radio : 30€
-  - main d'œuvre : 1h/homme : 15€
+###Site : ~45€
+  - __Récepteur radio : 30€__
+  - __main d'œuvre : 1h/homme : 15€__ 15
 <dl>
 <dt>Conclusion</dt>
   <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
