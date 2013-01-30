@@ -66,7 +66,7 @@ Notre solution au niveau du site central se présente sous la forme d’un intra
 
 Nous proposons également aux entreprises de maintenance partenaires de remplir les informations relatives à leurs interventions directement sur une interface web accessible depuis l’extérieur, plutôt que de les communiquer par mail ou téléphone à un agent du site central. Cette possibilité leur reste néanmoins accessible. C’est alors à l’agent lui même de remplir les informations sur l’intervention.
 
-D’un point de vue technique, de manière à simplifier les développements, nous choisissons d’utiliser les mêmes technologies pour la réalisation du site internet accessible par les sociétés de maintenance ainsi que pour le serveur accédé par les sites distants. Dans la même logique, nous utiliserons le même langage pour les clients légers que pour les serveurs, c’est à dire JavaScript, à travers son environnement haute performance Node.js.
+Cette solution intègrera notamment de puissantrs algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
 
 
 Autres frais
