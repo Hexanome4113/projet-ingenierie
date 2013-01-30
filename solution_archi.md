@@ -288,7 +288,8 @@ Prix unitaire de la solution:
 3590€	éolienne  
 708€	batterie  
 
-durée de vie estimée: ~10 ans
+durée de vie éolienne: ~10 ans  
+durée de vie batterie: 4-5 ans
 
 durée d'installation: 1-2 jours
 
@@ -312,10 +313,10 @@ Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristique
 
 Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
 
-Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 6 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix aux alentours de 10000€.
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
 
 Frais fixes:
-~10.000€	Développement de la brique logicielle de régulation différentielle
+~4.000€		Développement de la carte
 ~10.000€	Infrastructure de recharge des batteries
 ~200€/per	journée de formation au remplacement des batteries
 
