@@ -1,31 +1,124 @@
-*consignes:*
-
-*pour chaque aspect technique, proposer une ou plusieurs solutions (souhaitable) justifiées. Dans le cas de multiples possibilités, exprimer très clairement les critères de choix pour l'une ou l'autre des possibilités.*
-
-*Quantifier les besoins en énergie du dispositif en [ampère-heure](http://fr.wikipedia.org/wiki/Amp%C3%A8re-heure), par unité (si nécessaire) et par jour.*
-
-*Par exemple: Communication ponctuelle par wifi toutes les 2H, 200 mAh/borne/jour*
-
-
 1. Site central
 ===============
 
-Détermination du niveau de gravité des évènements
+Traffic attendu
 ---
-Pour déterminer le niveau de gravité des données reçues via les capteurs pour un site isolé, un système de règles est mis en place après la réception des données.
-Ces données sont donc comparées aux données précédemment reçues (historique des données) et grâce aux règles établies par les sociétés de maintenance, le propriétaire et les normes de sécurité européennes, le système détermine la gravité de la situation.
-Un évènement peut être dans un de ces trois états :
-- normal
-- inquiétant
-- alarmant
+Au niveau du serveur central, on s’attend à faire face à 40 gros sites (surestimation de la situation actuelle) ce qui représentera un flux de 10,4 mo de trafic pour un mois (calcul effectué sur la base décrite dans la suite du document).
 
-Génération d'une alerte
+En configurant les sites distants pour qu’ils ne se connectent par tous au même instant au site central, on évite les pics de transferts et de connections simultanées.
+
+Également, le site central échangera des données avec les sociétés de maintenance (pour des demandes de maintenance ainsi que pour en recevoir les rapports). Ces échanges sont assez peu fréquents et peu gourmands en masse de données.
+
+Pour ces raisons, le site central peut tout à fait se contenter d’une simple connexion ADSL, même si pour des raisons pratiques, un accès fibré est à privilégier.
+
+Base de données
 ---
-On souhaite optimiser les interventions par les sociétés de maintenance.
-Cela se traduit par une meilleure détermination du moment où il faut intervenir sur un site isolé.
-Une alarme sera générée automatiquement par le système lorsqu'un capteur en état alarmant, si d'autres capteurs sont alors en état inquiétant ceux-ci seront aussi compris dans l'alerte, ou lorsque trois capteurs sont en état inquiétant.
-Une alarme pourra aussi être émise manuellement par un employé du site central.
-Cela peut être très utile en cas de mauvaise détermination du niveau de gravité d'une donnée.
+
+En supposant qu’on stocke en base de données une valeur de 4 octet pour chaque message de capteur reçu, cela nous donne environ 10 mo par mois à stocker, auxquelles il faut rajouter toutes les informations d’ID, de relations, d’indexation, etc, ainsi que les données issues des échanges avec les sociétés de maintenance.
+
+D’autres données métiers peuvent être amenées à être stockées en base de données, mais ne représentent qu’une fraction de la masse des données précédentes.
+
+Avec une grande marge, un téraoctet de stockage paraît suffisants pour le stockage et la redondance. Cela représente en fin de compte très peu de données en comparaison de ce que les SGBD actuels sont capables de gérer (les performances étant grandement liées à son schéma et à sa configuration). Pour garantir des performances encore meilleures, il est envisageable d’utiliser des disques durs SSD.
+
+Les principales opérations qui seront effectuées seront :
+  - insertion d’une valeur d’un capteur en base de données
+  - extraction des valeurs les plus récentes des capteurs pour vérifier l’état global des sites distants sur un tableau de bord
+  - calculs intensifs sur l’ensemble de l’historique des valeurs de la base de donnée afin de :
+    - déceler des défaillances fréquentes
+    - évaluer l’intérêt d’intervenir sur certains sites afin de corriger des problèmes récurrents ou ayant de forts risques de se produire
+    - renégocier des contrats concernant des opérations de maintenance inutilisées en pratique ou au contraire trop souvent utilisées
+
+⇒ Car l’application requiert des opérations très complexes par moments, une base de donnée relationnelle est toute indiquée. Pour les dernières valeurs reçues pour chaque capteur, un stockage en RAM suffit (système de cache type Redis).
+
+Architecture matérielle
+---
+![site central](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Site_Central.png)
+
+Au niveau de l’équipement matériel du site central, nous aurons besoin de :
+  - un poste par employé (tour 175€, écran 75€)
+  - un pare-feu permettant de faire respecter la politique de sécurité du réseau de l’entreprise (1000€)
+  - un serveur web accessible depuis l’extérieur permettant aux entreprises de maintenance de saisir les détails des opérations de maintenance effectuées. Ne requiert pas de performances accrues. (200€)
+  - un serveur pour la base de données, disposant d’importantes ressources (RAM, stockage), et d’un système de redondance pour éviter une perte de données. (2500€)
+  - un serveur accédé par les systèmes embarqués des sites distants, a priori très peu gourmand en ressources mais devant assurer un service fiable et continu. Il sera donc doublé et protégé par le pare feu grâce à des règles strictes. (1000€)
+  - un serveur web et d’application accédé par tous les clients légers des postes des employés, devant périodiquement effectuer des calculs complexes (aide à la décision) et par conséquent doté de ressources conséquentes, ce qui garantira sa faible charge et sa forte réactivité la majorité du temps. (2500€)
+  - onduleurs, câbles, imprimante réseau, périphériques... (2000€)
+
+Architecture applicative
+---
+Notre solution au niveau du site central se présente sous la forme d’un intranet auxquels se connectent les employés, leur offrant :
+  - des tableaux de bord
+  - un système de notification en temps réel des alertes remontées des sites distants ou des interventions sur site
+  - des indicateurs
+  - une visualisation des interventions demandées aux sociétés de maintenance
+  - des demandes des propriétaires
+  - la modification des règles de maintenance automatisée
+  - la réalisation d’une action de maintenance manuelle
+  - l’affichage de  statistiques sur la fiabilité, les interventions sur sites, sur les sociétés de maintenance, sur les propriétaires
+
+Nous proposons également aux entreprises de maintenance partenaires de remplir les informations relatives à leurs interventions directement sur une interface web accessible depuis l’extérieur, plutôt que de les communiquer par mail ou téléphone à un agent du site central. Cette possibilité leur reste néanmoins accessible. C’est alors à l’agent lui même de remplir les informations sur l’intervention.
+
+Cette solution intègrera notamment de puissantrs algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
+
+
+Autres frais
+---
+### Fixes
+  - fournitures diverses (300€)
+  - mobilier (chaises, bureaux, luminaires, rangements) : (300€ + 100€/poste)
+  - cafetière (100€)
+
+### Forfaits
+  - de jolis locaux à Limoges (70m², 600€/mois)
+  - connexion internet haut débit (50€/mois)
+  - nom de domaine (12€/an)
+  - impôts et taxes divers et variés
+  - salaires (1500€/employé)
+  - edf, eau courante
+
+
+Personnel
+---
+Sur le site central, nous aurons besoin d'employer le personnel suivant :
+  - Un agent de maintenance sur place (peut-être deux, ou un vacataire, à voir), en charge de faire la maintenance logicielle (bd, site web, appel à une société en informatique externe pour les tâches les plus complexes, etc.) et matérielle (postes de travail, du parc informatique du site, commande de matériel, premier diagnostic en cas défaillance, appel à une société informatique externe pour la maintenance matérielle, suivi des réparations, etc.), responsable de la sécurité, de la gestion des comptes utilisateurs, aide et formation des utilisateurs aux outils.
+  - Un agent de maintenance pour les sites distants pour assurer les mêmes fonctions de maintenance logicielle et matérielle que l’agent sur place, mais pour les sites distants
+  - Une personne sur place pour prendre les appels/envoyer/répondre au(x) mails/courrier des propriétaires, des sociétés de maintenance, d’autres personnes (suivi de la relation)
+  - Un Comptable/Responsable du service achat/approvisionnement/Suivi de la facturation des sociétés de maintenance/des propriétaires de sites
+  - Des donneurs d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées
+  - Un directeur (peut-être avec une toute petite équipe de direction derrière lui de une ou deux personnes supplémentaires), responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)
+
+Système des gestion des alertes
+---
+Un système d'aide à la décision pour la gestion des alertes est aussi présent dans le site central.
+Ce système est un système à règles conditionnelles.
+Il est primordial de renseigner les règles à considérer lors de la mise en place de notre système pour chaque site isolé.
+Il est donc important de réunir les cadres et agents, de la société de maintenance comme du propriétaire du site, qui interviennent sur le site isolé en question afin de collecter toutes ces règles.
+
+Ces règles seront de la forme :
+SI _donnée dans un certain état_ ALORS EMETTRE UNE ALERTE POUR DEMANDER UNE INTERVENTION DANS UN DELAI DE _x à y jours_
+
+Exemples de règles possibles :
+- SI le niveau de liquide a baissé de 10 cm (depuis la dernière mesure donc la veille) ALORS émettre une alerte pour demander une intervention dans un délai de 0 à 6 jours.
+- SI le degré pH du liquide est de 2 ALORS demander émettre une alerte pour une intervention dans un délai de 0 à 10 jours.
+
+Certaines règles indispensables seront définies par l'architecture technique choisie sur le site isolé :
+- SI une batterie du site est faible ou épuisée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI la communication satellite avec le système embarqué est coupée ALORS émettre une alerte pour demander une intervention immédiate.
+- SI un capteur n'envoie plus de données ALORS émettre une alerte pour demander une intervention immédiate
+- SI l'éolienne présente un défaut ALORS émettre une alerte pour demander une intervention immédiate
+- ...
+
+De nouvelles règles seront aussi créées ou corrigées dynamiquement par le système d'aide à la décision lui-même en analysant l'historique des données reçues et des interventions effectuées.
+Par exemple si une intervention est effectuée à cause d'un dysfonctionnement particulier mais que le compte rendu d'intervention précise que la cause était mal identifiée, le système corrigera les règles correspondantes.
+Le système aura aussi un outil de prévention qui pourra émettre des alertes particulières en fonction de l'historique des données. Par exemple si le système détecte qu'un site distant en particulier présente un même dysfonctionnement de façon récurrente, le système émettra une alerte particulière qui mettra en avant cette récurrence et proposera de demander une intervention pour déterminer si une cause plus importante et grave ne serait pas à l'origine de cette récurrence.
+
+A la réception de nouvelles données venant d'un site isolé, ce système de gestion des alertes va appliquer toutes les règles établies aux données reçues.
+Si une seule règle est rencontrée, le système demandera une intervention dans les délais demandés.
+Mais si le système rencontre plusieurs règles, le système d'aide à la décision choisira de demander une intervention dans des délais convenants à toutes les règles activées.
+Ce système considère aussi les alertes précédemment émises qui n'ont pas encore été rétablies par une intervention.
+Si une telle alerte avait été émise avant la nouvelle le système vérifie la date d'intervention prévue pour cette précédente alerte.
+Si cette date est entre dans les délais calculés pour la nouvelle alerte alors les deux alertes seront traitées dans la même intervention, sinon le système choisira la date la plus proche pour demander une intervention pour les deux alertes.
+
+Ces alertes sont ensuite transmises au service de demande d'intervention de maintenance quelques jours avant la date d'intervention calculée.
 
 2. Site isolé
 =============
@@ -78,12 +171,12 @@ a. Capteurs
    un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
   </dd>
 </dl>
-   __Par cuve__ : ~ 325€ + 39€/100m
+###Par cuve : ~325€ + 39€/100m
 
-  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
-  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
-  - câbles : £11.76 (= 13,73€) / 100m : 
-  - main-d'œuvre : nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
+  - __pH-mètre / thermomère : 260€__ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - __niveau : 31.50€__ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - __câbles : 13,73€ / 100m__ 
+  - __main-d'œuvre : 25€ + 25€/100m__ Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 <dl>
   <dt>Solution alternative</dt>
   <dd>
@@ -115,18 +208,19 @@ a. Capteurs
   Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
-__Par cuve__ : ~ 435€
+###Par cuve : ~510€
 
-  - émetteur : (longue portée) 89.99$ = 66.78€ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
-  - MSP430 : $4.30 = 3.2€. Thib:C'est effectivement le prix à l'unité pas pour trouver la réduc qu'ils vont nous faire... :/
-  - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
-  - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
-  - batterie : 22.90€ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
-  - main-d'œuvre : 4h/homme -> 50€
+  - __émetteur : (longue portée) 66.78€__ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
+  - __MSP430 : 1.95€__
+  - __pH-mètre / thermomère : 260€__ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
+  - __niveau : 31.50€__ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
+  - __batterie : 22.90€__ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
+  - __main-d'œuvre : 50€__ 4h/homme -> 50€
+  - __caisson isolant : 80€__
   
-__Site__ : ~ 50€
-  - Récepteur radio : 30€
-  - main d'œuvre : 1h/homme : 15€
+###Site : ~45€
+  - __Récepteur radio : 30€__
+  - __main d'œuvre : 1h/homme : 15€__ 15
 <dl>
 <dt>Conclusion</dt>
   <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
@@ -156,7 +250,7 @@ Afin de dimensionner correctement les équipements relatifs à l'énergie, il co
 
 *micro-controleur* - calcul ci-dessus, **0,594mW**.
 
-*équipement satellitaire* - détaillé dans la partie en question, **XX W**
+*équipement satellitaire* - détaillé dans la partie en question, **5 W**
 
 *capteur pH + temperature* - 3 piles AAA pour 1200h d'utilisation. 1250mAh/pile soit 3750mAh à 1,5V c'est à dire une consommation de **4,6875 mW**.
 
@@ -166,12 +260,12 @@ Afin de dimensionner correctement les équipements relatifs à l'énergie, il co
 Si l'on considère:  
 que toutes les cuves sont équipées des trois types de capteurs qui fonctionnement environ 1 minute par heure,  
 que l'on néglige les pertes en ligne (qui sont proches de zero aux intensités considérées),  
-que l'on ouvre 3 fenêtres de communication de 1 minute chaque jour,  
+que l'on ouvre 3 fenêtres de communication satellitaire de 2 minutes chaque jour,  
 nous obtenons la consommation moyenne d'un site par l'approximation suivante:
 
-Consomation = (155.nbCuves + 3.XX).60 (mW.s)
+Consomation journalière = (155.nbCuves + 2.3.5000).60 (mW.s)
 
-Soit une consommation journalière de YYYY pour les sites les plus grands (environ 50 cuves).
+Soit environ 630 Wh/jour pour les sites les plus grands (50 cuves) que l'on prendra comme référence.
 
 
 
@@ -180,10 +274,19 @@ Soit une consommation journalière de YYYY pour les sites les plus grands (envir
 **Solution standard: Éolien & Batterie tampon**
 
 
-La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
+La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
-Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables.
+Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
+Prix unitaire de la solution:  
+9000€	installation  
+3590€	éolienne  
+708€	batterie  
+
+durée de vie éolienne: ~10 ans  
+durée de vie batterie: 4-5 ans
+
+durée d'installation: 1-2 jours
 
 
 
@@ -196,7 +299,32 @@ Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisant
 
 Le principe général de la solution est de maintenir la batterie à une température permettant un rendement acceptable, tout en limitant la consommation du dispositif de chauffage au minimum. Dans cette optique, on place l'ensemble des composants électroniques centraux (système embarqué notamment) dans une enceinte limitant les échanges de chaleur avec l'extérieur, le but étant également de rentabiliser la dissipation thermique de ces derniers. L'appoint de chauffage est rendu possible par l'intégration d'une résistance alimentée par la batterie elle-même. L'activation de cette résistance est contrôlée par une brique logicielle fonctionnant sur le système embarqué, dont l'objectif est de déterminer la meilleure stratégie à adopter pour préserver l'énergie emmagasinée dans la batterie malgré les conditions de température. Pour que cette optimisation soit possible, il faut au préalable avoir caractérisé précisément le rendement de la batterie en fonction de la température, le rendement de la résistance, ainsi que les caractéristiques thermiques (inertie, fuites...) de l'enceinte. En se basant sur ces données initiales et sur les relevés de température à l'intérieur du boitier, la brique logicielle est capable, par la résolution d'un système différentiel complexe, de déterminer cette stratégie optimale de chauffage. L'implémentation de ce système dans son ensemble (choix des composants les plus adaptés, étalonnage, développement de la brique logicielle...) ne sera pas détaillé ici, mais nos équipes disposent de l'expertise nécessaire à la mise en place d'un tel dispositif.
 
-Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succin mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
+Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
+
+
+Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
+
+>*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
+
+Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
+
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
+
+Frais fixes:
+~10.000€	Développement de la carte  
+~8.000€		Infrastructure de recharge des batteries  
+~200€/per	journée de formation au remplacement des batteries  
+
+
+Prix unitaire de la solution:  
+700€	caisson  
+12,26€	résistance  
+5.000+€	batterie  
+800€	assemblage
+
+durée de vie de la batterie ~10ans
+
+durée d'installation: 1 jour
 
 
 c. Système embarqué et système de communication avec le site central
@@ -214,6 +342,8 @@ Le système assurera également, dans certains cas, une fonction auxiliaire&nbsp
 
 Ces fonctionnalités sont prises en charge par les trois composants du système embarqué&nbsp;: le microcontrôleur, le système de liaison et la mémoire externe.
 
+_N.B.&nbsp;: Dans la suite, les coûts sont exprimés en euros, et n'incluent ni main d'œuvre, ni coûts liés à un développement spécifique (logiciel ou matériel), sauf mention contraire explicite. Les coûts donnés n'incluent donc que les prix des pièces détachés et des prestations fournies._
+
 ### Microcontrôleur ###
 
 Il est important de noter que les données reçues par le microcontrôleur de la part des capteurs sont déjà toutes numériques. Sa tâche principale se résume donc à contextualiser des données (c'est-à-dire leur associer un identifiant), et rediriger l'information résultante vers l'un de ses deux périphériques, soit le système de liaison, soit la mémoire externe.
@@ -222,16 +352,20 @@ La régulation de la température est elle plus complexe. D'autre part, cette br
 
 Pour cette raison, et parce que cette fonction, qui n'est pas liée à la satisfaction d'une exigence fonctionnelle, risque d'interférer avec la tâche principale du microcontrôleur, cette brique logicielle s'exécute sur un microcontrôleur dédié. La carte correspondant au système embarqué est donc déclinée en deux versions, selon la solution d'alimentation retenue, avec un ou deux microcontrôleurs.
 
+Il faudra donc assurer le développement d'une carte spécifique pour le système embarqué.
+
+_Coût approximatif de la carte&nbsp;: &nbsp;€ pour le développement/prototypage/test de la carte + y&nbsp;€ (par carte, hors microcontrôleur et mémoire externe) pour la production._
+
 #### Microcontrôleur de transmission des données ####
 Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
 Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
 
-Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 4 Series_) a été choisi.
+Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 2 Series_) a été choisi.
 
 Le microcontrôleur choisi permettant également de réaliser des conversions analogiques/numériques, celui peut aussi être employé au niveau des cuves, pour envoyer les mesures au système embarqué par ondes radio (voir _[a. Capteurs](#a-capteurs)_). De même, ce microcontrôleur est assez puissant pour assurer le contrôle de la température (voir _Microcontrôleur de régulation de la température_, ci-après. Au final, nous n'utilisons qu'un seul type de microcontrôleur pour répondre à tous nos besoins, ce qui présente plusieurs avantages. On peut notamment citer une même plateforme de développement, donc une réduction des coûts de programmation, ainsi que la possibilité de commander le nombre minimum d'exemplaires (bien souvent 1&thinsp;000) pour bénéficier du tarif le plus bas.
 
-_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ 2 Series _à_ Low Voltage Series _mais les idées restes les mêmes._
+_Bref, dans le paragraphe qui précède, les valeurs peuvent changer&nbsp;: passer de_ MSP430 2 Series _à_ MSP430 Low Voltage Series _mais les idées restes les mêmes._
 
 Le microcontrôleur choisi (MSP430F2370) à les caractéristiques suivantes&nbsp;:
 
@@ -254,7 +388,38 @@ Le microcontrôleur qui est utilisé pour assurer la régulation de la températ
 
 ### Système de liaison ###
 
+Au niveau du microcontrôleur de chaque site distant, on aggrège les données des capteurs envoyées chaque heure, en les envoyant au moins une fois par jour.
+
+Un capteur transmet toutes les 60 minutes son ID et sa valeur (deux entiers sur 4 octets), ce qui fait 2*4*24 = 192 octets de données par jour et par capteur, compressible à 100 octets en évitant la répétition de l’ID.
+
+De manière réaliste, sur un gros site (30 cuves) où chaque cuve aurait 3 capteurs, (pH, niveau et température), on aurait donc 9000 octets de générés chaque jour, auxquels il faut rajouter les différentes en-têtes nécessaires à la transmission :
+  - Ethernet : 18 octets
+  - IP : 24 octets
+  - TCP : 24 octets
+
+Soit +66 octets.
+
+Pour un gros site, on s’attend donc à consommer 9066 octets/jour, soit 265,6 ko/mois.
+
+Pour un petit site (5 cuves) : ((5*3*100)+66)*30 octets/mois = 45,9 ko/mois.
+
+En supposant que les sites peuvent être amenés à grossir de manière raisonnable en nombre de cuves, on peut fixer un plafond de trafic allant de 1 mo à 2 mo par mois pour un gros site, si un ou deux capteurs venaient à s’ajouter. Quand au débit maximal, il apparaît être vraiment peu significatif, les offres les plus lentes d’Internet par satellite conviendraient. Avec la gamme que nous avons choisies (quelques centaines de kilobits/s), la communication des données quotidiennes se ferait en moins d’une seconde.
+
+_Système de transmission composé de&nbsp;:_
+
+- _Antenne Prodelin de 1,8&nbsp;m de diamètre_
+- _Unité de transmission/réception de 5 W (C-Band)_
+- _Équipement divers nécessaire à l'installation de l'antenne sur le site_
+
+_Le tout pour environ 300&nbsp;€ (hors frais d'abonnement)._
+
 ### Mémoire externe ###
+
+_Spansion S25FL512S_
+
+- _Taille de la mémoire&nbsp;: 64&nbsp;Mo_
+- _Alimentation électrique&nbsp;: 3&nbsp;V, 100&nbsp;mA en fonctionnement, 0,07&nbsp;mA à l'arrêt_
+- _Prix (à l'unité)&nbsp;: 6,78&nbsp;€ (pour 1&thinsp;000), 7,34&nbsp;€ (pour 100)_
 
 d. ...
 ------
