@@ -280,14 +280,16 @@ Soit environ 630 Wh/jour pour les sites les plus grands (50 cuves) que l'on pren
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
-Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestique conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la Ultimate Air One 600 sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
+Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
 Prix unitaire de la solution:  
 9000€	installation  
-3590€	éolienne 
-708€	batterie 
+3590€	éolienne  
+708€	batterie  
 
-durée de vie estimée ~10 ans
+durée de vie estimée: ~10 ans
+
+durée d'installation: 1-2 jours
 
 
 
@@ -300,7 +302,7 @@ Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisant
 
 Le principe général de la solution est de maintenir la batterie à une température permettant un rendement acceptable, tout en limitant la consommation du dispositif de chauffage au minimum. Dans cette optique, on place l'ensemble des composants électroniques centraux (système embarqué notamment) dans une enceinte limitant les échanges de chaleur avec l'extérieur, le but étant également de rentabiliser la dissipation thermique de ces derniers. L'appoint de chauffage est rendu possible par l'intégration d'une résistance alimentée par la batterie elle-même. L'activation de cette résistance est contrôlée par une brique logicielle fonctionnant sur le système embarqué, dont l'objectif est de déterminer la meilleure stratégie à adopter pour préserver l'énergie emmagasinée dans la batterie malgré les conditions de température. Pour que cette optimisation soit possible, il faut au préalable avoir caractérisé précisément le rendement de la batterie en fonction de la température, le rendement de la résistance, ainsi que les caractéristiques thermiques (inertie, fuites...) de l'enceinte. En se basant sur ces données initiales et sur les relevés de température à l'intérieur du boitier, la brique logicielle est capable, par la résolution d'un système différentiel complexe, de déterminer cette stratégie optimale de chauffage. L'implémentation de ce système dans son ensemble (choix des composants les plus adaptés, étalonnage, développement de la brique logicielle...) ne sera pas détaillé ici, mais nos équipes disposent de l'expertise nécessaire à la mise en place d'un tel dispositif.
 
-Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succin mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
+Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
 
 Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
@@ -311,15 +313,21 @@ Pour faire l'appoint de température, on sélectionne un composant de puissance 
 
 Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 6 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix aux alentours de 10000€.
 
-Prix fixe de développement de la brique logicielle de régulation différentielle: environ 10.000€
+Frais fixes:
+~10.000€	Développement de la brique logicielle de régulation différentielle
+~10.000€	Infrastructure de recharge des batteries
+~200€/per	journée de formation au remplacement des batteries
 
 
 Prix unitaire de la solution:  
 700€	caisson  
 12,26€	résistance  
-10000€	batterie  
+10.000€	batterie  
+800€	assemblage
 
 durée de vie de la batterie ~10ans
+
+durée d'installation: 1 jour
 
 
 c. Système embarqué et système de communication avec le site central
