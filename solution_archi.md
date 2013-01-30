@@ -1,4 +1,3 @@
-
 1. Site central
 ===============
 
@@ -316,7 +315,7 @@ Frais fixes:
 Prix unitaire de la solution:  
 700€	caisson  
 12,26€	résistance  
-10.000€	batterie  
+>5.000€	batterie  
 800€	assemblage
 
 durée de vie de la batterie ~10ans
