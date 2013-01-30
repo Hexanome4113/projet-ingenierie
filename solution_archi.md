@@ -107,6 +107,10 @@ Certaines règles indispensables seront définies par l'architecture technique c
 - SI l'éolienne présente un défaut ALORS émettre une alerte pour demander une intervention immédiate
 - ...
 
+De nouvelles règles seront aussi créées ou corrigées dynamiquement par le système d'aide à la décision lui-même en analysant l'historique des données reçues et des interventions effectuées.
+Par exemple si une intervention est effectuée à cause d'un dysfonctionnement particulier mais que le compte rendu d'intervention précise que la cause était mal identifiée, le système corrigera les règles correspondantes.
+Le système aura aussi un outil de prévention qui pourra émettre des alertes particulières en fonction de l'historique des données. Par exemple si le système détecte qu'un site distant en particulier présente un même dysfonctionnement de façon récurrente, le système émettra une alerte particulière qui mettra en avant cette récurrence et proposera de demander une intervention pour déterminer si une cause plus importante et grave ne serait pas à l'origine de cette récurrence.
+
 A la réception de nouvelles données venant d'un site isolé, ce système de gestion des alertes va appliquer toutes les règles établies aux données reçues.
 Si une seule règle est rencontrée, le système demandera une intervention dans les délais demandés.
 Mais si le système rencontre plusieurs règles, le système d'aide à la décision choisira de demander une intervention dans des délais convenants à toutes les règles activées.
