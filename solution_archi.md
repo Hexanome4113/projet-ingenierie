@@ -307,7 +307,7 @@ Pour faire l'appoint de température, on sélectionne un composant de puissance 
 Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
 
 Frais fixes:
-~4.000€		Développement de la carte  
+~10.000€	Développement de la carte  
 ~8.000€		Infrastructure de recharge des batteries  
 ~200€/per	journée de formation au remplacement des batteries  
 
