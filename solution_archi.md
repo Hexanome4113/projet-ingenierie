@@ -300,7 +300,7 @@ Certaines contraintes apparaissent du fait de l'utilisation de cette solution al
 
 Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
 
-*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
+>*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
 
 Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
 
@@ -315,7 +315,7 @@ Frais fixes:
 Prix unitaire de la solution:  
 700€	caisson  
 12,26€	résistance  
->5.000€	batterie  
+5.000+€	batterie  
 800€	assemblage
 
 durée de vie de la batterie ~10ans
