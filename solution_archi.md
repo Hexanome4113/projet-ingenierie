@@ -213,14 +213,15 @@ a. Capteurs
   Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
   </dd>
 </dl>
-__Par cuve__ : ~ 435€
+__Par cuve__ : ~ 510€
 
   - émetteur : (longue portée) 89.99$ = 66.78€ (Consommation : 0.5W)(1 Year Common Sense Warranty on Transmitter, Lifetime Guarantee on Power Supply & Antenna)(Résistance au froid: c'est pour ça qu'il faut isoler)
-  - MSP430 : $4.30 = 3.2€. Thib:C'est effectivement le prix à l'unité pas pour trouver la réduc qu'ils vont nous faire... :/
+  - MSP430 : 1.95€.
   - pH-mètre / thermomère : 260€ (Phmètre : Précision:+-0.02 pH )(Thermomètre : Précision:+-0.5°C)(Résistance: -20°C (pas trouvé mieux) / Consommation : 3 piles AAA / approximativement 1200 heures d'utilisation continue)
   - niveau : 31.50€ (consommation : 3V, 50mA)(Garantie : 3ans)(Résistance: pas réussi à en trouver un avec résistance au froid)
   - batterie : 22.90€ ((Capacité : 1400mAH)(on la recharge une fois par an)(Garantie 2 ans)
   - main-d'œuvre : 4h/homme -> 50€
+  - caisson isolant : 80€ 
   
 __Site__ : ~ 50€
   - Récepteur radio : 30€
