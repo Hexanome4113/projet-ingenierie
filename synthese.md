@@ -25,4 +25,5 @@ Pour que les personnes présentes sur le site central puissent obtenir les donn�
 ###Création d'une alerte###
 ###Transmission d'une demande de maintenance###
 #Architecture de la solution#
+Yann s'en occupe
 #Sous système détaillé#
