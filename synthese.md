@@ -43,7 +43,7 @@ Le site central a pour rôle de centraliser les informations remontant des diff�
 
 La solution proposée pour le stockage d'informations s'appuie sur une base de donnée relationnelle centralisant les données. Le support matériel de cette base de données est redondant, afin de palier à d'éventuelles pannes et/ou pertes de données.
 
-A COMPLETER AVEC LES REFERENCES ET DETAILS{@style=color: red;}
+<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES ET DETAILS</span>
 
 
 ##Site Isolé##
@@ -74,7 +74,7 @@ Du fait de la dépendance totale de cette première solution vis à vis des cara
 
 On veut relever 3 grandeurs dans les cuves: le pH, la température, et le niveau de remplissage. Les capteurs sélectionnés sont en accord avec les contraintes propres aux sites isolés (températures de fonctionnement, consommation réduite...).
 
-A COMPLETER AVEC LES REFERENCES{@style=color: red;}
+<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES</span>
 
 ###Système Embarqué###
 
@@ -93,7 +93,7 @@ Au vu de l'isolement des sites, nous avons opté pour le seul moyen de transmett
 Antenne sélectionnée [Prodelin 1,8m](à renseigner!) 
 Émetteur / récepteur sélectionné: [Emm/recept 5W](à renseigner!) 
 
-MODELE / LIEN à renseigner{@style=color: red;}
+<span style="color:#FF0000">MODELE / LIEN à renseigner</span>
 
 
 
