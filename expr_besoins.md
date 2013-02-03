@@ -1,4 +1,4 @@
-Expression des Besoins
+Recueil des exigences
 ======================
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
@@ -27,12 +27,25 @@ Si le capteur est defectueux, le site central reçoit tout de même les autres i
 
 Qu'en est il de la distinction entre une perte de connexion et un système embarqué du site distant défaillant? On ne peut pas, il faut donc lever l'alerte correspondant au niveau de gravité le plus élevé : panne du système embarqué lui même. En effet, en cas de perte de connexion les données sont sauvergardée localement par le site isolé puis ré-envoyées dès la connexion rétablie. De plus il faut lever une alerte selon d'autres facteurs : le dernier état connu des capteurs, la criticité du site et la durée de "non réponse" du site.
 
+Enfin, nous travaillons au nord de la Norvège, ce qui impliques des conditions climatiques particulières : -40°C en hiver. Il est important de surveiller la resistance des appareils du système au froid où d'y ajouter un dispositif permettant de les isoler.
+
 B. L'acquisition des données et la communication entre les capteurs et le système embarqué du site distant
 --------------------------------------------------------------------------
-Nous avions jusqu'à présent des informations à transmettre au site central. Il s'agit de savoir comment ses données ont été collectées et comment elles ont été transmises au système embarqué du site isolé.
-nécessité de connecter les capteurs de manière fiable
+Nous avions jusqu'à présent des informations à transmettre au site central. Il s'agit de savoir comment ses données ont été collectées et comment elles ont été transmises au système embarqué du site isolé. Il y a une nécessité de connecter les capteurs de manière fiable, car l'absence de donnée est considéré comme une défaillance et entraine une maintenance.
 #### Modélisation de la contrainte de distance ####
 ![contrainte de distance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/1%20-%20Communication%20capteurs-site%20central/distance.png "contrainte de distance")
+
+Les sites ont des tailles différentes, de 1km de diamètre à une centaine de mètres, la solution doit prendre en compe ces contraintes. Doit on proposer une solution générique, en adapter plusieurs selon la taille des sites? Il faut aussi tenir compte de la topologie des sites : notre solution convient elle à un site escarpé (installation, possibilité d'emettre des ondes, ...)?
+
+Une question interessante peut être la fréquence de ces acquisitions. Actuellement, les sites sont vérifiés ponctuellement, voir rarement, par le propriétaire. L'absence de suivi régulier entraine des accidents révélés trop tard qui se révèlent fort couteux. Cependant dans la majorité des cas tous se passe bien, et le relevé de donné peut être couteux en ressource, augmenter la complexité du système et aussi les couts. Or, l'intéret du système est son autonomie, si le système de monitoring demande le passage d'une société de maintenance tous les trois jours, on voit rapidement l'absurdité d'un tel système.
+
+Nous avions déjà abordé la question du froid lors de la partie précédante, et si les appareils de mesures se situents dans les cuves, donc à priori un peu moins exposé au froid, la question demeure lorsqu'il s'agit de leur système d'alimentation et de transmission de donnée. Si d'un point de vue finnancier envisager un investissement important pour chaque site pour proteger le système embarqué est envisageable, le choix de solution d'isolation couteuses pour chaque cuve peut faire très vite grimper le prix.
+
+D'autrepart, pour la journalisation des données, lorsque tout se passe bien, stocker des informations toutes les dix minutes semble aberrant.
+Pourtant, lorsqu'un problème survient la rapidité du système à detecter le problème et à transmettre l'information est primordiale. (Surveillance de cuve de petrole ou d'eau en cas de geu de foret, fuite de liquide toxique,...)
+
+Il s'agit de trouver un compromis intelligent entre autonomie et rapidité du système à detecter une faille.
+
 
 
 C. Génération des demandes de maintenance
