@@ -15,4 +15,5 @@ plus approfondie de ce dernier en se concentrant sur les problèmes soulevés pa
 ##Génération des demandes de maintenance##
 ##Transmission d'une demande de maintenance à une société de maintenance##
 #Architecture de la solution#
+Yann s'en occupe
 #Sous système détaillé#
