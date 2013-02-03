@@ -128,18 +128,11 @@ Temps estimé: 6h+1h,  séance 0 puis modification apres revue externe de seance
 Personnes concernées: CdP avec validation des GEI et du RQ
 
 **Le recueil des exigences**  
-**Objectif** Parvenir à une bonne visualisation de la demande client. Réaliser un diagramme du problème clair et en extraire des sous diagrammes indépendants autant que possibles pour simplifier la tache suivante de modélisation.  
-- **Reformuler les exigences** fonctionnelles de l'appel d'offre  
-Temps estimé: 3h, séance 1  
-Personnes concernées : 2 personnes
-
-- Proposer une **esquisse de la solution** permettant de mettre en avant certaines exigences non fonctionnelles par rapport à d'autre. Faire une **proposition de hiérarchie**  
-Temps estimé: 3h, séance 1  
-Personnes concernées : 2 personnes
+**Objectif** Parvenir à une bonne visualisation de la demande client. Réaliser un diagramme du problème clair et en extraire des sous diagrammes indépendants autant que possibles pour simplifier la tache suivante de modélisation. 3 binomes se répartissent le travail en découpant le problème en sous partie. Par exemple: communication, contact société de mainenance,... Ce découpage est à faire entre eux en début de séance
 
 - **Ébauche de diagramme de cas d'utilisation**  
 Temps estimé: 3h, séance 1  
-Personnes concernées : 2 personnes
+Personnes concernées : 1 personne
 
 - **Confrontation des résultats** produits par les réflexions ci dessus.  
 Temps estimé: 30 min, séance 1  
@@ -163,16 +156,22 @@ Personnes concernées : 2 personnes
 **Modélisation de la solution**
 
 - **Modèle du domaine** prendre connaissance du domaine du problème et le modeliser  
-Temps estimé: 3h, séance 1  
+Temps estimé: 3h, séance 2  
 Personnes concernées : 2 personnes
 
 - **découpage en sous système**  
 Temps estimé: 1h, séance 3  
 Personnes concernées : Toutes
 
-- **Conception détaillée d'un sous systeme**  
+- **Proposition d'architecture de ce sous systeme**  Attention, cette partie n'a rien à voir avec le livrable "conception détaillée d'un sous système"
 Temps estimé: 8h, séance 3 et 4  
 Personnes concernées : Chacun affecté à un sous système
+
+**Conception détaillée d'un sous système**
+le choix du sous système doit se faire au cours de la séance 3. Ainsi, la personne travaillant sur les choix architecturaux pourra continuer le processus de conception de la solution pas la conception d'un point de vue plus proche du logiciel.
+Temps estimé: 8h, (séance 3 ébauche) et 4  
+Personnes concernées : La personne qui s'occupait de ce sous système pour l'architecture, deux autres 
+
 
 **Rédaction dossier de synthese**  
 Temps estimé: 3h, séance 4  
@@ -185,9 +184,9 @@ Personnes concernées: 1GEI+ CdP
 passage:  
 tous, séance 4
 
-Rédaction du dossier de synthèse: pas avant séance 3, de préférence après la 3 pendant la 4. Une à deux personnes pour l'écriture , l'équipe pour la relecture. Évalué à 2 heures en tout.
+Rédaction du dossier de synthèse: pas avant séance 3, de préférence après la 3 pendant la 4. Une à deux personnes pour l'écriture , l'équipe pour la relecture. Évalué à 4 heures en tout.
 
-La prestation orale aura lieu lors de la 5ème séance. Par conséquent tout la solution devra être le plus avancée possible (sans forcément être parfaite),lors que la 4 ème séance.
+La prestation orale aura lieu lors de la 4ème séance. Par conséquent tout la solution devra être le plus avancée possible (sans forcément être parfaite),lors que cette 4ème séance.
 
 
 
@@ -238,5 +237,6 @@ Prévention :
     - Réunion d’équipe  
     - Rencontres régulières avec COPEVUE pour confronter notre travail à leurs attentes     
    Réparation : 
+
 
 
