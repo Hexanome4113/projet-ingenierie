@@ -404,12 +404,15 @@ Autres frais
 Personnel
 ---
 Sur le site central, nous aurons besoin d'employer le personnel suivant :
-  - Un agent de maintenance sur place (peut-être deux, ou un vacataire, à voir), en charge de faire la maintenance logicielle (bd, site web, appel à une société en informatique externe pour les tâches les plus complexes, etc.) et matérielle (postes de travail, du parc informatique du site, commande de matériel, premier diagnostic en cas défaillance, appel à une société informatique externe pour la maintenance matérielle, suivi des réparations, etc.), responsable de la sécurité, de la gestion des comptes utilisateurs, aide et formation des utilisateurs aux outils.
-  - Un agent de maintenance pour les sites distants pour assurer les mêmes fonctions de maintenance logicielle et matérielle que l’agent sur place, mais pour les sites distants
-  - Une personne sur place pour prendre les appels/envoyer/répondre au(x) mails/courrier des propriétaires, des sociétés de maintenance, d’autres personnes (suivi de la relation)
+  - Un agent de maintenance sur place, en charge de faire la maintenance logicielle (bd, site web, appel à une société en informatique externe pour les tâches les plus complexes, etc.) et matérielle (postes de travail, du parc informatique du site, commande de matériel, premier diagnostic en cas défaillance, appel à une société informatique externe pour la maintenance matérielle, suivi des réparations, etc.), responsable de la sécurité, de la gestion des comptes utilisateurs, aide et formation des utilisateurs aux outils.
+  
+  - Un(e) secrétaire sur place pour prendre les appels/envoyer/répondre au(x) mails/courrier des propriétaires, des sociétés de maintenance, d’autres personnes (suivi de la relation)
+  
   - Un Comptable/Responsable du service achat/approvisionnement/Suivi de la facturation des sociétés de maintenance/des propriétaires de sites
-  - Des donneurs d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées
-  - Un directeur (peut-être avec une toute petite équipe de direction derrière lui de une ou deux personnes supplémentaires), responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)
+  
+  - Un donneur d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées
+  
+  - Un directeur responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)
 
 Système des gestion des alertes
 ---
@@ -422,7 +425,7 @@ Ces règles seront de la forme :
 SI _donnée dans un certain état_ ALORS EMETTRE UNE ALERTE POUR DEMANDER UNE INTERVENTION DANS UN DELAI DE _x à y jours_
 
 Exemples de règles possibles :
-- SI le niveau de liquide a baissé de 10 cm (depuis la dernière mesure donc la veille) ALORS émettre une alerte pour demander une intervention dans un délai de 0 à 6 jours.
+- SI le niveau de liquide a baissé de 10 cm en une journée ou moins ALORS émettre une alerte pour demander une intervention dans un délai de 0 à 6 jours.
 - SI le degré pH du liquide est de 2 ALORS demander émettre une alerte pour une intervention dans un délai de 0 à 10 jours.
 
 Certaines règles indispensables seront définies par l'architecture technique choisie sur le site isolé :
@@ -478,7 +481,8 @@ Tous les documents sus-cités devront suivre un certain formalisme. Un listing d
  - Coordonnées du propriétaire du site isolé  
  - Coordonnées du serveur central  
  - Liste des évènements à traiter avec leur degré de gravité  
- - Description de l'alerte et son degré de gravité (l'association de plusieurs évènements ayant une gravité mineure peut engendrer une alerte de niveau élevée)
+ - Description de l'alerte et son degré de gravité (l'association de plusieurs évènements ayant une gravité mineure peut engendrer une alerte de niveau élevée)  
+ - Compte rendu des trois dernières interventions effectuées sur le site  
 
 **Document de réponse à la demande d'intervention (envoyé par la société de maintenance au serveur central avant l'intervention) :**  
  - Date et heure du traitement de la demande  
@@ -500,4 +504,5 @@ Tous les documents sus-cités devront suivre un certain formalisme. Un listing d
  - Liste des interventions traitées non prévues et raison de ces interventions  
  - Observations et remarques (concernant l'état, l'entretien, la gestion et la maintenance du site isolé)  
  - Coût de l'intervention final (augmentation possible si interventions effectuées non prévues)  
+ 
 
