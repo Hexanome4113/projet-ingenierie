@@ -1,33 +1,33 @@
 #Synthèse#
 
 #Rappel de l'appel d'offre#
-L'appel d'offre que nous allons étudier dans ce projet a été lancé par la COPEVUE, (Comité pour la Protection de l'EnVironement de l'UE), qui souhaite pouvoir monitorer à distance un ensemble de sites difficilement accessibles. Ces différents sites distants sont actuellement surveillés directement par leur directeur, ce dernier passant de manière occasionnelle, selon son bon vouloir, ce qui reste assez rare en raison de l'innaccessibilité de ces sites. On peut estimer à une fois par mois. La mission proposée par l'appel d'offre consiste à automatiser cette surveillance en transmettant des données sur l'état du site automatiquement afin de permettre une réaction beaucoup plus rapide en cas d'accident et une optimisation des coûts de maintenance.
+L'appel d'offre que nous avons étudié a été lancé par la COPEVUE, (Comité pour la Protection de l'EnVironement de l'UE), qui souhaite pouvoir monitorer à distance un ensemble de sites difficilement accessibles. Ces différents sites, que nous apellerons sites isolés, sont actuellement surveillés directement par leur directeur, ce dernier passant de manière occasionnelle, estimé à une fois par mois. La mission proposée par l'appel d'offre consiste à automatiser cette surveillance en transmettant des données sur l'état du site automatiquement afin de permettre une réaction beaucoup plus rapide en cas d'accident et une optimisation des coûts de maintenance.
 
 Dans l'exemple traité, les sites seront situés au nord de la Norvège et feront une taille variant d'un diamètre de 100m à 1km. L'appel d'offre restreint la surveillance de site à des stations/réservoir possédant des cuves nécessitant chacune jusqu'à 3 capteurs : un ph-mètre, un thermomètre et un contrôleur de niveau. Dans cette exemple, la contrainte la plus forte vient du froid qu'il règne souvent dans cette région, rendant inefficaces certaines solutions. De plus l'isolation des sites et le climat de la Norvège pose des questions énergétiques importantes.
 
-Or l'exigence principale de cet appel d'offre est l'automie de la solution apportée. En effet, il faut qu'elle fonctionne (presque) sans intervention humaine. La solution proposée devra aussi répondre à certains problèmes provoqués par l'environnement dans lequel ces sites sont situés. La solution apportée devra être générique et pouvoir s'adapter aussi bien à différents types de terrains, mais aussi à d'autres types de sites et pas seulement à la Norvège et à des cuves ... 
+Or l'exigence principale de cet appel d'offre est l'automie de la solution apportée. En effet, il faut qu'elle fonctionne (presque) sans intervention humaine, dans le cas contraire on perd rapidement l'interet de monitorer les sites à distance. La solution proposée devra aussi répondre à certains problèmes provoqués par l'environnement dans lequel ces sites sont situés. La solution apportée devra être générique et pouvoir s'adapter aussi bien à différents types de terrains et de sites, pour plus tard ne pas être appliqué qu'en Norvège ou que pour la surveillance de cuves ... 
 
 #Recueil des exigences#
 
 Afin d'avoir une vision plus précise des exigences de l'appel d'offre, nous avons effectué une analyse plus approfondie de ce dernier en se concentrant sur les problèmes soulevés par ces exigences. Les principaux problèmes identifiés sont les suivants :
 
-##Acquisition des données sur le site distant##
-Pour récupérer les données, différents capteurs seront installés sur chacun des sites. Cependant, pour des raison de coût et d'économie d'énergie, il est évident que chaque capteur ne pourra être équipé d'un dispositif permettant de communiquer avec le site central. Il est donc nécessaire de regrouper les informations du site distant dans une seule unité qui sera chargée de communiquer avec le site central. Cette unité sera composée d'un dispositif de communication et d'un système embarqué permettant de contrôler ces communications. Pour celà, il faut déterminer plusieurs choses : en premier lieu, réussir à trouver un matériel fonctionnant dans les conditions imposées (froid, éloignement entre la cuve et le système embarqué, topologie du terrain...) à la fois pour le système embarqué et pour les cuves; en second lieu, trouver une architecture et une stratégie de communication entre capteurs et système embarqué permettant de limiter leur dépense en énergie tout en ayant des mesures suffisamment fréquentes pour pouvoir être exploitées au niveau du site central.
+##Acquisition des données sur le site isolé##
+Pour récupérer les données, différents capteurs seront installés sur chacun des sites. Cependant, pour des raison de coût et d'économie d'énergie, il est évident que chaque capteur ne pourra être équipé d'un dispositif permettant de communiquer avec le site central. Il est donc nécessaire de regrouper les informations du site isolé dans une seule unité qui sera chargée de communiquer avec le site central. Cette unité sera composée d'un dispositif de communication et d'un système embarqué permettant de contrôler ces communications. Pour celà, il faut déterminer plusieurs choses : en premier lieu, réussir à trouver un matériel fonctionnant dans les conditions imposées (froid, éloignement entre la cuve et le système embarqué, topologie du terrain...) à la fois pour le système embarqué et pour les cuves; en second lieu, trouver une architecture et une stratégie de communication entre capteurs et système embarqué permettant de limiter leur dépense en énergie tout en ayant des mesures suffisamment fréquentes pour pouvoir être exploitées au niveau du site central.
 
 ##Transmission des données au serveur central##
-Pour que les personnes présentes sur le site central puissent obtenir les données recueillies sur le site distant, il faut pouvoir établir une communication entre les deux. Cet aspect englobe à la fois la communication en elle même (non seulement l'aspect matériel, mais aussi le protocole et la fréquence), la gestion des problèmes (reprise de communication en cas de rupture) et l'enregistrement de traces portants sur les mesures effectuées.
+Pour que les personnes présentes sur le site central puissent obtenir les données recueillies sur le site isolé, il faut pouvoir établir une communication entre les deux. Cet aspect englobe à la fois la communication en elle même (non seulement l'aspect matériel, mais aussi le protocole et la fréquence), la gestion des problèmes (reprise de communication en cas de rupture) et l'enregistrement de traces portants sur les mesures effectuées. La frequence à laquelle il est utile de recevoir des données doit aussi être un point de reflexion.
 
 ##Génération des demandes de maintenance##
 L'intéret principal du dispositif demandé par l'appel d'offre est de pouvoir savoir très facilement si l'intervention d'une société de maintenance est nécessaire et si oui, les opérations à effectuer. Pour celà, chaque site dispose d'une base de règles qui lui est propre : ces règles identifient les différents problèmes et les réponses à y apporter selon leur gravité et leur nombre, certains problèmes n'étant pas critiques et ne nécessitant pas de maintenance dédiée. Pour déterminer quand une maintenance doit être effectuée, une solution consiste à générer des alertes lorsque des données anormales apparaissent. La génération d'alerte entrainerait les besoins suivants :
 
 ###Création de la stratégie d'alertes###
-Une stratégie de gestion des alertes doit être définie une fois pour l'ensemble des sites. Elle devra définir plusieurs niveaux de gravité d'alerte, qui entraineront plus ou moins vite une demande de maintenance. Par la suite, un ensemble de règles devra être défini pour chaque site distant, associant à chaque problème potentiel un niveau de gravité.
+Une stratégie de gestion des alertes doit être définie une fois pour l'ensemble des sites. Elle devra définir plusieurs niveaux de gravité d'alerte, qui entraineront plus ou moins vite une demande de maintenance. Par la suite, un ensemble de règles devra être défini pour chaque site isolé, associant à chaque problème potentiel un niveau de gravité.
 
 ###Création d'une alerte###
 La création automatique des alertes devra se faire au niveau du site central. C'est lui qui déclenchera une alerte en fonction des données transmises (ou de l'absence de données) par le site distant. Ces alertes génèreront ensuite une demande de maintenance si nécessaire. En parallèle des alertes automatiques, la possibilité de déclenchement d'une alerte manuelle par le directeur du site s'il constate une anomalie devra être prévue. Cette alerte devra être traitée et évaluée par un responsable du site central afin de déterminer si elle est valide ou non et de l'évaluer en cas de réponse positive.
 
 ###Transmission d'une demande de maintenance###
-Une fois des alertes nécessitant une maintenance reçues, il reste à contacter la société de maintenance qui s'occupe du site distant concerné. Il faudra prévoir les modalités de communication avec ces sociétés (par téléphone ou email, selon leurs préférences).
+Une fois des alertes nécessitant une maintenance reçues, il reste à contacter la société de maintenance qui s'occupe du site isolé concerné. Il faudra prévoir les modalités de communication avec ces sociétés (par téléphone ou email, selon leurs préférences).
 
 
 #Architecture de la solution#
@@ -62,12 +62,15 @@ Le micro-contrôleur sélectionné remplit parfaitement les besoins mentionnés 
 
 ###Communications###
 
-Au vu de l'isolement des sites, nous avons opté pour le seul moyen de transmettre les données disposant d'une couverture géographique adéquate et de caractéristiques satisfaisantes, les communications satellitaires. L'antenne sélectionnée propose un compromis adapté à notre situation, car elle présente un diamètre important tout en ne nécessitant pas l'installation du socle en béton propre aux antennes de plus grandes dimensions. Les bonnes caractéristiques associées aux antennes de cette dimension permettent l'utilisation d'une unité de transmission/réception de 5W seulement.
+Au vu de l'isolation des sites, nous avons opté pour le seul moyen de transmettre les données disposant d'une couverture géographique adéquate et de caractéristiques satisfaisantes, les communications satellitaires. L'antenne sélectionnée propose un compromis adapté à notre situation, car elle présente un diamètre important tout en ne nécessitant pas l'installation du socle en béton propre aux antennes de plus grandes dimensions. Les bonnes caractéristiques associées aux antennes de cette dimension permettent l'utilisation d'une unité de transmission/réception de 5W seulement.
 
 Antenne sélectionnée [Prodelin 1,8m](à renseigner!) 
 Émetteur / récepteur sélectionné: [Emm/recept 5W](à renseigner!) 
 
 <span style="color:#FF0000">MODELE / LIEN à renseigner</span>
+
+###Fréquence des communications###
+Quand doit on faire un relevé de donnée? Quand doit on les envoyer et avec quelle granularité stocker ses informations? Commençons par le cas le plus simple, celui où tout se passe bien. Pour conserver un suivi de l'activité des sites on envisage de stocker une information (pour un capteur, pour une cuve, pour un site) par jour. Par conséquent envoyer plus d'une information par jour, lorsque tout va bien, semble raisonnable. Cependant que se passe t il en cas de données alarmantes? Nous avons estimé que relever les données des capteurs toutes les heures est envisageable d'un point de vue energetique et permet une bonne réactivite. Le système embarqué du site doit comparer les données reçues toutes les heures avec la donnée journalière envoyée correspondante. Si le système embarqué detecte une variation trop importante entre celles ci, il se charge d'en alerter le site central qui peut ainsi avoir un bon suivi en temps de crise. Le système sauvegarde alors la donnée envoyée comme donnée de référence pour la journée qu'il comparera avec les prochaines valeurs. L'interet de cette solution, outre de permettre un bon suivi, est qu'elle permet de limiter l'utilisation abusive de l'antenne, gourmande en energie. 
 
 ###Autonomie Énergétique###
 
@@ -83,9 +86,10 @@ Du fait de la dépendance totale de cette première solution vis à vis des cara
  * Résistance chauffante: [HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329)  
  * Micro-contrôleur dédie: voir partie *Système Embarqué*  
  * Batterie sélectionnée au cas par cas.  
+ * Developpement de la brique logicielle (approx 4000€)
 
 ##Site Central##
-Le site central a pour rôle de centraliser les informations remontant des différents sites, et de superviser les sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et anticipe sur les besoins non fonctionnels de scalabilité de la solution.
+Le site central a pour rôle de centraliser les informations remontant des différents sites, et de programmer les visites des sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et permet une solution générique personnalisable pour s'adapter aux futures évolutions du projet.
 
 La solution proposée pour le stockage d'informations s'appuie sur une base de donnée relationnelle centralisant les données. Le support matériel de cette base de données est redondant, afin de palier à d'éventuelles pannes et/ou pertes de données.
 
