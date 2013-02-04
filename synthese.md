@@ -1,16 +1,13 @@
 #Synthèse#
-Ceci est une synthèse, donc on ne crée pas d'information.
-Elle doit faire au max 6 pages.
-On doit avoir à peu pres 3 fois ça dans le git, donc pas besoin de faire du pipeau : on veut des info pertinentes justifiées et interessantes
+
 #Rappel de l'appel d'offre#
-Thibaut : _Bon allez j'me charge de cette partie_
+L'appel d'offre que nous allons étudier dans ce projet a été lancé par la COPEVUE, (Comité pour la Protection de l'EnVironement de l'UE), qui souhaite pouvoir monitorer à distance un ensemble de sites difficilement accessibles. Ces différents sites distants sont actuellement surveillés directement par leur directeur, ce dernier passant de manière occasionnelle, selon son bon vouloir, ce qui reste assez rare en raison de l'innaccessibilité de ces sites. On peut estimer à une fois par mois. La mission proposée par l'appel d'offre consiste à automatiser cette surveillance en transmettant des données sur l'état du site automatiquement afin de permettre une réaction beaucoup plus rapide en cas d'accident et une optimisation des coûts de maintenance.
 
-L'appel d'offre que nous allons étudier dans ce projet a été lancé par la COPEVUE, (un organisme regroupant des propriétaires de sites distants (à corriger quand j'aurai le sujet)), qui souhaite pouvoir monitorer à distance un ensemble de sites difficilement accessibles. Ces différents sites distants sont actuellement surveillés directement par leur directeur, ce dernier passant de manière occasionnelle quand il en a le temps, ce qui reste assez rare en raison de l'innaccessibilité de ces sites. La mission proposée par l'appel d'offre consiste donc à automatiser cette surveillance en transmettant des données automatiquement à un site central afin de permettre une réaction beaucoup plus rapide en cas d'accident et une optimisation des coûts de maintenance.
+Dans l'exemple traité, les sites seront situés au nord de la Norvège et feront une taille variant d'un diamètre de 100m à 1km. L'appel d'offre restreint la surveillance de site à des stations/réservoir possédant des cuves nécessitant chacune jusqu'à 3 capteurs : un ph-mètre, un thermomètre et un contrôleur de niveau. Dans cette exemple, la contrainte la plus forte vient du froid qu'il règne souvent dans cette région, rendant inefficaces certaines solutions. De plus l'isolation des sites et le climat de la Norvège pose des questions énergétiques importantes.
 
-L'exigence principale de cet appel d'offre est l'automie de la solution apportée. En effet, il faut qu'elle fonctionne sans (presque) aucune intervention humaine. La solution proposée devra aussi répondre à certains problèmes provoqués par l'environnement dans lequel ces sites sont situés. La solution apportée devra être générique et pouvoir s'adapter à différents types de terrains. Dans l'exemple traité, les sites seront situés au nord de la Norvège et feront une taille variant d'un diamètre de 100m à 1km. Ces sites comporteront un nombre variable de cuves de liquide nécessitant chacune jusqu'à 3 capteurs : un ph-mètre, un thermomètre et un contrôleur de niveau. Dans cette exemple, la contrainte la plus forte vient du froid qu'il règne souvent dans cette région, rendant inefficaces certaines solutions.
+Or l'exigence principale de cet appel d'offre est l'automie de la solution apportée. En effet, il faut qu'elle fonctionne (presque) sans intervention humaine. La solution proposée devra aussi répondre à certains problèmes provoqués par l'environnement dans lequel ces sites sont situés. La solution apportée devra être générique et pouvoir s'adapter aussi bien à différents types de terrains, mais aussi à d'autres types de sites et pas seulement à la Norvège et à des cuves ... 
 
 #Recueil des exigences#
-Thibaut : _Bon allez de celle là aussi_
 
 Afin d'avoir une vision plus précise des exigences de l'appel d'offre, nous avons effectué une analyse plus approfondie de ce dernier en se concentrant sur les problèmes soulevés par ces exigences. Les principaux problèmes identifiés sont les suivants :
 
@@ -34,24 +31,43 @@ Une fois des alertes nécessitant une maintenance reçues, il reste à contacter
 
 
 #Architecture de la solution#
-Yann s'en occupe
-
-##Site Central##
-Le site central a pour rôle de centraliser les informations remontant des différents sites, et de superviser les sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et anticipe sur les besoins non fonctionnels de scalabilité de la solution.
-
-La solution proposée pour le stockage d'informations s'appuie sur une base de donnée relationnelle centralisant les données. Le support matériel de cette base de données est redondant, afin de palier à d'éventuelles pannes et/ou pertes de données.
-
-<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES ET DETAILS</span>
-
 
 ##Site Isolé##
 
+L'architecture du site isolé se devait répondre aux défis suivants:
+ - permettre un relevé fiable des informations  
+ - effectuer un premier contrôle sur les mesures, et prévenir le site central en cas d'anomalie  
+ - faire remonter régulièrement l'ensemble des données collectées sur le site  
+ - assurer l'autonomie énergétique du système  
 
-L'architecture du site central se devait répondre aux défis suivants:
- * assurer l'autonomie énergétique du système
- * permettre un relevé fiable des informations
- * effectuer un premier contrôle sur les mesures, et prévenir le site central en cas d'anomalie
- * faire remonter régulièrement l'ensemble des données collectées sur le site
+###Capteurs et Communication intra-site###
+
+On veut relever 3 grandeurs dans les cuves: le pH, la température, et le niveau de remplissage. Les capteurs sélectionnés sont en accord avec les contraintes propres aux sites isolés (températures de fonctionnement, consommation réduite...). La conception autour des capteurs doit répondre aux questions suivantes: leur consommation en énergie et la transmission des mesures vers un lieu où elles pourront être envoyé au site central.
+
+Pour s'adapter aux différentes topologies des sites on propose deux solutions complémentaires. La première qu'on souhaite appliquer dans la majorité des cas : relier les capteurs en filaire. L'avantage de cette solution est qu'elle est simple, autonome en energie et peu couteuse, cependant le prix peut varier si les cuves sont éloignées les unes des autres, ou être difficile à installer dans les terrains escarpés.
+
+L'autre solution a un cout fixe, mais plus élevé : elle consiste en l'installation de baterie pour alimenter les cuves et d'un système d'emetteur/recepteur pour la transmission.
+
+<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES</span>
+
+###Système Embarqué###
+
+Le système embarqué a pour rôle de recueillir les mesures, les stocker temporairement avant de les transmettre au site central. Une première analyse visant à détecter d'importants sauts dans les valeurs est également souhaitable, un écart brutal vis-à-vis des valeurs précédentes étant souvent le symptôme d'une anomalie.  
+Le micro-contrôleur sélectionné remplit parfaitement les besoins mentionnés ci-dessus même en envisageabnt une forte augmentation de la taille des sites, mais également les autres cas d'utilisation envisagés (micro-contrôleur dédié au calcul différentiel, micro-contrôleur de communications radio...). Il consomme par ailleurs très peu d'énergie et est proposé à moins de deux euros l'unité (si on envisage des commandes de 1000 exemplaires). Dans le cas du système embarqué, on adjoint à ce micro-contrôleur une mémoire externe, nécessaire au stockage temporaire des données relevées.
+
+ * Micro-contrôleur générique à tout le système: [MSP430F2370](http://www.ti.com/product/msp430f2370)  
+ * Mémoire externe: [Spansion S25FL512S](www.spansion.com/Support/Datasheets/S25FL512S_00_02_e.pdf)
+
+
+
+###Communications###
+
+Au vu de l'isolement des sites, nous avons opté pour le seul moyen de transmettre les données disposant d'une couverture géographique adéquate et de caractéristiques satisfaisantes, les communications satellitaires. L'antenne sélectionnée propose un compromis adapté à notre situation, car elle présente un diamètre important tout en ne nécessitant pas l'installation du socle en béton propre aux antennes de plus grandes dimensions. Les bonnes caractéristiques associées aux antennes de cette dimension permettent l'utilisation d'une unité de transmission/réception de 5W seulement.
+
+Antenne sélectionnée [Prodelin 1,8m](à renseigner!) 
+Émetteur / récepteur sélectionné: [Emm/recept 5W](à renseigner!) 
+
+<span style="color:#FF0000">MODELE / LIEN à renseigner</span>
 
 ###Autonomie Énergétique###
 
@@ -68,30 +84,13 @@ Du fait de la dépendance totale de cette première solution vis à vis des cara
  * Micro-contrôleur dédie: voir partie *Système Embarqué*  
  * Batterie sélectionnée au cas par cas.  
 
-###Capteurs et Communication intra-site###
+##Site Central##
+Le site central a pour rôle de centraliser les informations remontant des différents sites, et de superviser les sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et anticipe sur les besoins non fonctionnels de scalabilité de la solution.
 
-On veut relever 3 grandeurs dans les cuves: le pH, la température, et le niveau de remplissage. Les capteurs sélectionnés sont en accord avec les contraintes propres aux sites isolés (températures de fonctionnement, consommation réduite...).
+La solution proposée pour le stockage d'informations s'appuie sur une base de donnée relationnelle centralisant les données. Le support matériel de cette base de données est redondant, afin de palier à d'éventuelles pannes et/ou pertes de données.
 
-<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES</span>
+<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES ET DETAILS</span>
 
-###Système Embarqué###
-
-Le système embarqué a pour rôle de recueillir les mesures, les stocker temporairement avant de les transmettre au site central. Une première analyse visant à détecter d'importants sauts dans les valeurs est également souhaitée, un écart brutal vis-à-vis des valeurs précédentes étant souvent le symptôme d'une anomalie.  
-Le micro-contrôleur sélectionné remplit parfaitement les besoins mentionnés ci-dessus quelle que soit la dimension du site considéré, mais également les autres cas d'utilisation envisagés (micro-contrôleur dédié au calcul différentiel, micro-contrôleur de communications radio...). Il consomme par ailleurs très peu d'énergie et est proposé à un prix négligeable. Dans le cas du système embarqué, on adjoint à ce micro-contrôleur une mémoire externe, nécessaire au stockage temporaire des données relevées.
-
- * Micro-contrôleur générique à tout le système: [MSP430F2370](http://www.ti.com/product/msp430f2370)  
- * Mémoire externe: [Spansion S25FL512S](www.spansion.com/Support/Datasheets/S25FL512S_00_02_e.pdf)
-
-
-
-###Communications###
-
-Au vu de l'isolement des sites, nous avons opté pour le seul moyen de transmettre les données disposant d'une couverture géographique adéquate et de caractéristiques satisfaisantes, les communications satellitaires. L'antenne sélectionnée propose un compromis adapté à notre situation, car elle présente un diamètre important tout en ne nécessitant pas l'installation du socle en béton propre aux antennes de plus grandes dimensions. Les bonnes caractéristiques associées aux antennes de cette dimension permettent l'utilisation d'une unité de transmission/réception de 5W seulement.
-
-Antenne sélectionnée [Prodelin 1,8m](à renseigner!) 
-Émetteur / récepteur sélectionné: [Emm/recept 5W](à renseigner!) 
-
-<span style="color:#FF0000">MODELE / LIEN à renseigner</span>
 
 
 
