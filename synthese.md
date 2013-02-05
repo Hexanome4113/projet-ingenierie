@@ -47,7 +47,7 @@ Pour s'adapter aux différentes topologies des sites on propose deux solutions c
 
 L'autre solution a un cout fixe, mais plus élevé : elle consiste en l'installation de baterie pour alimenter les cuves et d'un système d'emetteur/recepteur pour la transmission.
 
-<span style="color:#FF0000">A COMPLETER AVEC LES REFERENCES</span>
+
 
 ###Fréquence des communications###
 Quand doit on faire un relevé de donnée? Quand doit on les envoyer et avec quelle granularité stocker ses informations? Commençons par le cas le plus simple, celui où tout se passe bien. Pour conserver un suivi de l'activité des sites on envisage de stocker une information (pour un capteur, pour une cuve, pour un site) par jour. Par conséquent envoyer plus d'une information par jour, lorsque tout va bien, semble raisonnable. Cependant que se passe t il en cas de données alarmantes? Nous avons estimé que relever les données des capteurs toutes les heures est envisageable d'un point de vue energetique et permet une bonne réactivite. Le système embarqué du site doit comparer les données reçues toutes les heures avec la donnée journalière envoyée correspondante. Si le système embarqué detecte une variation trop importante entre celles ci, il se charge d'en alerter le site central qui peut ainsi avoir un bon suivi en temps de crise. Le système sauvegarde alors la donnée envoyée comme donnée de référence pour la journée qu'il comparera avec les prochaines valeurs. L'interet de cette solution, outre de permettre un bon suivi, est qu'elle permet de limiter l'utilisation abusive de l'antenne, gourmande en energie. 
@@ -55,15 +55,15 @@ Quand doit on faire un relevé de donnée? Quand doit on les envoyer et avec que
 
 ###Système Embarqué###
 
-Le système embarqué a pour rôle de recueillir les mesures, les stocker temporairement avant de les transmettre au site central. Il doit aussi envoyer des alertes au site central lorsqu'un capteur cesse d'envoyer des données, et stocker les données des capteurs lorsque la connexion ne fonctionne plus. Lors de la reprise de connexion, les données qui n'ont pas pu être envoyées, le sont, ainsi il n'y a pas de perte d'information. Le micro-contrôleur sélectionné remplit parfaitement les besoins mentionnés ci-dessus même en envisageant une forte augmentation de la taille des sites.. Il consomme par ailleurs très peu d'énergie et est proposé à moins de deux euros l'unité (si on envisage des commandes de 1000 exemplaires). Dans le cas du système embarqué, on adjoint à ce micro-contrôleur une mémoire externe, nécessaire au stockage temporaire des données relevées. L'intérêt de ce microcontroleur est qu'il reste relativement puissant, si les besoins évoluent: 
+Le système embarqué a pour rôle de recueillir les mesures, les stocker temporairement avant de les transmettre au site central. Il doit aussi envoyer des alertes au site central lorsqu'un capteur cesse d'envoyer des données, et stocker les données des capteurs lorsque la connexion ne fonctionne plus. Lors de la reprise de connexion, les données qui n'ont pas pu être envoyées, le sont, ainsi il n'y a pas de perte d'information. Le micro-contrôleur sélectionné remplit parfaitement les besoins mentionnés ci-dessus même en envisageant une forte augmentation de la taille des sites.. Il consomme par ailleurs très peu d'énergie et est proposé à des prix avantageux si les commandes dépassent la centaine. Cette commande importante est envisageable car on peut réutiliser ce microcontroleur dans d'autres parties de la solution comme on le verra plus tard. Dans le cas du système embarqué, on adjoint à ce micro-contrôleur une mémoire externe, nécessaire au stockage temporaire des données relevées. L'intérêt de ce microcontroleur est qu'il reste relativement puissant, si les besoins évoluent: 
 - Taille de la mémoire Flash&nbsp;: 32&nbsp;ko
 - Taille de la RAM&nbsp;: 2048 octets
 - Nombre de broches GPIO&nbsp;: 32
 - Convertisseur analogique/numérique&nbsp;
 - Multiplicateur matériel
 
- * Micro-contrôleur générique à tout le système: [MSP430F2370](http://www.ti.com/product/msp430f2370)  
- * Mémoire externe: [Spansion S25FL512S](www.spansion.com/Support/Datasheets/S25FL512S_00_02_e.pdf)
+- 1€45 : Micro-contrôleur générique à tout le système: [MSP430F2370](http://www.ti.com/product/msp430f2370)  
+- 6€78 : Mémoire externe 64Mo [Spansion S25FL512S](www.spansion.com/Support/Datasheets/S25FL512S_00_02_e.pdf)
 
 
 
@@ -79,20 +79,23 @@ Prix : 300€ ( abonnement non inclu )
 
 L'autonomie énergétique est proposée sous deux formes différentes. La première, la solution applicable dans la plus part des cas, se base sur l'exploitation du potentiel éolien de la Norvège. On y associe une éolienne domestique modeste à une batterie tampon adaptée. Cette solution à été calibrée au regard de statistiques météorologiques afin d'assurer une autonomie totale et continue.
 
- * Éolienne sélectionnée: [Ultimate Aire One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html)  
- * Batterie sélectionnée: [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181)
-Prix : 9 000€ (installation) + 3 590€ (éolienne) + 708€ (batterie)
-= 13 298€
+ - 3 590€ : Éolienne sélectionnée: [Ultimate Aire One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html)  
+ - 9 000€ installation de l'eolienne  
+ - 708€ : Batterie sélectionnée: [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181)  
+
+Prix par site: 13 298€
 
 Du fait de la dépendance totale de cette première solution vis à vis des caractéristiques du site, on propose une seconde solution, générique, et pouvant être installée partout. Cette solution s'appuie sur l'optimisation différentielle d'une batterie de forte capacité. Cette dernière étant l'unique "source" d'énergie dans ce cas, on lui adjoint une résistance chauffante afin de réguler sa température, et ainsi maximiser sa rétention d'énergie tout en essayant de minimiser l'énergie gaspillée en chauffage. Dans l'optique de conserver au maximum la chaleur, on placera l'ensemble dans une enceinte thermique. Le tout est contrôlé par une brique logicielle spécifique qui fonctionne sur un micro-contrôleur qui lui est dédié.
 
- * Enceinte isotherme sur mesure, partenaire potentiel: [SMCI](http://www.klege-europ-smci.com/) : 700€  
- * Résistance chauffante: [HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) 12,26€ 
- * Micro-contrôleur dédie: voir partie *Système Embarqué*  
- * Batterie sélectionnée au cas par cas.  minimum de 5 000€
+ - 700€ : Enceinte isotherme sur mesure, partenaire potentiel: [SMCI](http://www.klege-europ-smci.com/)  
+ - 12€26 : Résistance chauffante [HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329)  
+ - 2€ : Micro-contrôleur dédie: voir partie *Système Embarqué*  
+ - 5 000€ min : Batterie sélectionnée au cas par cas.  
 
 Frais fixes:
-Developpement de la brique logicielle approximativement 10 000€
+10 000€ : Developpement de la brique logicielle approximativement  
+
+Prix par site 5 712€26, ce qui est deux fois moins cher que la solution générique, mais pas autonome puisque la batterie nécéssite d'être rechargée, et qu'une augmentation de la taille d'un site ou sa modification peut entrainer l'achat d'une nouvelle batterie. 
 
 ##Site Central##
 Le site central a pour rôle de centraliser les informations remontant des différents sites, et de programmer les visites des sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et permet une solution générique personnalisable pour s'adapter aux futures évolutions du projet.

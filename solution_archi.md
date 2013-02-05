@@ -143,7 +143,7 @@ Le microcontrôleur choisi (MSP430F2370) à les caractéristiques suivantes&nbsp
 - Convertisseur analogique/numérique&nbsp;: Oui
 - Multiplicateur matériel&nbsp;: Oui
 - Support matériel de protocoles de communication série&nbsp;: Oui 
-- Prix (à l'unité)&nbsp;: 1,95&nbsp;$ (pour 1&thinsp;000 exemplaires)
+- Prix (à l'unité)&nbsp;: 1,45&nbsp;€ (pour 1&thinsp;000 exemplaires)
 
 #### Microcontrôleur de régulation de la température ####
 
@@ -277,7 +277,6 @@ Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer �
 **Frais fixes:**
 <table>
     <tr><td>~10.000€</td><td>Développement de la carte</td></tr>
-	<tr><td>~8.000€</td><td>Infrastructure de recharge des batteries</td></tr>
 	<tr><td>~200€/pers.&nbsp;&nbsp;</td><td>Journée de formation au remplacement des batteries</td></tr>
 </table>
 
