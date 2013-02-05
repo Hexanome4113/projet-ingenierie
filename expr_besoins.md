@@ -1,4 +1,4 @@
-Recueil des exigences
+Recueil des exigences{@style=text-align: center;}
 ======================
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
