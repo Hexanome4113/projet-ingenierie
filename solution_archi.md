@@ -2,14 +2,12 @@
 
 ##Présentation générale de la solution##
   ![Schéma général](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/schema_general.png)
-La solution est divisée, d'un point de vue totalement géographique en trois types de zones : les sites isolés qui collectent et envoient les informations sur les cuves, le site central qui rassemble toutes ses informations et les traite en vue de programmer des alertes, et enfin les sociétés de maintenance qui se déplacent et effectue les réparations.
+La solution est divisée, d'un point de vue totalement géographique, en trois types de zones : les sites isolés qui collectent et envoient les informations sur les cuves, le site central qui rassemble toutes ces informations et les traite en vue de programmer des alertes, et enfin les sociétés de maintenance qui envoient des agents qui se déplacent et effectuent les réparations.
 
-Pour clarifier la solution, voici la modelisation de l'architecture générale de la solution grace à un diagramme de déploiement. Les différents point clés de ce diagramme seront détaillés plus en détail par la suite, cependant une présenter une vision globale de la solution dès maintenant semble pertinent. 
+Pour clarifier la solution, voici un diagramme de déploiement de notre solution. Les différents point clés de ce diagramme seront détaillés plus en détail par la suite.
 ![Diagramme de déploiement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/DiagrammeDeDeploiement.png)
-Pour respecter la logique, nous allons détailler les différents points de l'architecture dans cet ordre: d'abord la partie sur le site isolé :
-les capteurs, leur communications avec le système embarqué, leur communication avec le site central puis nous aborderons la thématique energetique (nous avons établi dans le recueil des exigences l'importance de l'authonomie de notre solution).
 
-Ensuite nous aborderons le point du site central : la collecte des informations des différents sites isolés, leur stockage, leur analyse et la communication avec les sociétés de maintenance et enfin les moyen à mettre en place pour deployer une telle structure d'un point de vue aussi bien technique qu'humain.
+Les sociétés de maintenance n'était pas le coeur de notre problématique, elle ne seront abordées que du point de vue des communications entre elles et le système. Il nous reste donc deux grands ensembles:
 
 1. Site isolé
 =============
@@ -17,119 +15,86 @@ Ensuite nous aborderons le point du site central : la collecte des informations 
 a. Capteurs
 -----------
 
-<dl>
-  <dt>Introduction</dt>
-  <dd>
-  Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises au système embarqué. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
-   de l'apport en énergie aux différents appareils.
-   
-  Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km de diamètre, ce qui fait une distance importante entre le système embarqué et les capteurs), le relief accidenté des sites, et le froid régnant dans le nord de la Norvège.
-  </dd>
-  <dd>
-  Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacun des avantages et inconvénients. Pour les différencier,
-   nous allons notamment prioriser les tâches selon les exigences non-fonctionnelles auxquelles elles répondent. La COPEVUE ayant placé comme facteur
-   primordial l'autonomie de notre installation, nous nous baserons donc sur ce facteur en priorité.
-  </dd>
-  
-  <dt>Solution retenue</dt>
-  <dd>
-  La solution nous ayant paru la plus pertinente est la suivante :</dd>
-</dl>
-  
-  ![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_retenue.png)
-  
-<dl>
-  <dd>
-  Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des câbles électriques
-  </dd>
-  <dd>
-  Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
-   il n'y a pas besoin de source d'énergie autre que celle du système embarqué. De plus, son nombre limité d'appareils limite les risques de pannes 
-   et donc de coupure du réseau et de frais de maintenance.
-  </dd>
-  <dd>
-  L'énergie dépensée pour chaque cuve dans ce genre d'installation est minime : il suffit en effet d'avoir assez d'énergie pour faire fonctionner les capteurs, ce qui correspond 
-   pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
-  </dd>
-  <dd>
-  Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
-   être assez éloigné des cuves, il faudra parfois tirer un câble de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
-   des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le câble électrique, et le second vient du temps passé par
-   des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
-   passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
-   un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
-  </dd>
-</dl>
-###Par cuve : ~325€ + 39€/100m
+### Introduction ###
+Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises au système embarqué. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer de l'apport en énergie aux différents appareils. 
+Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km de diamètre, ce qui fait une distance importante entre le système embarqué et les capteurs), le relief accidenté des sites, et le froid régnant dans le nord de la Norvège.
 
-  - __pH-mètre / thermomère : 260€__   
-  Précision:+-0.02 pH /+-0.5°C  
-  Résistance: -20°C  
+Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacune des avantages et inconvénients. Pour les différencier, nous allons notamment prioriser les tâches selon les exigences non-fonctionnelles auxquelles elles répondent. La COPEVUE ayant placé comme facteur primordial l'autonomie de notre installation, nous nous baserons donc sur ce facteur en priorité.
+
+###Solution retenue ###
+La solution nous ayant paru la plus pertinente est la suivante :
+  
+![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_retenue.png)
+  
+Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des câbles électriques
+
+Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
+il n'y a pas besoin de source d'énergie autre que celle du système embarqué. De plus, son nombre limité d'appareils limite les risques de pannes 
+et donc de coupure du réseau et de frais de maintenance.
+
+L'énergie dépensée pour chaque cuve dans ce genre d'installation est minime : il suffit en effet d'avoir assez d'énergie pour faire fonctionner les capteurs, ce qui correspond 
+pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
+
+Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
+être assez éloigné des cuves, il faudra parfois tirer un câble de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
+des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le câble électrique, et le second vient du temps passé par
+des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
+passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
+un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
+
+####Par cuve : ~170€ + 39€/100m
+
+  - __pH-mètre / thermomère : 109€__ [Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)    
+  Précision:+-0.01 pH /+-0.1°C    
   Consommation : 3 piles AAA ( approximativement 1200 heures d'utilisation continue)  
-  - __niveau : 31.50€__  
-  Consommation : 3V, 50mA  
-  (Garantie : 3ans)  
-  Résistance au froid
-  - __câbles : 13,73€ / 100m__ 
-  - __main-d'œuvre : 25€ + 25€/100m__ Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
-<dl>
-  <dt>Solution alternative</dt>
-  <dd>
-  Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternative dont l'architecture serait la suivante :
-  </dd>
-</dl>
-
-  ![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_alternative.png)
+  - __niveau : 31.50€__ [Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)    
+  Précision:+-0.2%    
+  Consommation : 3V, 50mA   
+  Résistance au froid    
+  - __câbles : 15,49€ / 100m__ [Lien](http://r.twenga.fr/g3.php?pg=VDszNTAxMjk2OTkzNDAzODEyMzI1OzQxNTg2MDE7aHR0cDovL2dvLmxlZ3VpZGUuY29tL25hdi90d2VuZ2FfcHRfZnIucGhwP2lkX21hZz0yOTAyNzU4MiZpZHg9NTA2MDMwNSZpZGxnPTI5MDI3NTgyODA2MSZpZF9yZWNoPSZtcz1LRVlXT1JEX0lOUFVUJmxhbmc9ZnImdmFycz10YzpwOzc1YTMwNDRjMGRkMDJkMzA4MjQ1OWE5ZTVhMmFmMzMz&dac=1)
+  - __main-d'œuvre : 25€ + 25€/100m__ 
   
-<dl>
-  <dd>
-  Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
-   pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consommation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
-   non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera utilisée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
-  </dd>
-  <dd>
-  Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio émettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
-   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que
-   le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai raisonnable pour le changement de batterie.
-  </dd>
-  <dd>
-  L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
-   elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
-    les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour cela, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
-	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
-	solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
-  </dd>
-  <dd>
-  Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
-  </dd>
-</dl>
-###Par cuve : ~510€
+Note sur la main d'oeuvre: Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 
-  - __émetteur : (longue portée) 66.78€__  
-  Consommation : 0.5W
-  1 an de garantie
+###Solution alternative
+
+Pour pallier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternative dont l'architecture serait la suivante :
+
+![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_alternative.png)
+  
+Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne paiera pas plus cher pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consommation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera utilisée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
+  
+Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio émettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai raisonnable pour le changement de batterie.
+
+L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet, les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour cela, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
+
+Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
+
+####Par cuve : ~425€
+
+  - __émetteur : (longue portée) 29.23€__  [Lien](http://www.controle-sans-fil.com/index.php?main_page=product_info&cPath=173&products_id=582&zenid=8qps2f0od1pr1vc28bmhlfavu3)    
+  Consommation : 0.5W    
   Résistance au froid: faible, d'où l'isolation
-  - __MSP430 : 1.95€__ détaillé plus loin
-  - __pH-mètre / thermomère : 260€__ Précision:+-0.02 pH/+-0.5°C  
-  Résistance: -20°C  
-  Consommation : 3 piles AAA ( Approximativement 1200 heures d'utilisation continue)
-  - __niveau : 31.50€__  
-  Consommation : 3V, 50mA  
-  Garantie : 3ans  
+  - __MSP430 : 5.98€__ [Lien](http://hackspark.fr/fr/ti-msp430-launchpad.html)
+  - __pH-mètre / thermomère : 109€__ [Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)    
+  Précision:+-0.01 pH /+-0.1°C    
+  Consommation : 3 piles AAA ( approximativement 1200 heures d'utilisation continue)  
+  - __niveau : 31.50€__ [Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)    
+  Précision:+-0.2%    
+  Consommation : 3V, 50mA   
   Résistance au froid
-  - __batterie : 22.90€__  
-  Capacité : 1400mAH  (Rechargement prévu une fois par an)  
+  - __batterie : 29€__  [Lien](http://www.absolutesport.fr/batterie-/126-batterie-haute-capacite-drift.html)    
+  Capacité : 1400mAH  (Rechargement prévu une fois par an)   
   Garantie 2 ans
   - __main-d'œuvre : 50€__ 4h/homme -> 50€
   - __caisson isolant : 80€__
   
-###Site : ~45€
-  - __Récepteur radio : 30€__
-  - __main d'œuvre : 1h/homme : 15€__ 15
-<dl>
-<dt>Conclusion</dt>
-  <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
-</dl>
+####Site : ~45€
+  - __Récepteur radio : ~30€__
+  - __main d'œuvre : 1h/homme : 15€__
+
+### Conclusion
+  Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
 
 
 b. Système embarqué et système de communication avec le site central
@@ -163,7 +128,7 @@ Il faudra donc assurer le développement d'une carte spécifique pour le systèm
 #### Microcontrôleur de transmission des données ####
 Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
-Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
+Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur le critères suivant, identifié comme le plus important lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
 
 Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 2 Series_) a été choisi.
 
@@ -226,7 +191,7 @@ _Spansion S25FL512S_
 c. Énergie
 ----------
 
- **Introduction**
+### Introduction ###
 
 Le système nécessite la mise en place d'une solution d'alimentation autonome pour les sites isolés n'ayant pas accès à une source d'énergie extérieure. Le système ayant besoin d'une alimentation continue et de faible puissance, il semble indispensable d'avoir recours à une batterie pour faire tampon, quelle que soit la source d'énergie utilisée. La principale contrainte de fonctionnement d'une batterie est la température ambiante, en l'occurrence ici les températures sur site peuvent descendre jusqu'à des extrêmes de -40°C, ce qui limite drastiquement le rendement de n'importe quelle batterie du marché.
 
@@ -241,7 +206,7 @@ Après revue des différentes alternatives, la seule solution restante pour gén
 On constate que quelques zones ne réunissent pas les conditions recquises par l'éolien: on proposera donc une solution de secours pour ces quelques cas particuliers.
 
 
-**Evaluation des besoins en énergie**
+###Evaluation des besoins en énergie###
 
 Afin de dimensionner correctement les équipements relatifs à l'énergie, il convient d'avoir une idée précise des besoins de notre système. Les deux carractéristiques principales à considérer sont la consommation moyenne, et la puissance maximale que l'on doit être capable de développer ponctuellement pour permettre, notamment, les communications satelitaires. La consommation moyenne dépend bien évidement de l'échelle du site considéré, car le principal besoin d'énergie provient de l'allimentation des capteurs. En effet le micro-controleur sélectionné nécessite entre 0,7µA (idle) et 270µA (on load) sous une tension de 2,2V, soit une consomation 0,594mW si l'on considère pour simplifier que ce dernier est solicité en permanence. Pour comparaison, un triplet de capteurs pH-niveau-température consomme 155mW (voir calcul ci-dessous) ce qui justifie que l'on puisse considérer la consommation du système embarqué comme négligeable.
 
@@ -268,26 +233,28 @@ Soit environ 630 Wh/jour pour les sites les plus grands (50 cuves) que l'on pren
 
 
 
-**Solution standard: Éolien & Batterie tampon**
+###Solution standard: Éolien & Batterie tampon###
 
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
-Prix unitaire de la solution:  
-9000€	installation  
-3590€	éolienne  
-708€	batterie  
+**Prix unitaire de la solution:**
+<table>
+    <tr><td>9000€</td><td>installation</td></tr>
+	<tr><td>3590€.&nbsp;&nbsp;</td><td>éolienne</td></tr>
+	<tr><td>708€</td><td>batterie</td></tr>
+</table>
 
-durée de vie éolienne: ~10 ans  
-durée de vie batterie: 4-5 ans
+**Durée de vie éolienne:** ~10 ans  
+**Durée de vie batterie:** 4-5 ans
 
-durée d'installation: 1-2 jours
+**Durée d'installation:** 1-2 jours
 
 
 
-**Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
+###Solution alternative: Optimisation différentielle d'une batterie de forte capacité###
 
 Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisante pour y placer une éolienne, on propose la solution exceptionnelle décrite ci-dessous. Il est important de noter que cette solution est plus onéreuse, offre de moins bons rendements et une autonomie moins forte que la solution standard présentée précédemment. Sa mise en place doit donc se limiter exclusivement aux cas où la solution standard ne serait pas applicable.
 
@@ -299,29 +266,33 @@ Le principe général de la solution est de maintenir la batterie à une tempér
 Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
 
-Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
+Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la paroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
 
 >*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
 
 Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
 
-Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimensionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
 
-Frais fixes:
-~10.000€	Développement de la carte  
-~8.000€		Infrastructure de recharge des batteries  
-~200€/per	journée de formation au remplacement des batteries  
+**Frais fixes:**
+<table>
+    <tr><td>~10.000€</td><td>Développement de la carte</td></tr>
+	<tr><td>~8.000€</td><td>Infrastructure de recharge des batteries</td></tr>
+	<tr><td>~200€/pers.&nbsp;&nbsp;</td><td>Journée de formation au remplacement des batteries</td></tr>
+</table>
+
+**Prix unitaire de la solution:**
+<table>
+	<tr><td>700€	</td><td>caisson</td></tr>
+	<tr><td>12,26€	</td><td>résistance</td></tr>
+	<tr><td>5.000+€	&nbsp;&nbsp;</td><td>batterie</td></tr>
+	<tr><td>800€	</td><td>assemblage</td></tr>
+</table>
 
 
-Prix unitaire de la solution:  
-700€	caisson  
-12,26€	résistance  
-5.000+€	batterie  
-800€	assemblage
+**Durée de vie de la batterie:** ~10ans
 
-durée de vie de la batterie ~10ans
-
-durée d'installation: 1 jour
+**Durée d'installation:** 1 jour
 
 2. Site central
 ===============
@@ -345,7 +316,7 @@ D’autres données métiers peuvent être amenées à être stockées en base d
 
 Avec une grande marge, un téraoctet de stockage paraît suffisants pour le stockage et la redondance. Cela représente en fin de compte très peu de données en comparaison de ce que les SGBD actuels sont capables de gérer (les performances étant grandement liées à son schéma et à sa configuration). Pour garantir des performances encore meilleures, il est envisageable d’utiliser des disques durs SSD.
 
-Les principales opérations qui seront effectuées seront :
+Les principales opérations qui seront effectuées sont :
   - insertion d’une valeur d’un capteur en base de données
   - extraction des valeurs les plus récentes des capteurs pour vérifier l’état global des sites distants sur un tableau de bord
   - calculs intensifs sur l’ensemble de l’historique des valeurs de la base de donnée afin de :
@@ -370,7 +341,7 @@ Au niveau de l’équipement matériel du site central, nous aurons besoin de :
 
 Architecture applicative
 ---
-Notre solution au niveau du site central se présente sous la forme d’un intranet auxquels se connectent les employés, leur offrant :
+Notre solution au niveau du site central se présente sous la forme d’un intranet auquel se connectent les employés, leur offrant :
   - des tableaux de bord
   - un système de notification en temps réel des alertes remontées des sites distants ou des interventions sur site
   - des indicateurs
@@ -382,7 +353,7 @@ Notre solution au niveau du site central se présente sous la forme d’un intra
 
 Nous proposons également aux entreprises de maintenance partenaires de remplir les informations relatives à leurs interventions directement sur une interface web accessible depuis l’extérieur, plutôt que de les communiquer par mail ou téléphone à un agent du site central. Cette possibilité leur reste néanmoins accessible. C’est alors à l’agent lui même de remplir les informations sur l’intervention.
 
-Cette solution intègrera notamment de puissantrs algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
+Cette solution intègrera notamment de puissants algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
 
 
 Autres frais

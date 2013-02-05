@@ -1,7 +1,7 @@
-Rédaction et Gestion de configurations
+Gestion de la configuration et de la documentation
 ========
 
-Rédaction
+Gestion de la documentation
 ------
 
 ### Format des documents ###
