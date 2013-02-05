@@ -2,14 +2,12 @@
 
 ##Présentation générale de la solution##
   ![Schéma général](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/schema_general.png)
-La solution est divisée, d'un point de vue totalement géographique en trois types de zones : les sites isolés qui collectent et envoient les informations sur les cuves, le site central qui rassemble toutes ses informations et les traite en vue de programmer des alertes, et enfin les sociétés de maintenance qui se déplacent et effectue les réparations.
+La solution est divisée, d'un point de vue totalement géographique, en trois types de zones : les sites isolés qui collectent et envoient les informations sur les cuves, le site central qui rassemble toutes ces informations et les traite en vue de programmer des alertes, et enfin les sociétés de maintenance qui envoient des agents qui se déplacent et effectuent les réparations.
 
-Pour clarifier la solution, voici la modelisation de l'architecture générale de la solution grace à un diagramme de déploiement. Les différents point clés de ce diagramme seront détaillés plus en détail par la suite, cependant une présenter une vision globale de la solution dès maintenant semble pertinent. 
+Pour clarifier la solution, voici un diagramme de déploiement de notre solution. Les différents point clés de ce diagramme seront détaillés plus en détail par la suite.
 ![Diagramme de déploiement](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/DiagrammeDeDeploiement.png)
-Pour respecter la logique, nous allons détailler les différents points de l'architecture dans cet ordre: d'abord la partie sur le site isolé :
-les capteurs, leur communications avec le système embarqué, leur communication avec le site central puis nous aborderons la thématique energetique (nous avons établi dans le recueil des exigences l'importance de l'authonomie de notre solution).
 
-Ensuite nous aborderons le point du site central : la collecte des informations des différents sites isolés, leur stockage, leur analyse et la communication avec les sociétés de maintenance et enfin les moyen à mettre en place pour deployer une telle structure d'un point de vue aussi bien technique qu'humain.
+Les sociétés de maintenance n'était pas le coeur de notre problématique, elle ne seront abordées que du point de vue des communications entre elles et le système. Il nous reste donc deux grands ensembles:
 
 1. Site isolé
 =============
@@ -17,50 +15,34 @@ Ensuite nous aborderons le point du site central : la collecte des informations 
 a. Capteurs
 -----------
 
-<dl>
-  <dt>Introduction</dt>
-  <dd>
-  Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises au système embarqué. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer
-   de l'apport en énergie aux différents appareils.
-   
-  Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km de diamètre, ce qui fait une distance importante entre le système embarqué et les capteurs), le relief accidenté des sites, et le froid régnant dans le nord de la Norvège.
-  </dd>
-  <dd>
-  Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacun des avantages et inconvénients. Pour les différencier,
-   nous allons notamment prioriser les tâches selon les exigences non-fonctionnelles auxquelles elles répondent. La COPEVUE ayant placé comme facteur
-   primordial l'autonomie de notre installation, nous nous baserons donc sur ce facteur en priorité.
-  </dd>
+### Introduction ###
+Pour permettre une transmission des informations au site central, les données récupérées par les capteurs devront tout d'abord être transmises au système embarqué. Pour cela, il y a deux problématiques principales auxquelles il faut répondre : gérer la transmission des données, et s'assurer de l'apport en énergie aux différents appareils. 
+Diverses contraintes rendent ces opérations difficiles : la taille des sites (faisant de 100m à 1km de diamètre, ce qui fait une distance importante entre le système embarqué et les capteurs), le relief accidenté des sites, et le froid régnant dans le nord de la Norvège.
+
+Répondre à ces exigences peut se faire de plusieurs façon différentes, présentant chacune des avantages et inconvénients. Pour les différencier, nous allons notamment prioriser les tâches selon les exigences non-fonctionnelles auxquelles elles répondent. La COPEVUE ayant placé comme facteur primordial l'autonomie de notre installation, nous nous baserons donc sur ce facteur en priorité.
+
+###Solution retenue ###
+La solution nous ayant paru la plus pertinente est la suivante :
   
-  <dt>Solution retenue</dt>
-  <dd>
-  La solution nous ayant paru la plus pertinente est la suivante :</dd>
-</dl>
+![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_retenue.png)
   
-  ![Proposition retenue](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_retenue.png)
-  
-<dl>
-  <dd>
-  Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des câbles électriques
-  </dd>
-  <dd>
-  Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
-   il n'y a pas besoin de source d'énergie autre que celle du système embarqué. De plus, son nombre limité d'appareils limite les risques de pannes 
-   et donc de coupure du réseau et de frais de maintenance.
-  </dd>
-  <dd>
-  L'énergie dépensée pour chaque cuve dans ce genre d'installation est minime : il suffit en effet d'avoir assez d'énergie pour faire fonctionner les capteurs, ce qui correspond 
-   pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
-  </dd>
-  <dd>
-  Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
-   être assez éloigné des cuves, il faudra parfois tirer un câble de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
-   des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le câble électrique, et le second vient du temps passé par
-   des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
-   passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
-   un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
-  </dd>
-</dl>
-###Par cuve : ~325€ + 39€/100m
+Cette solution consiste à installer un système embarqué sur le site et à le relier directement à chacune des cuves par des câbles électriques
+
+Les principaux avantages de cette solution résident dans son utilisation peu coûteuse ; Ses capteurs étant directement reliés au réseau, 
+il n'y a pas besoin de source d'énergie autre que celle du système embarqué. De plus, son nombre limité d'appareils limite les risques de pannes 
+et donc de coupure du réseau et de frais de maintenance.
+
+L'énergie dépensée pour chaque cuve dans ce genre d'installation est minime : il suffit en effet d'avoir assez d'énergie pour faire fonctionner les capteurs, ce qui correspond 
+pour chacun à l'équivalent d'une pile AAA par an si on effectue une mesure par heure.
+
+Cette approche présente cependant un certain nombre de limites, notamment celle liées à la complexité d'installation. En effet, le système embarqué pouvant
+être assez éloigné des cuves, il faudra parfois tirer un câble de 1km, pouvant poser des difficultés d'installation (et des frais importants) en fonction
+des terrains. Ces frais résultent de deux facteurs : le premier est le coût matériel, c'est à dire le câble électrique, et le second vient du temps passé par
+des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (qu'on considère comme qualifiés, et auxquels on attribue un salaire de 13 euros l'heure)
+passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
+un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
+
+####Par cuve : ~325€ + 39€/100m
 
   - __pH-mètre / thermomère : 260€__   
   Précision:+-0.02 pH /+-0.5°C  
@@ -72,38 +54,22 @@ a. Capteurs
   Résistance au froid
   - __câbles : 13,73€ / 100m__ 
   - __main-d'œuvre : 25€ + 25€/100m__ Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
-<dl>
-  <dt>Solution alternative</dt>
-  <dd>
-  Pour palier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternative dont l'architecture serait la suivante :
-  </dd>
-</dl>
 
-  ![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_alternative.png)
+###Solution alternative
+
+Pour pallier au relatif manque d'efficacité de la solution retenue dans certains cas, nous pouvons proposer une solution alternative dont l'architecture serait la suivante :
+
+![Proposition alternative](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/Solution_alternative.png)
   
-<dl>
-  <dd>
-  Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne payera pas plus cher 
-   pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consommation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner 
-   non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera utilisée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
-  </dd>
-  <dd>
-  Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio émettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner
-   que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que
-   le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai raisonnable pour le changement de batterie.
-  </dd>
-  <dd>
-  L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,
-   elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet,
-    les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour cela, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords
-	avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette
-	solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
-  </dd>
-  <dd>
-  Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
-  </dd>
-</dl>
-###Par cuve : ~510€
+Cette solution consistant à installer une borne radio (reliée aux différents capteurs) par cuve permettant de communiquer avec le système embarqué et un récepteur du côté du système embarqué a l'avantage d'avoir des coûts fixes : on ne paiera pas plus cher pour une cuve éloignée de 1km que pour une éloignée de 20m. Cette solution présente un problème de consommation d'énergie : n'étant pas reliée au site, elle doit comporter avec l'émetteur et le microcontrôleur une batterie pour faire fonctionner non seulement les capteurs mais aussi les appareils de communications. De plus, un peu d'énergie sera utilisée pour réchauffer ces appareils afin d'éviter que le froid ne les empêche de fonctionner.
+  
+Pour économiser l'énergie passant dans la communication, nous avons prévu de mettre en place des fenêtres de temps au cours desquelles la radio émettra les données des capteurs. Nous avons ainsi estimé que l'appareil ne devrait fonctionner que 2 minutes par heures pour pouvoir envoyer des données suffisantes au système embarqué. Au niveau du chauffage, l'économie se fera grâce à une isolation efficace des appareils : nous avons déterminé qu'un abri en polyuréthane serait suffisant pour que le chauffage ne doive fonctionner qu'une moyenne de 10 minutes par jour. Au vu de ces données, nous estimons le temps d'autonomie de chaque cuve munie d'une batterie adaptée à environ 1 an, ce qui laisse un délai raisonnable pour le changement de batterie.
+
+L'avantage principal de cette solution est sa facilité d'installation et un coût relativement limité lors de la pose sur des cuves éloignées du système embarqué. Cependant, elle présente de nombreux points limitant son utilisation : pour commencer,elle n'est rentable qu'à partir d'une certaine distance, une communication par ondes n'étant bien évidement pas nécessaire pour des cuves situées à 10m du système embarqué. Ensuite, cette solution pose un problème d'autonomie des appareils : en effet, les capteurs n'étant plus reliés électriquement au site, il doivent trouver une source d'énergie autre. Pour cela, l'utilisation d'une batterie peut s'avérer concluante, mais nécessite tout de même un changement occasionnel. Cependant, des accords avec les sociétés de maintenance pourraient être trouvés : le système leur permettant d'économiser des trajets, celles-ci pourraient faire un geste et s'occuper du changement des batteries annuel sans modification du contrat. Le dernier problème de cette solution peut venir de la configuration du site : le terrain peut être accidenté et gêner la progression des ondes. Par ailleurs, le froid risque de geler les appareils de transmission, des mesures (assez coûteuses) devant être prises pour éviter cela.
+
+Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
+
+####Par cuve : ~510€
 
   - __émetteur : (longue portée) 66.78€__  
   Consommation : 0.5W
@@ -123,13 +89,12 @@ a. Capteurs
   - __main-d'œuvre : 50€__ 4h/homme -> 50€
   - __caisson isolant : 80€__
   
-###Site : ~45€
+####Site : ~45€
   - __Récepteur radio : 30€__
-  - __main d'œuvre : 1h/homme : 15€__ 15
-<dl>
-<dt>Conclusion</dt>
-  <dd>Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
-</dl>
+  - __main d'œuvre : 1h/homme : 15€__
+
+### Conclusion
+  Bien que la première solution semble plus intéressante, il peut être pertinent de la combiner dans certains cas à la seconde pour une plus grande souplesse et une économie conséquente.
 
 
 b. Système embarqué et système de communication avec le site central
@@ -276,7 +241,7 @@ La solution standard s'appuie donc sur la génération d'énergie par l'intermé
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
 Prix unitaire de la solution:  
-9000€	installation  
+9000€    installation  
 3590€	éolienne  
 708€	batterie  
 
