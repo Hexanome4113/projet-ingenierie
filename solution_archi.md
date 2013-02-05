@@ -318,7 +318,7 @@ D’autres données métiers peuvent être amenées à être stockées en base d
 
 Avec une grande marge, un téraoctet de stockage paraît suffisants pour le stockage et la redondance. Cela représente en fin de compte très peu de données en comparaison de ce que les SGBD actuels sont capables de gérer (les performances étant grandement liées à son schéma et à sa configuration). Pour garantir des performances encore meilleures, il est envisageable d’utiliser des disques durs SSD.
 
-Les principales opérations qui seront effectuées seront :
+Les principales opérations qui seront effectuées sont :
   - insertion d’une valeur d’un capteur en base de données
   - extraction des valeurs les plus récentes des capteurs pour vérifier l’état global des sites distants sur un tableau de bord
   - calculs intensifs sur l’ensemble de l’historique des valeurs de la base de donnée afin de :
@@ -343,7 +343,7 @@ Au niveau de l’équipement matériel du site central, nous aurons besoin de :
 
 Architecture applicative
 ---
-Notre solution au niveau du site central se présente sous la forme d’un intranet auxquels se connectent les employés, leur offrant :
+Notre solution au niveau du site central se présente sous la forme d’un intranet auquel se connectent les employés, leur offrant :
   - des tableaux de bord
   - un système de notification en temps réel des alertes remontées des sites distants ou des interventions sur site
   - des indicateurs
@@ -355,7 +355,7 @@ Notre solution au niveau du site central se présente sous la forme d’un intra
 
 Nous proposons également aux entreprises de maintenance partenaires de remplir les informations relatives à leurs interventions directement sur une interface web accessible depuis l’extérieur, plutôt que de les communiquer par mail ou téléphone à un agent du site central. Cette possibilité leur reste néanmoins accessible. C’est alors à l’agent lui même de remplir les informations sur l’intervention.
 
-Cette solution intègrera notamment de puissantrs algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
+Cette solution intègrera notamment de puissants algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros.
 
 
 Autres frais
