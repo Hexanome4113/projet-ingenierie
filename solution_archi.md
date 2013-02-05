@@ -193,7 +193,7 @@ _Spansion S25FL512S_
 c. Énergie
 ----------
 
- ###Introduction###
+### Introduction ###
 
 Le système nécessite la mise en place d'une solution d'alimentation autonome pour les sites isolés n'ayant pas accès à une source d'énergie extérieure. Le système ayant besoin d'une alimentation continue et de faible puissance, il semble indispensable d'avoir recours à une batterie pour faire tampon, quelle que soit la source d'énergie utilisée. La principale contrainte de fonctionnement d'une batterie est la température ambiante, en l'occurrence ici les températures sur site peuvent descendre jusqu'à des extrêmes de -40°C, ce qui limite drastiquement le rendement de n'importe quelle batterie du marché.
 
@@ -242,17 +242,17 @@ La solution standard s'appuie donc sur la génération d'énergie par l'intermé
 
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
-**Prix unitaire de la solution:  **
+**Prix unitaire de la solution:**
 <table>
     <tr><td>9000€</td><td>installation</td></tr>
 	<tr><td>3590€.&nbsp;&nbsp;</td><td>éolienne</td></tr>
 	<tr><td>708€</td><td>batterie</td></tr>
 </table>
 
-**durée de vie éolienne:** ~10 ans  
-**durée de vie batterie:** 4-5 ans
+**Durée de vie éolienne:** ~10 ans  
+**Durée de vie batterie:** 4-5 ans
 
-**durée d'installation:** 1-2 jours
+**Durée d'installation:** 1-2 jours
 
 
 
