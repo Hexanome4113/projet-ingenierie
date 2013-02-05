@@ -193,7 +193,7 @@ _Spansion S25FL512S_
 c. Énergie
 ----------
 
- **Introduction**
+ ###Introduction###
 
 Le système nécessite la mise en place d'une solution d'alimentation autonome pour les sites isolés n'ayant pas accès à une source d'énergie extérieure. Le système ayant besoin d'une alimentation continue et de faible puissance, il semble indispensable d'avoir recours à une batterie pour faire tampon, quelle que soit la source d'énergie utilisée. La principale contrainte de fonctionnement d'une batterie est la température ambiante, en l'occurrence ici les températures sur site peuvent descendre jusqu'à des extrêmes de -40°C, ce qui limite drastiquement le rendement de n'importe quelle batterie du marché.
 
@@ -208,7 +208,7 @@ Après revue des différentes alternatives, la seule solution restante pour gén
 On constate que quelques zones ne réunissent pas les conditions recquises par l'éolien: on proposera donc une solution de secours pour ces quelques cas particuliers.
 
 
-**Evaluation des besoins en énergie**
+###Evaluation des besoins en énergie###
 
 Afin de dimensionner correctement les équipements relatifs à l'énergie, il convient d'avoir une idée précise des besoins de notre système. Les deux carractéristiques principales à considérer sont la consommation moyenne, et la puissance maximale que l'on doit être capable de développer ponctuellement pour permettre, notamment, les communications satelitaires. La consommation moyenne dépend bien évidement de l'échelle du site considéré, car le principal besoin d'énergie provient de l'allimentation des capteurs. En effet le micro-controleur sélectionné nécessite entre 0,7µA (idle) et 270µA (on load) sous une tension de 2,2V, soit une consomation 0,594mW si l'on considère pour simplifier que ce dernier est solicité en permanence. Pour comparaison, un triplet de capteurs pH-niveau-température consomme 155mW (voir calcul ci-dessous) ce qui justifie que l'on puisse considérer la consommation du système embarqué comme négligeable.
 
@@ -235,26 +235,28 @@ Soit environ 630 Wh/jour pour les sites les plus grands (50 cuves) que l'on pren
 
 
 
-**Solution standard: Éolien & Batterie tampon**
+###Solution standard: Éolien & Batterie tampon###
 
 
 La solution standard s'appuie donc sur la génération d'énergie par l'intermédiaire d'une éolienne de capacité adaptée. Les aléas météorologiques ne permettant pas une alimentation continue, nous adjoindrons à cette source d'énergie une batterie de capacité limitée, supposée apte à subvenir seule aux besoins du système pendant 2 jours complets. Le second rôle de la batterie tampon est de permettre le développement de la puissance nécessaire aux fenêtres de communication satellitaires, puissance qui n'est pas forcément délivrée en sortie d'une petite éolienne. Le rendement de cette batterie sera mauvais du fait des conditions de température, mais ce n'est pas un problème si l'on considère qu'elle n'a pour seul rôle que de faire tampon entre l'éolienne et le système. L'accent sera mis sur le choix d'une batterie adaptée à ces conditions.
 
 Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de permettre un rechargement rapide de la batterie quand les conditions météo sont favorables. De nombreuses solutions d'éoliennes domestiques conviennent parfaitement aux besoins de notre système, et présentent généralement des tarifs attractifs. C'est le cas de la [Ultimate Air One 600](http://toutlesolaire.com/p/Eolienne-24V-600W-Ultimate-Aire-One-/1500.html) sélectionnée, qui replit parfaitement les critères ci-dessus et présente l'avantage de fonctionner même lors de vents faibles (jusqu'à 2,5m/s). Il est important, lors de l'usage d'une source d'énergie inconstante telle qu'une éolienne, de favoriser les batteries qui ne sont pas sujetes à l'effet mémoire. Ainsi les batteries au plomb par exemple, sont a exclure. On choisit la batterie [GEL MOLL OPzV 1530Ah 2V](http://www.apb-energy.fr/boutique/fiche_produit.cfm?ref=MOLL-OPZV-1530&type=175&code_lg=lg_fr&num=181) qui pour un prix de 708€, devrait couvrir une autonomie de minimum 2 jours avec sa capacité de 3000Wh malgré la perte de performances en cas de faibles températures.
 
-Prix unitaire de la solution:  
-9000€    installation  
-3590€  éolienne  
-708€	batterie  
+**Prix unitaire de la solution:  **
+<table>
+    <tr><td>9000€</td><td>installation</td></tr>
+	<tr><td>3590€.&nbsp;&nbsp;</td><td>éolienne</td></tr>
+	<tr><td>708€</td><td>batterie</td></tr>
+</table>
 
-durée de vie éolienne: ~10 ans  
-durée de vie batterie: 4-5 ans
+**durée de vie éolienne:** ~10 ans  
+**durée de vie batterie:** 4-5 ans
 
-durée d'installation: 1-2 jours
+**durée d'installation:** 1-2 jours
 
 
 
-**Solution alternative: Optimisation différentielle d'une batterie de forte capacité**
+###Solution alternative: Optimisation différentielle d'une batterie de forte capacité###
 
 Dans le cas où la localisation d'un site n'offre aucune prise au vent suffisante pour y placer une éolienne, on propose la solution exceptionnelle décrite ci-dessous. Il est important de noter que cette solution est plus onéreuse, offre de moins bons rendements et une autonomie moins forte que la solution standard présentée précédemment. Sa mise en place doit donc se limiter exclusivement aux cas où la solution standard ne serait pas applicable.
 
@@ -274,14 +276,14 @@ Pour faire l'appoint de température, on sélectionne un composant de puissance 
 
 Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimensionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
 
-Frais fixes:
+**Frais fixes:**
 <table>
     <tr><td>~10.000€</td><td>Développement de la carte</td></tr>
 	<tr><td>~8.000€</td><td>Infrastructure de recharge des batteries</td></tr>
 	<tr><td>~200€/pers.&nbsp;&nbsp;</td><td>Journée de formation au remplacement des batteries</td></tr>
 </table>
 
-Prix unitaire de la solution:
+**Prix unitaire de la solution:**
 <table>
 	<tr><td>700€	</td><td>caisson</td></tr>
 	<tr><td>12,26€	</td><td>résistance</td></tr>
@@ -290,9 +292,9 @@ Prix unitaire de la solution:
 </table>
 
 
-durée de vie de la batterie ~10ans
+**Durée de vie de la batterie:** ~10ans
 
-durée d'installation: 1 jour
+**Durée d'installation:** 1 jour
 
 2. Site central
 ===============
