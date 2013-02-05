@@ -53,7 +53,9 @@ un temps variable en fonction de la distance de la cuve au système embarqué qu
   (Garantie : 3ans)  
   Résistance au froid
   - __câbles : 13,73€ / 100m__ 
-  - __main-d'œuvre : 25€ + 25€/100m__ Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
+  - __main-d'œuvre : 25€ + 25€/100m__ 
+  
+Note sur la main d'oeuvre: Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
 
 ###Solution alternative
 
@@ -128,7 +130,7 @@ Il faudra donc assurer le développement d'une carte spécifique pour le systèm
 #### Microcontrôleur de transmission des données ####
 Comme dit précédemment, ce microcontrôleur assure une tâche simple. En s'appuyant sur la partie _[a. Capteurs](#a-capteurs)_, on peut déterminer que le débit de données que devra traiter ce microcontrôleur est de 2 octets par seconde. En effet, la fréquence de mesure choisie est de une mesure par cuve par heure. On fait l'hypothèse ici que cette mesure engendre une transmission de huit octets vers le système embarqué et que les mesures ont toutes lieues à des instants différents (pas de phénomène de pic). En considérant un site isolé de 50 cuves (légère surestimation par rapport aux plus grands sites) avec chacune 10 capteurs, cela représente donc un volume de 4000 octets à traiter par heure, soit 1,11 octets par seconde. Par sécurité, le traitement à appliquer à une mesure doit donc se faire dans tous les cas en moins d'une demi seconde. Compte tenu des performances actuelles des microcontrôleurs sur le marché, cette obligation n'est pas un facteur limitant, puisque virtuellement n'importe quel microcontrôleur convient pour remplir une tâche aussi peu demandeuse de performance.
 
-Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur les critères suivants, identifiés comme les plus importants lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
+Le choix du microcontrôleur ne peut donc reposer sur un critère de performance. Il doit donc reposer sur le critères suivant, identifié comme le plus important lors de l'analyse des besoins et du recueil des exigences&nbsp;: l'efficacité en terme de consommation de la solution proposée, afin de maximiser l'autonomie du système. Il s'agit là d'un objectif d'autant plus important qu'une solution très économe en énergie a déjà été trouvée pour les capteurs, et que dans le cas de l'alimentation alternative sur batterie uniquement, l'autonomie est un besoin encore plus crucial.
 
 Pour cette raison, nous avons choisi d'utiliser un MSP430 pour le traitement et la transmission des données. Cette gamme de microcontrôleur de Texas Instruments est focalisée sur des produits très économes en énergie. Compte tenu du (très) faible besoin de performance et de la simplicité algorithmique du travail à effectuer, un microcontrôleur d'entrée de gamme (appartenant à la famille _MSP430 1 Series_, par exemple) devrait être utilisable. Toutefois, afin d'anticiper de futures évolutions de la solution, et pour ne pas être limité par un matériel qui s'avèrerait alors trop peu performant, un microcontrôleur plus puissant (appartenant à la famille _MSP430 2 Series_) a été choisi.
 
@@ -242,7 +244,7 @@ Par ailleurs, l'éolienne devra être légèrement surdimensionnée afin de perm
 
 Prix unitaire de la solution:  
 9000€    installation  
-3590€	éolienne  
+3590€  éolienne  
 708€	batterie  
 
 durée de vie éolienne: ~10 ans  
@@ -264,25 +266,29 @@ Le principe général de la solution est de maintenir la batterie à une tempér
 Certaines contraintes apparaissent du fait de l'utilisation de cette solution alternative. Il faudra notamment surveiller à distance le niveau de la batterie afin d'anticiper les pannes d'énergie. Par ailleurs, l'autonomie n'étant que partielle, les intervenants des sociétés de maintenance devront être mis à partie pour remplacer les batteries vides par des batteries chargées lors des interventions. Cela implique une formation supplémentaire (succinte mais nécessaire) de ce personnel intervenant, et le développement des aspects logistiques et techniques nécessaires au rechargement des batteries échangées.
 
 
-Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la parroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
+Le caisson isotherme sera conçu sur mesure afin d'obtenir des carractéristiques thermiques optimales malgré le passage des cables au travers de la paroi isolante. La société française SAINTE MARIE CONSTRUCTIONS ISOTHERMES dispose de l'expérience nécessaire à la sous-traitance de la fabrication (cf. auto-description de l'entreprise ci-dessous). Le prix exact par caisson est impossible à déterminer sans avoir recours à un devis, cependant au vu des prix du marché on peut envisager un tarif aux alentours de 700€/pièce.
 
 >*"Le savoir faire dans la conception de cellules isothermes, a permis à SMCI, le lancement d'une gamme de caissons isothermes capables de répondre aux attentes des métiers high tech, tel que les télécommunications, l'exploration pétrolière, l'industrie aéronautique et les services aéroportuaires. Des caissons conçus et fabriqués selon le cahier des charges de nos clients, répondant ainsi aux exigences les plus poussées, assurant fiabilité, résistance et protection des équipements les plus sensibles contre les variations de température ou une forte hygrométrie."*
 
 Pour faire l'appoint de température, on sélectionne un composant de puissance limitée car l'inertie thermique de l'ensemble ainsi que les excellentes carractéristiques d'isolation du caisson laissent supposer qu'il ne sera nécessaire de chauffer que de manière très ponctuelle. La résistance chauffante [DBK - HP04-1/04-24](http://fr.farnell.com/dbk/hp04-1-04-24/resistance-chauffante-ptc-20w/dp/4408329) présente un bon compromis en termes de consommation électrique (10W), elle est disponible au prix de 12,26€ au dela de 50 unités achetées.
 
-Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimentionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
+Au vu de la complexité d'un tel dispositif, il serrait malhonnête d'annoncer à ce stade du développement une consommation effective du système de régulation, et donc de pouvoir dimensionner précisément la batterie qui lui sera associée. Cependant sans entrer dans les détails, on considère qu'une autonomie de 3 mois minimum est nécessaire pour qu'un tel système soit rentable. Les batteries à considérer pour de telles exigences, et au vu de la consommation réduite du système d'autre part, sont généralement situées dans des gammes de prix au dela de 5000€. Bien évidement, la taille du site est également un critère important pour le choix de la capacité nominale de la batterie.
 
 Frais fixes:
-~10.000€	Développement de la carte  
-~8.000€		Infrastructure de recharge des batteries  
-~200€/per	journée de formation au remplacement des batteries  
+<table>
+    <tr><td>~10.000€</td><td>Développement de la carte</td></tr>
+	<tr><td>~8.000€</td><td>Infrastructure de recharge des batteries</td></tr>
+	<tr><td>~200€/pers.&nbsp;&nbsp;</td><td>Journée de formation au remplacement des batteries</td></tr>
+</table>
 
+Prix unitaire de la solution:
+<table>
+	<tr><td>700€	</td><td>caisson</td></tr>
+	<tr><td>12,26€	</td><td>résistance</td></tr>
+	<tr><td>5.000+€	&nbsp;&nbsp;</td><td>batterie</td></tr>
+	<tr><td>800€	</td><td>assemblage</td></tr>
+</table>
 
-Prix unitaire de la solution:  
-700€	caisson  
-12,26€	résistance  
-5.000+€	batterie  
-800€	assemblage
 
 durée de vie de la batterie ~10ans
 
