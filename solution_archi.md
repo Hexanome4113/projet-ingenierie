@@ -72,18 +72,18 @@ Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé
 
 ####Par cuve : ~425€
 
-  - __émetteur : (longue portée) 29.23€__  ![Lien](http://www.controle-sans-fil.com/index.php?main_page=product_info&cPath=173&products_id=582&zenid=8qps2f0od1pr1vc28bmhlfavu3)    
+  - __émetteur : (longue portée) 29.23€__  [Lien](http://www.controle-sans-fil.com/index.php?main_page=product_info&cPath=173&products_id=582&zenid=8qps2f0od1pr1vc28bmhlfavu3)    
   Consommation : 0.5W    
   Résistance au froid: faible, d'où l'isolation
-  - __MSP430 : 5.98€__ ! [Lien](http://hackspark.fr/fr/ti-msp430-launchpad.html)
-  - __pH-mètre / thermomère : 109€__ ![Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)    
+  - __MSP430 : 5.98€__ [Lien](http://hackspark.fr/fr/ti-msp430-launchpad.html)
+  - __pH-mètre / thermomère : 109€__ [Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)    
   Précision:+-0.01 pH /+-0.1°C    
   Consommation : 3 piles AAA ( approximativement 1200 heures d'utilisation continue)  
-  - __niveau : 31.50€__ ![Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)    
+  - __niveau : 31.50€__ [Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)    
   Précision:+-0.2%    
   Consommation : 3V, 50mA   
   Résistance au froid
-  - __batterie : 29€__  ![Lien](http://www.absolutesport.fr/batterie-/126-batterie-haute-capacite-drift.html)    
+  - __batterie : 29€__  [Lien](http://www.absolutesport.fr/batterie-/126-batterie-haute-capacite-drift.html)    
   Capacité : 1400mAH  (Rechargement prévu une fois par an)   
   Garantie 2 ans
   - __main-d'œuvre : 50€__ 4h/homme -> 50€
