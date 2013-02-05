@@ -136,9 +136,9 @@ Une fois l'opération demandée effectuée les techniciens peuvent remplir les d
 Pour faire fonctionner le site central, nous avons prévu une équipe de cinq personnes :
  - Un agent en charge de faire la maintenance logicielle et matérielle du site, comme il est nécéssaire dès l'installation d'informatique dans une entreprise.  
  - Un(e) secrétaire qui s'occupera de la relation avec les propriétaires mais aussi les sociétés de maintenances  
-  - Un Comptable  
-  - Un donneur d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées  
-  - Un directeur responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)  
+ - Un Comptable  
+ - Un donneur d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées  
+ - Un directeur responsable de la coordination site central/site distant, travail de management (coordination des équipes, réunions, planifications diverses)  
   
 ##Budget prévisionnel pour la mise en place de la solution ##
 Estimation des coûts du site central : 
@@ -146,10 +146,10 @@ Estimation des coûts du site central :
  - Coûts développement de cette solution de création d'alerte: 30 000€  
  - Un [pare-feu](http://www.ldlc-pro.com/fiche/PB00135486.html) permettant de faire respecter la politique de sécurité du réseau de l’entreprise 1500€  
  - Le serveur web hebergeant l'application accessible aux entreprises de maintenance permettant de saisir les détails des opérations de maintenance effectuées 1000€  
-  - Les deux serveurs pour la base de données, disposant d’importantes ressources 5000€  
-  - Les deux serveurs accédé par les systèmes embarqués des sites distants 2 500€   
-  - Création d'un poste par employer (mobilier, ordinateur,...) 1 500€ par membre du personnel  
-  - Onduleurs, câbles, imprimante réseau, périphériques... (3000€)  
+ - Les deux serveurs pour la base de données, disposant d’importantes ressources 5000€  
+ - Les deux serveurs accédé par les systèmes embarqués des sites distants 2 500€   
+ - Création d'un poste par employer (mobilier, ordinateur,...) 1 500€ par membre du personnel  
+ - Onduleurs, câbles, imprimante réseau, périphériques... (3000€)  
   
 Frais mensuels:  
  - Salaires: 15 000€ par personne  
