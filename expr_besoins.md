@@ -1,5 +1,7 @@
-Recueil des exigences
+<p style="text-align:center";>Recueil des exigences
 ======================
+</p>
+<p style="text-align:justify";>
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
 Le schéma ci-dessous est un premier découpage, plutot évident, du problème. Notre travail va commencer par s'attarder sur les premières interfaces mises à jour, puis nous approfondirons petit à petit notre approche.
@@ -129,3 +131,4 @@ Lorsqu'une demande de maintenance est générée par le système de décision du
 ![02 - Transmission d'une demande de maintenance](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/4%20-%20Emission%20demande%20societe%20maintenance/02TransmissionDemandeMaintenance.png "01 - Transmission d'une demande de maintenance")
 
 On peut imaginer que l'envoi de la demande se fait via une service de type tickets permettant de contacter la société, ou par email, fax, ou encore appel téléphonique effectué par un opérateur. Lorsque la maintenance a été effectuée, la société de maintenance le notifie et le système peut journaliser cette notification. Si l'intervention ne peut pas être réalisée actuellement par la société, une autre sera contactée.
+</p>
