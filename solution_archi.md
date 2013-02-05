@@ -42,17 +42,16 @@ des ouvriers qualifiés qui se traduit par un salaire à verser. Ces ouvriers (q
 passeront en effet un temps fixe pour chaque cuve pour l'installation des capteurs et leur raccordement (on estime à 2 heures le temps passé par cuve), ce à quoi il faut rajouter
 un temps variable en fonction de la distance de la cuve au système embarqué qu'ils passeront pour tirer le câble et s'assurer qu'il ne risque rien.
 
-####Par cuve : ~325€ + 39€/100m
+####Par cuve : ~170€ + 39€/100m
 
-  - __pH-mètre / thermomère : 260€__   
-  Précision:+-0.02 pH /+-0.5°C  
-  Résistance: -20°C  
+  - __pH-mètre / thermomère : 109€__ ![Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)
+  Précision:+-0.01 pH /+-0.1°C
   Consommation : 3 piles AAA ( approximativement 1200 heures d'utilisation continue)  
-  - __niveau : 31.50€__  
-  Consommation : 3V, 50mA  
-  (Garantie : 3ans)  
+  - __niveau : 31.50€__ ![Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)
+  Précision:+-0.2%
+  Consommation : 3V, 50mA   
   Résistance au froid
-  - __câbles : 13,73€ / 100m__ 
+  - __câbles : 15,49€ / 100m__ ![Lien](http://r.twenga.fr/g3.php?pg=VDszNTAxMjk2OTkzNDAzODEyMzI1OzQxNTg2MDE7aHR0cDovL2dvLmxlZ3VpZGUuY29tL25hdi90d2VuZ2FfcHRfZnIucGhwP2lkX21hZz0yOTAyNzU4MiZpZHg9NTA2MDMwNSZpZGxnPTI5MDI3NTgyODA2MSZpZF9yZWNoPSZtcz1LRVlXT1JEX0lOUFVUJmxhbmc9ZnImdmFycz10YzpwOzc1YTMwNDRjMGRkMDJkMzA4MjQ1OWE5ZTVhMmFmMzMz&dac=1)
   - __main-d'œuvre : 25€ + 25€/100m__ 
   
 Note sur la main d'oeuvre: Nous avons estimé à environ 2h la moyenne de temps passé par un technicien pour tirer 100m de cable. Ces deux heures seront passées à tirer le cable de 100m, le raccorder à l'extrémité précédente, et le protéger / signaler. Comme dit précédemment, ce technicien sera payé aux alentours de 13€ de l'heure, d'où le calcul : 2h/homme + 2h/homme/100m -> 25€ + 25€/100m
@@ -71,28 +70,27 @@ L'avantage principal de cette solution est sa facilité d'installation et un co�
 
 Pour ce type d'installation, le coût fixe de la main d'œuvre sera plus élevé : en effet, en plus de l'installation des capteurs, il faudra du temps aux ouvriers pour s'assurer de l'isolation de l'émetteur (et du microcontrôleur) et de leur bon fonctionnement. 
 
-####Par cuve : ~510€
+####Par cuve : ~425€
 
-  - __émetteur : (longue portée) 66.78€__  
+  - __émetteur : (longue portée) 29.23€__  ![Lien](http://www.controle-sans-fil.com/index.php?main_page=product_info&cPath=173&products_id=582&zenid=8qps2f0od1pr1vc28bmhlfavu3)
   Consommation : 0.5W
-  1 an de garantie
   Résistance au froid: faible, d'où l'isolation
-  - __MSP430 : 1.95€__ détaillé plus loin
-  - __pH-mètre / thermomère : 260€__ Précision:+-0.02 pH/+-0.5°C  
-  Résistance: -20°C  
-  Consommation : 3 piles AAA ( Approximativement 1200 heures d'utilisation continue)
-  - __niveau : 31.50€__  
-  Consommation : 3V, 50mA  
-  Garantie : 3ans  
+  - __MSP430 : 5.98€__ ! [Lien](http://hackspark.fr/fr/ti-msp430-launchpad.html)
+  - __pH-mètre / thermomère : 109€__ ![Lien](http://www.electronique-diffusion.fr/product_info.php?products_id=61403)
+  Précision:+-0.01 pH /+-0.1°C
+  Consommation : 3 piles AAA ( approximativement 1200 heures d'utilisation continue)  
+  - __niveau : 31.50€__ ![Lien](http://www.directindustry.fr/prod/endress-hauser/capteurs-de-niveau-hydrostatiques-4726-745459.html)
+  Précision:+-0.2%
+  Consommation : 3V, 50mA   
   Résistance au froid
-  - __batterie : 22.90€__  
+  - __batterie : 29€__  ![Lien](http://www.absolutesport.fr/batterie-/126-batterie-haute-capacite-drift.html)
   Capacité : 1400mAH  (Rechargement prévu une fois par an)  
   Garantie 2 ans
   - __main-d'œuvre : 50€__ 4h/homme -> 50€
   - __caisson isolant : 80€__
   
 ####Site : ~45€
-  - __Récepteur radio : 30€__
+  - __Récepteur radio : ~30€__
   - __main d'œuvre : 1h/homme : 15€__
 
 ### Conclusion
