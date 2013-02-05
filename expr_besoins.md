@@ -1,9 +1,8 @@
-Recueil des exigences {@style=text-align: center;}
+Recueil des exigences
 ======================
 
 Après une étude de l'appel d'offre présenté nous avons défini un recueil des exigences en réfléchissant également aux problèmes qui pourraient survenir.
 Le schéma ci-dessous est un premier découpage, plutot évident, du problème. Notre travail va commencer par s'attarder sur les premières interfaces mises à jour, puis nous approfondirons petit à petit notre approche.
-</p>
 #### Découpage grossier du problème ####
 ![schéma général](https://raw.github.com/Hexanome4113/projet-ingenierie/master/images/ProblemDiagrams/schemaGeneral.png "schéma général")
 
