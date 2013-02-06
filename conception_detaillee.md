@@ -116,7 +116,7 @@ Afin de détailler le fonctionnement du sous-système, plusieurs diagrammes sont
 
 Présentation des différents états, diagramme de transitions
 
-![Figure manquante — Diagramme d'activité : après réception d'une mesure](../../raw/master/images/AdvancedConception/da-apres-receptin-d-une-mesure.png "Diagramme d'activité : après réception d'une mesure")
+![Figure manquante — Diagramme d'activité : après réception d'une mesure](../../raw/master/images/AdvancedConception/da-apres-reception-d-une-mesure.png "Diagramme d'activité : après réception d'une mesure")
 
 ![Figure manquante — Diagramme d'activité : transmission](../../raw/master/images/AdvancedConception/da-transmission.png "Diagramme d'activité : transmission")
 
