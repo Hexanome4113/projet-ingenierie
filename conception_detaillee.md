@@ -100,7 +100,7 @@ Le processus suivant donne une vue logique du fonctionnement du sous-système. C
 
 Afin de détailler le fonctionnement du sous-système, plusieurs diagrammes sont présentés ci-après :
 
-- un découpage en classe logicielle du sous-système est proposé à la partie [2. Diagramme de classes](#2-diagramme-de-classes) ;
+- un découpage en classes logicielles du sous-système est proposé à la partie [2. Diagramme de classes](#2-diagramme-de-classes) ;
 - plusieurs diagrammes présentes les différents états et les activités des composants du sous-système [3. Diagrammes d'états et d'activités](#3-diagrammes-d%C3%A9tats-et-dactivit%C3%A9s) ;
 - plusieurs diagrammes de communication montre également comment ces classes interopèrent [4. Diagrammes de communication](#4-diagrammes-de-communication).
 
@@ -108,31 +108,64 @@ Afin de détailler le fonctionnement du sous-système, plusieurs diagrammes sont
 2. Diagramme de classes
 -----------------------
 
+Le découpage en classe logicielles de l'intégralité du sous-système est présenté dans le diagramme suivant. Les classes présentes sur ce diagramme sont à rapprocher de celles figurant sur les diagrammes de communication. Des références à ce diagramme seront faites par la suite.
+
 ![Figure manquante — Diagramme de classes du sous-système de prise en charge des données capteurs](../../raw/master/images/AdvancedConception/diagramme-de-classes.png "Diagramme de classes du sous-système de prise en charge des données capteurs")
 
 
 3. Diagrammes d'états et d'activités
 ------------------------------------
 
-Présentation des différents états, diagramme de transitions
+Pour introduire le diagramme qui suit, il faut se placer dans le cas où le sous-système aurait à traiter une nouvelle donnée qu'il vient de recevoir.
+
+Ce diagramme d'activité montre alors les actions entreprises par le sous-système, pour déterminer s'il doit y avoir transmission et/ou mise à jour des valeurs de référence pour les capteurs dans la mémoire externe. La partie "transmission" proprement dite est détaillée dans le deuxième diagramme d'activité.
 
 ![Figure manquante — Diagramme d'activité : après réception d'une mesure](../../raw/master/images/AdvancedConception/da-apres-reception-d-une-mesure.png "Diagramme d'activité : après réception d'une mesure")
+Diagramme d'activité : après réception d'une mesure
+
+Détail de la partie transmission du diagramme d'activité précédent :
 
 ![Figure manquante — Diagramme d'activité : transmission](../../raw/master/images/AdvancedConception/da-transmission.png "Diagramme d'activité : transmission")
+Diagramme d'activité : transmission
 
-![Figure manquante — Diagramme d'état : transmission](../../raw/master/images/AdvancedConception/de-transmission.png "Diagramme d'état : transmission")
+Du point de vue de l'état du sous-système, on peut remarquer que plusieurs classes (`Transmission` et `ModemSatellite`) peuvent se trouver dans des états différents, au cours du traitement d'une nouvelle mesure. Une transmission peut en effet échouer, elle doit alors être retentée, ou réussir et elle peut alors être supprimée de la mémoire externe. Le diagramme suivant présente les différents états dans lesquels la classe `Transmission` peut être, ainsi que les transitions qui la font passer d'un état à l'autre.
 
-![Figure manquante — Diagramme d'état : modem](../../raw/master/images/AdvancedConception/de-modem.png "Diagramme d'état : modem")
+![Figure manquante — Diagramme d'état : Transmission](../../raw/master/images/AdvancedConception/de-transmission.png "Diagramme d'état : Transmission")
+Diagramme d'état : `Transmission`
+
+Enfin, directement corrélé au succès de l'envoie d'une transmission, la connexion Internet du modem satellite peut elle aussi s'interrompre. Le modem satellite peut donc être dans plusieurs états lui aussi, présentés ci-dessous :
+
+![Figure manquante — Diagramme d'état : ModemSatellite](../../raw/master/images/AdvancedConception/de-modem.png "Diagramme d'état : ModemSatellite")
+Diagramme d'état : `ModemSatellite`
 
 
 4. Diagrammes de communication
 ------------------------------
-Collecte d'informations, divers tests, envoi
+
+Les diagrammes précédents permettent de comprendre dans quels états passe le sous-système, au cours du traitement d'une nouvelle mesure, et ils permettent de visualiser les actions entreprises par le sous-système. Mais ils offrent une vue grossière de la façon dont les blocs fonctionnels du sous-système (la mémoire externe, le modem satellite, etc.) interagissent entre eux.
+
+Pour avoir une idée plus fine des interactions ayant lieu entre les classes présentées dans le diagramme de classe de la [partie 2](#2-diagramme-de-classes), il est nécessaire d'avoir des diagrammes de communication.
+
+On peut donc reprendre le scénario envisagé à la partie précédente (cas du traitement de l'arrivée d'une nouvelle mesure et de sa transmission) en étudiant cette fois les communications mises en jeu entre les différentes classes du sous-système.
+
+Le diagramme suivant présente justement ces communications lorsque le sous-système met à jour la dernière mesure reçue pour un capteur dans la mémoire externe :
 
 ![Figure manquante — Diagramme de communication : enregistrement d'une mesure](../../raw/master/images/AdvancedConception/dc-enregistrement-d-une-mesure.png "Diagramme de communication : enregistrement d'une mesure")
+Diagramme de communication : enregistrement d'une mesure
+
+Le diagramme suivant présente les communications entre les classes du sous-système lorsque ce dernier détermine qu'une transmission doit être effectué, puis qu'il envoie les données au modem.
 
 ![Figure manquante — Diagramme de communication : transmission](../../raw/master/images/AdvancedConception/dc-transmission.png "Diagramme de communication : transmission")
+Diagramme de communication : transmission
 
 
 5. Validation croisée
 ---------------------
+
+La conception de ce sous-système a été menée avec un objectif de cohérence en tête. Afin de garantir cette cohérence lors de la conception, et donc de s'assurer de la qualité de notre solution, nous avons eu recours à une technique appelée "validation croisée des modèles".
+
+Ainsi, les différents diagrammes ont fréquemment été confrontés, quand ils n'étaient pas carrément élaborés en parallèle, pour faire apparaître les incohérences et pouvoir les corriger. Grâce à cette approche plusieurs erreurs ont été évitées.
+
+Par exemple, à un certain moment, la classe `MemoireExterne` n'était pas un singleton. Il est apparu en faisant les diagrammes de communication qu'il était judicieux de changer cela, pour garantir que les autres classes accéderait bien à la même instance de `MemoireExterne`, ce qui est crucial compte tenu du rôle de "mémoire" de cette classe.
+
+De même, en confrontant les diagrammes d'états et de classe, on peut bien s'assurer que les énumérations sont complètes, c'est-à-dire que tous les états présents dans les diagrammes d'états se retrouvent dans l'une des quatre énumération du diagramme de classe (ce qui encore une fois a été corrigé grâce à la validation croisée).
