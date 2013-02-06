@@ -78,7 +78,6 @@ document de synthese finalisé
 présentation orale  
 revue interne et bilan  
 
-![image à ajouter]()
 
  
 
