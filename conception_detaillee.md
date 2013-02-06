@@ -16,19 +16,23 @@ L'objet de ce document est de détailler le sous-système en charge de ces tâch
 
 Le sous-système étudié ne s'occupe pas de l'unification des données reçues à l'entrée du microcontrôleur. En effet, comme ces données ne sont pas toutes obtenues par le système embarqué de la même façon, elles ne contiennent pas les mêmes informations.
 
-Les données brutes, reçues par le système embarqué, sont hétérogènes sur deux aspects :
+Les données brutes, reçues par le système embarqué, sont hétérogènes sur deux aspects&nbsp;:
 
-1. Les données peuvent provenir directement des capteurs reliés par une connexion filaire au système embarqué. Ces données ne comportent alors qu'une mesure, celle du capteur relié au microcontrôleur.  
-En revanche, dans le cas de la connexion par ondes radios, un autre microcontrôleur agrège les mesures de tous les capteurs de la cuve, avant de les transmettre en une fois au système embarqué.  
-Dans ce cas, la donnée transmise contient plusieurs mesures. La première différence entre les données se situe donc au niveau du nombre de mesures par données reçues.
+1.  Les données peuvent provenir directement des capteurs reliés par une connexion filaire au système embarqué. Ces données ne comportent alors qu'une mesure, celle du capteur relié au microcontrôleur.
 
-2. La nature même des données reçues (indépendamment du nombre de mesures qu'elles contiennent) est différente, suivant que la donnée provienne directement d'un capteur ou soit passée entre temps par un microcontrôleur sur la cuve (pour la transmission par radio).  
-Dans le premier cas, le capteur ne fournit le plus souvent qu'une représentation codée de la valeur mesurée (cas d'un capteur à sortie numérique). Aucune autre information (identifiant du capteur, heure de la prise de mesure, etc.) n'est alors présente dans la donnée reçue. Les capteurs peuvent même fournir une grandeur analogique, corrélée à la grandeur physique qu'ils mesurent, que le microcontrôleur du site central doit alors avant toute autre chose numériser.  
-Dans le second cas, les données envoyées par ondes radios contiennent déjà toutes les informations utiles pour chaque mesure (identificateur du capteur ayant fourni la mesure, modèle du capteur, etc.).
+    En revanche, dans le cas de la connexion par ondes radios, un autre microcontrôleur agrège les mesures de tous les capteurs de la cuve, avant de les transmettre en une fois au système embarqué.
+
+    Dans ce cas, la donnée transmise contient plusieurs mesures. La première différence entre les données se situe donc au niveau du nombre de mesures par données reçues.
+
+2.  La nature même des données reçues (indépendamment du nombre de mesures qu'elles contiennent) est différente, suivant que la donnée provienne directement d'un capteur ou soit passée entre temps par un microcontrôleur sur la cuve (pour la transmission par radio).
+
+    Dans le premier cas, le capteur ne fournit le plus souvent qu'une représentation codée de la valeur mesurée (cas d'un capteur à sortie numérique). Aucune autre information (identifiant du capteur, heure de la prise de mesure, etc.) n'est alors présente dans la donnée reçue. Les capteurs peuvent même fournir une grandeur analogique, corrélée à la grandeur physique qu'ils mesurent, que le microcontrôleur du site central doit alors avant toute autre chose numériser.
+
+    Dans le second cas, les données envoyées par ondes radios contiennent déjà toutes les informations utiles pour chaque mesure (identificateur du capteur ayant fourni la mesure, modèle du capteur, etc.).
 
 Il existe donc un sous-système de pré-traitement des mesures, qui ne sera pas détaillé, dont le rôle est de masquer ces différences afin de fournir des données homogènes en entrée du sous-système étudié (voir figure ci-dessous).
 
-![Figure&nbsp;: Sous-systèmes en lien avec le sous-système détaillé](../../raw/master/images/AdvancedConception/sous-systemes-en-lien-avec-le-sous-systeme-detaille.png "Sous-systèmes en lien avec le sous-système détaillé")
+![Figure manquante&nbsp;&mdash; Sous-systèmes en lien avec le sous-système détaillé](../../raw/master/images/AdvancedConception/sous-systemes-en-lien-avec-le-sous-systeme-detaille.png "Sous-systèmes en lien avec le sous-système détaillé")
 
 La nature exacte de ces données d'entrée est détaillée au paragraphe [b. Données à l'entrée du sous-système](#b-donnees-a-l-entree-du-sous-systeme).
 
@@ -44,20 +48,90 @@ En plus de déterminer quand il doit envoyer les mesures des capteurs, le sous-s
 
 ### b. Données à l'entrée du sous-système ###
 
+Comme il a été dit précédemment, un sous-système en amont de celui-ci se charge d'effacer les différences entre les différentes données reçues par le système embarqué (voir à ce propos le paragraphe [Ce qui n'est pas réalisé par le sous-système](#ce-qui-n-est-pas-realise-par-le-sous-systeme)).
+
+Le sous-système de prise en charge des données capteurs n'a donc à faire qu'à des données homogènes, chaque donnée contenant une et une seule mesure (provenant d'un capteur bien identifié).
+
+Les données exploitées en entrée par ce sous-système sont donc composées&nbsp;:
+
+- de l'identifiant du capteur qui a fourni cette mesure&nbsp;;
+- du numéro de modèle du capteur&nbsp;;
+- du type de mesure (mesure de pH, de température ou de niveau)&nbsp;;
+- d'un horodatage correspondant à l'heure où la prise de mesure a été effectuée&nbsp;;
+- et enfin, de la valeur pré-traitée, déduite la grandeur transmise par le capteur (par exemple, la conversion de 42 sur une échelle linéaire de valeurs entières, codée entre 0 et 255, pour des valeurs de pH allant de 2 à 14, c'est-à-dire 3,98).
+
+
 ### c. Organisation de la mémoire externe ###
 
-2. Diagramme de Classes
+Pour assurer un fonctionnement optimal, y compris en cas d'impossibilité de transmettre les mesures des capteurs, ce sous-système a besoin de stocker des données en mémoire. C'est pour cette raison que, dans notre solution, une mémoire externe vient en complément du microcontrôleur composant le système embarqué.
+
+Cette mémoire est partagée en plusieurs zones distinctes. Chaque zone a pour rôle le stockage d'un type d'information bien défini&nbsp;:
+
+- Zone 1 (notée _Z1_)&nbsp;: pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir un écart maximum toléré entre la valeur de référence et les valeurs mesurées&nbsp;;
+- Zone 2 (notée _Z2_)&nbsp;: pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir une valeur de référence&nbsp;;
+- Zone 3 (notée _Z3_)&nbsp;: pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir la dernière valeur mesurée&nbsp;;
+- Zone 4 (notée _Z4_)&nbsp;: pour chaque transmission en attente, de la mémoire est réservée dans cette zone pour contenir les infos qu'il est prévu de transmettre.
+
+Les notations _Z1_ à _Z4_ seront utilisées par la suite pour se rapporter à ces zones de la mémoire externe.
+
+
+### d. Aperçu du fonctionnement du sous-système ###
+
+Le processus suivant donne une vue logique du fonctionnement du sous-système. Cette description textuelle vient en complément des diagrammes qui suivent, dans le but d'en faciliter la compréhension. La même notation (_C_ pour le capteur type et _D_ pour la donnée reçue de ce capteur) est utilisée dans les diagrammes qui s'y prêtent.
+
+> -   À la réception d'une donnée _D_, provenant du capteur _C_&nbsp;:
+>    -   Enregistrer _D_ en tant que dernière donnée reçue pour _C_, dans _Z3_.
+>    -   Si la donnée de référence pour _C_ date de plus de 1 jour __ou__ si _D_ est très éloignée de la donnée de référence (écart supérieur à l'écart maximum toléré, trouvé dans _Z1_)&nbsp;:
+>        -   Mettre à jour la donnée de référence de tous les capteurs avec leur dernière donnée reçue, dans _Z2_.
+>        -   Préparer une transmission de la dernière donnée reçue de tous les capteurs, dans _Z4_.
+>    -   Sinon&nbsp;:
+>        -   Rien à faire.
+>-   Lorsqu'une transmission est prête&nbsp;:
+>    -   Lire les données de transmission dans _Z4_.
+>    -   Si la connexion satellitaire est opérationnelle&nbsp;:
+>        -   Transmettre les données.
+>            -   Si la transmission réussie&nbsp;:
+>                -   Supprimer les données de transmission de _Z4_.
+>            -   Sinon&nbsp;:
+>                -   Rien à faire.
+>    -   Sinon&nbsp;:
+>        -   Rien à faire.
+>-   Dès que la connexion satellitaire est de nouveau opérationnelle (si elle ne l'était plus), retenter les transmission prêtes.
+
+Afin de détailler le fonctionnement du sous-système, plusieurs diagrammes sont présentés ci-après&nbsp;:
+
+- un découpage en classe logicielle du sous-système est proposé à la partie [2. Diagramme de classes](#2-diagramme-de-classe)&nbsp;;
+- plusieurs diagrammes présentes les différents états et les activités des composants du sous-système [3. Diagrammes d'états et d'activités](#3-diagrammes-d-etats-et-d-activites)&nbsp;;
+- plusieurs diagrammes de communication montre également comment ces classes interopèrent [4. Diagrammes de communication](#4-diagrammes-de-communication).
+
+
+2. Diagramme de classes
 -----------------------
 
-
-3. Etats et Transitions
------------------------
-Présentation des différents états, diag de transitions
+![Figure manquante&nbsp;&mdash; Diagramme de classes du sous-système de prise en charge des données capteurs](../../raw/master/images/AdvancedConception/diagramme-de-classes.png "Diagramme de classes du sous-système de prise en charge des données capteurs")
 
 
-4. Séquence de collecte de données
-----------------------------------
+3. Diagrammes d'états et d'activités
+------------------------------------
+
+Présentation des différents états, diagramme de transitions
+
+![Figure manquante&nbsp;&mdash; Diagramme d'activité&nbsp;: après réception d'une mesure](../../raw/master/images/AdvancedConception/da-apres-receptin-d-une-mesure.png "Diagramme d'activité&nbsp;: après réception d'une mesure")
+
+![Figure manquante&nbsp;&mdash; Diagramme d'activité&nbsp;: transmission](../../raw/master/images/AdvancedConception/da-transmission.png "Diagramme d'activité&nbsp;: transmission")
+
+![Figure manquante&nbsp;&mdash; Diagramme d'état&nbsp;: transmission](../../raw/master/images/AdvancedConception/de-transmission.png "Diagramme d'état&nbsp;: transmission")
+
+![Figure manquante&nbsp;&mdash; Diagramme d'état&nbsp;: modem](../../raw/master/images/AdvancedConception/de-modem.png "Diagramme d'état&nbsp;: modem")
+
+
+4. Diagrammes de communication
+------------------------------
 Collecte d'informations, divers tests, envoi
+
+![Figure manquante&nbsp;&mdash; Diagramme de communication&nbsp;: enregistrement d'une mesure](../../raw/master/images/AdvancedConception/dc-enregistrement-d-une-mesure.png "Diagramme de communication&nbsp;: enregistrement d'une mesure")
+
+![Figure manquante&nbsp;&mdash; Diagramme de communication&nbsp;: transmission](../../raw/master/images/AdvancedConception/dc-transmission.png "Diagramme de communication&nbsp;: transmission")
 
 
 5. Validation croisée
