@@ -26,7 +26,7 @@ Les données brutes, reçues par le système embarqué, sont hétérogènes sur 
 
 2.  La nature même des données reçues (indépendamment du nombre de mesures qu'elles contiennent) est différente, suivant que la donnée provienne directement d'un capteur ou soit passée entre temps par un microcontrôleur sur la cuve (pour la transmission par radio).
 
-    Dans le premier cas, le capteur ne fournit le plus souvent qu'une représentation codée de la valeur mesurée (cas d'un capteur à sortie numérique). Aucune autre information (identifiant du capteur, heure de la prise de mesure, etc.) n'est alors présente dans la donnée reçue. Les capteurs peuvent même fournir une grandeur analogique, corrélée à la grandeur physique qu'ils mesurent, que le microcontrôleur du site central doit alors avant toute autre chose numériser.
+    Dans le premier cas, le capteur ne fournit le plus souvent qu'une représentation codée de la valeur mesurée (cas d'un capteur à sortie numérique). Aucune autre information (identifiant du capteur, heure de la prise de mesure, etc.) n'est alors présente dans la donnée reçue. Les capteurs peuvent même fournir une grandeur analogique, corrélée à la grandeur physique qu'ils mesurent, que le microcontrôleur du site isolé doit alors avant toute autre chose numériser.
 
     Dans le second cas, les données envoyées par ondes radios contiennent déjà toutes les informations utiles pour chaque mesure (identificateur du capteur ayant fourni la mesure, modèle du capteur, etc.).
 
@@ -55,9 +55,9 @@ Le sous-système de prise en charge des données capteurs n'a donc à faire qu'�
 Les données exploitées en entrée par ce sous-système sont donc composées :
 
 - de l'identifiant du capteur qui a fourni cette mesure ;
-- du numéro de modèle du capteur ;
-- du type de mesure (mesure de pH, de température ou de niveau) ;
-- d'un horodatage correspondant à l'heure où la prise de mesure a été effectuée ;
+- du numéro de modèle du capteur ,
+- du type de mesure (mesure de pH, de température ou de niveau) ,
+- d'un horodatage correspondant à l'heure où la prise de mesure a été effectuée ,
 - et enfin, de la valeur pré-traitée, déduite la grandeur transmise par le capteur (par exemple, la conversion de 42 sur une échelle linéaire de valeurs entières, codée entre 0 et 255, pour des valeurs de pH allant de 2 à 14, c'est-à-dire 3,98).
 
 
@@ -68,8 +68,8 @@ Pour assurer un fonctionnement optimal, y compris en cas d'impossibilité de tra
 Cette mémoire est partagée en plusieurs zones distinctes. Chaque zone a pour rôle le stockage d'un type d'information bien défini :
 
 - Zone 1 (notée _Z1_) : pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir un écart maximum toléré entre la valeur de référence et les valeurs mesurées ;
-- Zone 2 (notée _Z2_) : pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir une valeur de référence ;
-- Zone 3 (notée _Z3_) : pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir la dernière valeur mesurée ;
+- Zone 2 (notée _Z2_) : pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir une valeur de référence ,
+- Zone 3 (notée _Z3_) : pour chaque capteur du site isolé, de la mémoire est réservée dans cette zone pour contenir la dernière valeur mesurée ,
 - Zone 4 (notée _Z4_) : pour chaque transmission en attente, de la mémoire est réservée dans cette zone pour contenir les infos qu'il est prévu de transmettre.
 
 Les notations _Z1_ à _Z4_ seront utilisées par la suite pour se rapporter à ces zones de la mémoire externe.
@@ -168,4 +168,4 @@ Ainsi, les différents diagrammes ont fréquemment été confrontés, quand ils 
 
 Par exemple, à un certain moment, la classe `MemoireExterne` n'était pas un singleton. Il est apparu en faisant les diagrammes de communication qu'il était judicieux de changer cela, pour garantir que les autres classes accéderait bien à la même instance de `MemoireExterne`, ce qui est crucial compte tenu du rôle de "mémoire" de cette classe.
 
-De même, en confrontant les diagrammes d'états et de classe, on peut bien s'assurer que les énumérations sont complètes, c'est-à-dire que tous les états présents dans les diagrammes d'états se retrouvent dans l'une des quatre énumération du diagramme de classe (ce qui encore une fois a été corrigé grâce à la validation croisée).
+De même, en confrontant les diagrammes d'états et de classe, on peut bien s'assurer que les énumérations sont complètes, c'est-à-dire que tous les états présents dans les diagrammes d'états se retrouvent dans l'une des quatre énumérations du diagramme de classe (ce qui encore une fois a été corrigé grâce à la validation croisée).
