@@ -101,8 +101,8 @@ Le processus suivant donne une vue logique du fonctionnement du sous-système. C
 Afin de détailler le fonctionnement du sous-système, plusieurs diagrammes sont présentés ci-après :
 
 - un découpage en classes logicielles du sous-système est proposé à la partie [2. Diagramme de classes](#2-diagramme-de-classes) ;
-- plusieurs diagrammes présentes les différents états et les activités des composants du sous-système [3. Diagrammes d'états et d'activités](#3-diagrammes-d%C3%A9tats-et-dactivit%C3%A9s) ;
-- plusieurs diagrammes de communication montre également comment ces classes interopèrent [4. Diagrammes de communication](#4-diagrammes-de-communication).
+- plusieurs diagrammes présentent les différents états et les activités des composants du sous-système [3. Diagrammes d'états et d'activités](#3-diagrammes-d%C3%A9tats-et-dactivit%C3%A9s) ;
+- plusieurs diagrammes de communication montrent également comment ces classes interopèrent [4. Diagrammes de communication](#4-diagrammes-de-communication).
 
 
 2. Diagramme de classes
