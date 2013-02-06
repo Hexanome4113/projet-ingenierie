@@ -26,12 +26,21 @@ Dans ce cas, la donnée transmise contient plusieurs mesures. La première diff�
 Dans le premier cas, le capteur ne fournit le plus souvent qu'une représentation codée de la valeur mesurée (cas d'un capteur à sortie numérique). Aucune autre information (identifiant du capteur, heure de la prise de mesure, etc.) n'est alors présente dans la donnée reçue. Les capteurs peuvent même fournir une grandeur analogique, corrélée à la grandeur physique qu'ils mesurent, que le microcontrôleur du site central doit alors avant toute autre chose numériser.  
 Dans le second cas, les données envoyées par ondes radios contiennent déjà toutes les informations utiles pour chaque mesure (identificateur du capteur ayant fourni la mesure, modèle du capteur, etc.).
 
-Il existe donc un sous-système de pré-traitement des mesures, qui ne sera pas détaillé, dont le rôle est de masquer ces différences afin de fournir des données homogènes en entrée du sous-système étudié.
+Il existe donc un sous-système de pré-traitement des mesures, qui ne sera pas détaillé, dont le rôle est de masquer ces différences afin de fournir des données homogènes en entrée du sous-système étudié (voir figure ci-dessous).
+
+![Figure&nbsp;: Sous-systèmes en lien avec le sous-système détaillé](../../raw/master/images/AdvancedConception/sous-systemes-en-lien-avec-le-sous-systeme-detaille.png "Sous-systèmes en lien avec le sous-système détaillé")
 
 La nature exacte de ces données d'entrée est détaillée au paragraphe [b. Données à l'entrée du sous-système](#b-donnees-a-l-entree-du-sous-systeme).
 
 
 #### Ce qui est réalisé par le sous-système ####
+
+Le but du sous-système est de déterminer les transmissions à effectuer vers le site central. En analysant les mesures reçues, et en les comparant à une valeur de référence, le sous-système décide s'il doit immédiatement entamer une transmission.
+
+Dans tous les cas, le système transmet la dernière mesure qu'il a obtenu de chaque capteur toutes les 24 heures.
+
+En plus de déterminer quand il doit envoyer les mesures des capteurs, le sous-système supervise également cet envoi. La transmission des mesures a lieu via le système de transmission satellite. En cas d'échec (si la connexion n'est pas disponible, ou si le transfert échoue), le sous-système doit assurer la sauvegarde des données de la transmission, afin de pouvoir les retransmettre une fois la situation rétablie.
+
 
 ### b. Données à l'entrée du sous-système ###
 
