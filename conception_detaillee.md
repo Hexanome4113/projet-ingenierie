@@ -121,22 +121,22 @@ Pour introduire le diagramme qui suit, il faut se placer dans le cas où le sous
 Ce diagramme d'activité montre alors les actions entreprises par le sous-système, pour déterminer s'il doit y avoir transmission et/ou mise à jour des valeurs de référence pour les capteurs dans la mémoire externe. La partie "transmission" proprement dite est détaillée dans le deuxième diagramme d'activité.
 
 ![Figure manquante — Diagramme d'activité : après réception d'une mesure](../../raw/master/images/AdvancedConception/da-apres-reception-d-une-mesure.png "Diagramme d'activité : après réception d'une mesure")
-Diagramme d'activité : après réception d'une mesure
+_Diagramme d'activité : après réception d'une mesure_
 
 Détail de la partie transmission du diagramme d'activité précédent :
 
 ![Figure manquante — Diagramme d'activité : transmission](../../raw/master/images/AdvancedConception/da-transmission.png "Diagramme d'activité : transmission")
-Diagramme d'activité : transmission
+_Diagramme d'activité : transmission_
 
 Du point de vue de l'état du sous-système, on peut remarquer que plusieurs classes (`Transmission` et `ModemSatellite`) peuvent se trouver dans des états différents, au cours du traitement d'une nouvelle mesure. Une transmission peut en effet échouer, elle doit alors être retentée, ou réussir et elle peut alors être supprimée de la mémoire externe. Le diagramme suivant présente les différents états dans lesquels la classe `Transmission` peut être, ainsi que les transitions qui la font passer d'un état à l'autre.
 
 ![Figure manquante — Diagramme d'état : Transmission](../../raw/master/images/AdvancedConception/de-transmission.png "Diagramme d'état : Transmission")
-Diagramme d'état : `Transmission`
+_Diagramme d'état : `Transmission`_
 
 Enfin, directement corrélé au succès de l'envoie d'une transmission, la connexion Internet du modem satellite peut elle aussi s'interrompre. Le modem satellite peut donc être dans plusieurs états lui aussi, présentés ci-dessous :
 
 ![Figure manquante — Diagramme d'état : ModemSatellite](../../raw/master/images/AdvancedConception/de-modem.png "Diagramme d'état : ModemSatellite")
-Diagramme d'état : `ModemSatellite`
+_Diagramme d'état : `ModemSatellite`_
 
 
 4. Diagrammes de communication
@@ -151,12 +151,12 @@ On peut donc reprendre le scénario envisagé à la partie précédente (cas du 
 Le diagramme suivant présente justement ces communications lorsque le sous-système met à jour la dernière mesure reçue pour un capteur dans la mémoire externe :
 
 ![Figure manquante — Diagramme de communication : enregistrement d'une mesure](../../raw/master/images/AdvancedConception/dc-enregistrement-d-une-mesure.png "Diagramme de communication : enregistrement d'une mesure")
-Diagramme de communication : enregistrement d'une mesure
+_Diagramme de communication : enregistrement d'une mesure_
 
 Le diagramme suivant présente les communications entre les classes du sous-système lorsque ce dernier détermine qu'une transmission doit être effectué, puis qu'il envoie les données au modem.
 
 ![Figure manquante — Diagramme de communication : transmission](../../raw/master/images/AdvancedConception/dc-transmission.png "Diagramme de communication : transmission")
-Diagramme de communication : transmission
+_Diagramme de communication : transmission_
 
 
 5. Validation croisée
