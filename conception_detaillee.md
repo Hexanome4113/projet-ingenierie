@@ -164,7 +164,7 @@ _Diagramme de communication : transmission_
 
 La conception de ce sous-système a été menée avec un objectif de cohérence en tête. Afin de garantir cette cohérence lors de la conception, et donc de s'assurer de la qualité de notre solution, nous avons eu recours à une technique appelée "validation croisée des modèles".
 
-Ainsi, les différents diagrammes ont fréquemment été confrontés, quand ils n'étaient pas carrément élaborés en parallèle, pour faire apparaître les incohérences et pouvoir les corriger. Grâce à cette approche plusieurs erreurs ont été évitées.
+Ainsi, les différents diagrammes ont fréquemment été confrontés, quand ils n'étaient pas élaborés en parallèle, pour faire apparaître les incohérences et pouvoir les corriger. Grâce à cette approche plusieurs erreurs ont été évitées.
 
 Par exemple, à un certain moment, la classe `MemoireExterne` n'était pas un singleton. Il est apparu en faisant les diagrammes de communication qu'il était judicieux de changer cela, pour garantir que les autres classes accéderait bien à la même instance de `MemoireExterne`, ce qui est crucial compte tenu du rôle de "mémoire" de cette classe.
 
