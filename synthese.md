@@ -109,7 +109,7 @@ Frais fixes:
 10 000€ : Développement de la brique logicielle approximativement  
 
 Prix par site 5 713€71.
-Les coûts sont peut être deux fois moins cher que la solution générique, mais la solution n'est pas autonome puisque la batterie nécéssite d'être rechargée, et qu'une augmentation de la taille d'un site ou sa modification peut entrainer l'achat d'une nouvelle batterie. 
+Les coûts sont peut être deux fois moins cher que la solution générique, mais la solution n'est pas autonome puisque la batterie nécessite d'être rechargée, et qu'une augmentation de la taille d'un site ou sa modification peut entraîner l'achat d'une nouvelle batterie. 
 
 ##Site Central##
 Le site central a pour rôle de centraliser les informations remontant des différents sites, et de programmer les visites des sociétés de maintenance après analyse de ces informations. L'architecture proposée privilégie la fiabilité et permet une solution générique personnalisable pour s'adapter aux futures évolutions du projet.
@@ -120,9 +120,9 @@ Le stockage des données est important non seulement pour assurer un suivi de l'
 
 ###Un système de règle###
 L'intérêt principal du dispositif demandé par l'appel d'offre est de pouvoir savoir très facilement si l'intervention d'une société de maintenance est nécessaire et si oui, les opérations à effectuer. Pour cela, chaque site dispose d'une base de règles qui lui est propre : ces règles identifient les différents problèmes et les réponses à y apporter selon leur gravité et leur nombre, certains problèmes n'étant pas critiques et ne nécessitant pas de maintenance dédiée. Les données des sites et leur historique permettent de générer des alertes plus ou moins graves. En pratique, ce système se traduia par un [serveur](http://www.pc-look.com/boutik/62908.html) web et d’application accédé par des clients légers sur les postes des employés. Celui ci doit périodiquement effectuer des calculs complexes (aide à la décision), par conséquent il sera doté de ressources conséquentes, ce qui garantira sa faible charge et sa forte réactivité la majorité du temps. (5000€)
-Cette solution intègrera notamment de puissants algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros. 
+Cette solution intégrera notamment de puissants algorithmes d'aide à la décision adaptés à nos grandes quantités de données. Son coût de développement, mise en production et maintenance corrective et évolutive (sur 5 ans) est estimé à environ 30 000 euros. 
 ###Création de la stratégie d'alertes###
-Une stratégie de gestion des alertes doit être définie une fois pour l'ensemble des sites. Elle devra définir plusieurs niveaux de gravité d'alerte, qui entraineront plus ou moins vite une demande de maintenance. Une stratégie générale sera établie lors de la configuration initiale du projet à l'aide des techniciens des sociétés de maintenance traitant actuellement les sites. Les propriétaires n'étant pas forément ceux qui possèdent le plus de connaissance sur les sites isolés. Par la suite, ces règles pourront être modifiés, par exemple si on observe à l'utilisation un signe précurseur dans les données d'une panne, programmer une règle demandant l'intervention à l'apparition de ce signe.
+Une stratégie de gestion des alertes doit être définie une fois pour l'ensemble des sites. Elle devra définir plusieurs niveaux de gravité d'alerte, qui entraîneront plus ou moins vite une demande de maintenance. Une stratégie générale sera établie lors de la configuration initiale du projet à l'aide des techniciens des sociétés de maintenance traitant actuellement les sites. Les propriétaires n'étant pas forcément ceux qui possèdent le plus de connaissance sur les sites isolés. Par la suite, ces règles pourront être modifiés, par exemple si on observe à l'utilisation un signe précurseur dans les données d'une panne, programmer une règle demandant l'intervention à l'apparition de ce signe.
  
 
 ###Création d'une alerte###
@@ -134,7 +134,7 @@ Une fois l'opération demandée effectuée les techniciens peuvent remplir les d
 
 ###Personnel sur place###
 Pour faire fonctionner le site central, nous avons prévu une équipe de cinq personnes :
- - Un agent en charge de faire la maintenance logicielle et matérielle du site, comme il est nécéssaire dès l'installation d'informatique dans une entreprise.  
+ - Un agent en charge de faire la maintenance logicielle et matérielle du site, comme il est nécessaire dès l'installation d'informatique dans une entreprise.  
  - Un(e) secrétaire qui s'occupera de la relation avec les propriétaires mais aussi les sociétés de maintenances  
  - Un Comptable  
  - Un donneur d’ordres aux sociétés de maintenance, pour traiter toutes les alertes non automatisées  
@@ -145,7 +145,7 @@ Estimation des coûts du site central :
  - Le [serveur](http://www.pc-look.com/boutik/62908.html) web et d’application accédé par tous les clients légers des postes des employés, effectuant les calculs complexes d'aide à la décision 5000€  
  - Coûts développement de cette solution de création d'alerte: 30 000€  
  - Un [pare-feu](http://www.ldlc-pro.com/fiche/PB00135486.html) permettant de faire respecter la politique de sécurité du réseau de l’entreprise 1500€  
- - Le serveur web hebergeant l'application accessible aux entreprises de maintenance permettant de saisir les détails des opérations de maintenance effectuées 1000€  
+ - Le serveur web hébergeant l'application accessible aux entreprises de maintenance permettant de saisir les détails des opérations de maintenance effectuées 1000€  
  - Les deux serveurs pour la base de données, disposant d’importantes ressources 5000€  
  - Les deux serveurs accédé par les systèmes embarqués des sites distants 2 500€   
  - Création d'un poste par employer (mobilier, ordinateur,...) 1 500€ par membre du personnel  
